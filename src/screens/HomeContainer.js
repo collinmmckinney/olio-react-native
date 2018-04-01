@@ -1,6 +1,6 @@
 import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import { connect } from 'react-redux';
+import { loggedInUserQuery } from '../graphql/queries';
 import HomeScreen from './HomeScreen';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,12 +20,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 export default compose(
-    graphql(gql`
-        query {
-            loggedInUser {
-                id
-            }
-        }
-    `),
+    graphql(loggedInUserQuery),
     connect(mapStateToProps, undefined, mergeProps)
 )(HomeScreen);

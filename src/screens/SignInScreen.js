@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Text,
     TextInput
 } from 'react-native';
 import PropTypes from 'prop-types';
