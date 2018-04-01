@@ -13,6 +13,15 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         onPressSignUp: (email, username, password) => {
             ownProps.signupUser({
                 variables: { email, username, password },
+                refetchQueries: [{
+                    query: gql`
+                        query {
+                            loggedInUser {
+                                id
+                            }
+                        }
+                    `
+                }],
                 update: (store, { data: { signupUser: { token } } }) => {
                     AsyncStorage.setItem('token', token).then(() => {
                         ownProps.navigation.navigate('Home');

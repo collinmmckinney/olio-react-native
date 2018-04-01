@@ -35,16 +35,7 @@ const styles = StyleSheet.create({
 
 export default class SignInScreen extends Component {
     static propTypes = {
-        user: PropTypes.shape({
-            email: PropTypes.string,
-            username: PropTypes.string,
-            password: PropTypes.string
-        }),
         onPressSignIn: PropTypes.func.isRequired
-    }
-
-    static defaultProps = {
-        user: {}
     }
 
     constructor(props) {
@@ -52,7 +43,6 @@ export default class SignInScreen extends Component {
 
         this.state = {
             email: '',
-            username: '',
             password: ''
         };
 
@@ -61,28 +51,19 @@ export default class SignInScreen extends Component {
 
     handlePressSignIn() {
         const { onPressSignIn } = this.props;
-        const { email, username, password } = this.state;
-        onPressSignIn(email, username, password);
+        const { email, password } = this.state;
+        onPressSignIn(email, password);
     }
 
     render() {
-        const { user } = this.props;
-        const { email, username, password } = this.state;
+        const { email, password } = this.state;
 
         return (
             <View style={styles.container}>
-                <Text>{user && user.username}</Text>
                 <TextInput
                     value={email}
                     onChangeText={value => this.setState({ email: value })}
                     keyboardType="email-address"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    style={styles.input}
-                />
-                <TextInput
-                    value={username}
-                    onChangeText={value => this.setState({ username: value })}
                     autoCorrect={false}
                     autoCapitalize="none"
                     style={styles.input}

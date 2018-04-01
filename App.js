@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator, TabNavigator } from 'react-navigation';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
@@ -18,7 +18,8 @@ import {
     HomeContainer,
     SignInOrSignUpContainer,
     SignInContainer,
-    SignUpContainer
+    SignUpContainer,
+    SettingsContainer
 } from './src/screens';
 
 const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjfg0gyqm0kw60103ql11s2vc';
@@ -93,8 +94,6 @@ const client = new ApolloClient({
 //     })
 //     .catch(error => console.error(error));
 
-// Cards Tab
-
 const HomeStack = StackNavigator({
     Home: {
         screen: HomeContainer
@@ -127,7 +126,15 @@ const AuthStack = SwitchNavigator({
     headerMode: 'none'
 });
 
-const AppNavigator = AuthStack;
+const SettingsStack = StackNavigator({
+    Settings: { screen: SettingsContainer }
+});
+
+
+const AppNavigator = TabNavigator({
+    HomeTab: { screen: AuthStack, title: 'Home' },
+    SettingsTab: { screen: SettingsStack, title: 'Profile' },
+}, { initialRouteName: 'HomeTab' });
 
 export default class App extends Component {
     render() {
