@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Text,
-    TouchableHighlight
+    Text
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -18,15 +17,28 @@ const styles = StyleSheet.create({
 
 export default class HomeScreen extends Component {
     static propTypes = {
-    }
+        userId: PropTypes.string,
+        isUserNull: PropTypes.bool,
+        onNullUser: PropTypes.func
+    };
 
-    constructor(props) {
-        super(props);
+    static defaultProps = {
+        userId: '',
+        isUserNull: false,
+        onNullUser: () => {}
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isUserNull) {
+            nextProps.onNullUser();
+        }
     }
 
     render() {
+        const { userId } = this.props;
         return (
             <View style={styles.container}>
+                <Text>{userId}</Text>
             </View>
         );
     }

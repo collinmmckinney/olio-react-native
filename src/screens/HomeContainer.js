@@ -8,9 +8,24 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return {};
+    const userId = ownProps.data.loggedInUser ? ownProps.data.loggedInUser.id : null;
+    const isUserNull = !ownProps.data.loading && !ownProps.data.loggedInUser;
+    return {
+        userId,
+        isUserNull,
+        onNullUser: () => {
+            ownProps.navigation.navigate('SignInOrSignUp');
+        }
+    };
 };
 
 export default compose(
+    graphql(gql`
+        query {
+            loggedInUser {
+                id
+            }
+        }
+    `),
     connect(mapStateToProps, undefined, mergeProps)
 )(HomeScreen);

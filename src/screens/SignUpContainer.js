@@ -25,13 +25,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 export default compose(
     graphql(gql`
-        query {
-            loggedInUser {
-                id
-            }
-        }
-    `),
-    graphql(gql`
         mutation($email: String!, $username: String!, $password: String!) {
             signupUser(email: $email, username: $username, password: $password) {
                 id

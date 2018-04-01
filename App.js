@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator } from 'react-navigation';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
@@ -38,29 +38,16 @@ const errorLink = onError((errors) => {
 });
 const httpLink = createHttpLink({ uri: GRAPHQL_URL });
 
-let token;
-const authLink = setContext((_, { headers }) => {
-    // If we already have the token, return it:
-    if (token) {
-        return {
+// TODO Need to store token on Keychain:
+const authLink = setContext((_, { headers }) => (
+    AsyncStorage.getItem('token')
+        .then(token => ({
             headers: {
                 ...headers,
                 authorization: token ? `Bearer ${token}` : ''
             }
-        };
-    }
-
-    return AsyncStorage.getItem('token')
-        .then((storedToken) => {
-            token = storedToken;
-            return {
-                headers: {
-                    ...headers,
-                    authorization: token ? `Bearer ${token}` : ''
-                }
-            };
-        });
-});
+        }))
+));
 
 const link = ApolloLink.from([
     reduxLink,
@@ -106,10 +93,15 @@ const client = new ApolloClient({
 //     })
 //     .catch(error => console.error(error));
 
-const AppNavigator = StackNavigator({
+// Cards Tab
+
+const HomeStack = StackNavigator({
     Home: {
         screen: HomeContainer
-    },
+    }
+}, { initialRouteName: 'Home' });
+
+const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {
         screen: SignInOrSignUpContainer
     },
@@ -120,6 +112,22 @@ const AppNavigator = StackNavigator({
         screen: SignUpContainer
     }
 }, { initialRouteName: 'SignInOrSignUp' });
+
+const AuthStack = SwitchNavigator({
+    Home: {
+        screen: HomeStack
+    },
+    SignInOrSignUp: {
+        screen: SignInOrSignUpStack,
+        navigationOptions: { tabBarVisible: false }
+    }
+}, {
+    initialRouteName: 'Home',
+    mode: 'modal',
+    headerMode: 'none'
+});
+
+const AppNavigator = AuthStack;
 
 export default class App extends Component {
     render() {
