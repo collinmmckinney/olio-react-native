@@ -3,10 +3,10 @@ import {
     View,
     StyleSheet,
     Text,
-    TextInput,
-    TouchableHighlight
+    TextInput
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { Button } from '../components';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,17 +19,6 @@ const styles = StyleSheet.create({
         height: 48,
         fontSize: 24,
         borderWidth: 1
-    },
-    button: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48,
-        backgroundColor: 'black'
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 24
     }
 });
 
@@ -66,6 +55,7 @@ export default class SignInScreen extends Component {
                     keyboardType="email-address"
                     autoCorrect={false}
                     autoCapitalize="none"
+                    placeholder="email"
                     style={styles.input}
                 />
                 <TextInput
@@ -74,13 +64,10 @@ export default class SignInScreen extends Component {
                     autoCorrect={false}
                     autoCapitalize="none"
                     secureTextEntry
+                    placeholder="password"
                     style={styles.input}
                 />
-                <TouchableHighlight onPress={this.handlePressSignIn}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Sign In</Text>
-                    </View>
-                </TouchableHighlight>
+                <Button label="Sign In" onPress={this.handlePressSignIn} />
             </View>
         );
     }
