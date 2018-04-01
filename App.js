@@ -14,7 +14,12 @@ import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
 import gql from 'graphql-tag';
 
-import { HomeContainer, SignInContainer, SignUpContainer } from './src/screens';
+import {
+    HomeContainer,
+    SignInOrSignUpContainer,
+    SignInContainer,
+    SignUpContainer
+} from './src/screens';
 
 const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjfg0gyqm0kw60103ql11s2vc';
 
@@ -36,7 +41,6 @@ const httpLink = createHttpLink({ uri: GRAPHQL_URL });
 let token;
 const authLink = setContext((_, { headers }) => {
     // If we already have the token, return it:
-    console.log(token);
     if (token) {
         return {
             headers: {
@@ -106,13 +110,16 @@ const AppNavigator = StackNavigator({
     Home: {
         screen: HomeContainer
     },
+    SignInOrSignUp: {
+        screen: SignInOrSignUpContainer
+    },
     SignIn: {
         screen: SignInContainer
     },
     SignUp: {
         screen: SignUpContainer
     }
-}, { initialRouteName: 'Home' });
+}, { initialRouteName: 'SignInOrSignUp' });
 
 export default class App extends Component {
     render() {

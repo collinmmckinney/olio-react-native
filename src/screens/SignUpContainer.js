@@ -1,6 +1,7 @@
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 import SignUpScreen from './SignUpScreen';
 
 const mapStateToProps = (state, ownProps) => {
@@ -8,12 +9,16 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    console.log(stateProps);
-    console.log(dispatchProps);
-    console.log(ownProps);
     return {
         onPressSignUp: (email, username, password) => {
-            ownProps.signupUser({ variables: { email, username, password } });
+            ownProps.signupUser({
+                variables: { email, username, password },
+                update: (store, { data: { signupUser: { token } } }) => {
+                    AsyncStorage.setItem('token', token).then(() => {
+                        ownProps.navigation.navigate('Home');
+                    });
+                }
+            });
         }
     };
 };

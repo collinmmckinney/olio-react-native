@@ -7,22 +7,10 @@ const mapStateToProps = (state, ownProps) => {
     return {};
 };
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-    onPressSignIn: () => {
-        ownProps.navigation.navigate('SignIn');
-    },
-    onPressSignUp: () => {
-        ownProps.navigation.navigate('SignUp');
-    }
-});
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return {};
+};
 
 export default compose(
-    graphql(gql`
-        query {
-            loggedInUser {
-                id
-            }
-        }
-    `),
     connect(mapStateToProps, undefined, mergeProps)
 )(HomeScreen);
