@@ -1,24 +1,33 @@
-import { SET_LOCATION } from '../actions/location';
+import { SET_USER_LOCATION, SET_MAP_REGION } from '../actions/location';
 
 const initialState = {
-    location: {
+    userLocation: {
         timestamp: null,
         coords: {
             accuracy: null,
             altitude: null,
             altitudeAccuracy: null,
             heading: null,
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: null,
+            longitude: null,
             speed: null
         }
-    }
+    },
+    mapRegion: {
+        latitude: null,
+        longitude: null,
+        latitudeDelta: null,
+        longitudeDelta: null
+    },
+    mapFollowsLocation: true
 };
 
 export default function Location(state = initialState, action) {
     switch (action.type) {
-        case SET_LOCATION:
-            return Object.assign({}, state, { location: action.payload.location });
+        case SET_USER_LOCATION:
+            return Object.assign({}, state, { userLocation: action.payload.location });
+        case SET_MAP_REGION:
+            return Object.assign({}, state, { mapRegion: action.payload.region });
         default:
             return state;
     }
