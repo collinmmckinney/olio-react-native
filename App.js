@@ -12,7 +12,7 @@ import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
 import ReduxLink from 'apollo-link-redux';
 import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
-
+import { Location } from './src/reducers';
 import {
     MapContainer,
     SignInOrSignUpContainer,
@@ -26,7 +26,10 @@ const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjfmlnicx0evz0146b22cjekm'
 
 // Redux
 const store = createStore(
-    combineReducers({ apollo: apolloReducer }),
+    combineReducers({
+        apollo: apolloReducer,
+        Location
+    }),
     {}, // initial state
     composeWithDevTools(),
 );

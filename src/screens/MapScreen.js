@@ -20,7 +20,10 @@ export default class MapScreen extends Component {
     static propTypes = {
         userId: PropTypes.string,
         isUserNull: PropTypes.bool,
-        onNullUser: PropTypes.func
+        onNullUser: PropTypes.func,
+        requestLocationPermission: PropTypes.func.isRequired,
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired
     };
 
     static defaultProps = {
@@ -29,6 +32,10 @@ export default class MapScreen extends Component {
         onNullUser: () => {}
     };
 
+    componentDidMount() {
+        this.props.requestLocationPermission();
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.isUserNull) {
             nextProps.onNullUser();
@@ -36,15 +43,16 @@ export default class MapScreen extends Component {
     }
 
     render() {
-        const { userId } = this.props;
+        const { latitude, longitude } = this.props;
+        console.log(latitude, longitude);
         return (
             <View style={styles.container}>
                 <MapView
                     initialRegion={{
-                        latitude: 37.78825,
-                        longitude: -122.4324,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
+                        latitude,
+                        longitude,
+                        latitudeDelta: 0.0222,
+                        longitudeDelta: 0.0121,
                     }}
                     style={styles.container}
                 />

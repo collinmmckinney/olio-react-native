@@ -2,7 +2,7 @@
     "extends": "airbnb",
     "parser": "babel-eslint",
     "rules": {
-        "indent": [2, 4],
+        "indent": [2, 4, {"SwitchCase": 1}],
         "comma-dangle": "off",
         "react/jsx-filename-extension": "off",
         "react/prefer-stateless-function": "off",
