@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class HomeScreen extends Component {
+export default class MapScreen extends Component {
     static propTypes = {
         userId: PropTypes.string,
         isUserNull: PropTypes.bool,

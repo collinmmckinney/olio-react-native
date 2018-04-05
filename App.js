@@ -12,13 +12,13 @@ import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
 import ReduxLink from 'apollo-link-redux';
 import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
-import gql from 'graphql-tag';
 
 import {
-    HomeContainer,
+    MapContainer,
     SignInOrSignUpContainer,
     SignInContainer,
     SignUpContainer,
+    DataContainer,
     SettingsContainer
 } from './src/screens';
 
@@ -64,41 +64,13 @@ const client = new ApolloClient({
     cache
 });
 
-// client.mutate({
-//     mutation: gql`
-//         mutation {
-//             signupUser(email: "test@test.com", username: "test", password: "testing") {
-//                 id
-//                 token
-//             }
-//         }
-//     `
-// })
-//     .then(({ data }) => {
-//         console.log(data);
-//         AsyncStorage.setItem('token', data.signupUser.token).then(() => {
-//             client.query({
-//                 query: gql`
-//                     query {
-//                         loggedInUser {
-//                             id
-//                         }
-//                     }
-//                 `
-//             })
-//                 .then((result) => {
-//                     console.log(result);
-//                 })
-//                 .catch(error => console.error(error));
-//         });
-//     })
-//     .catch(error => console.error(error));
+// First Tab
 
-const HomeStack = StackNavigator({
-    Home: {
-        screen: HomeContainer
+const MapStack = StackNavigator({
+    Map: {
+        screen: MapContainer
     }
-}, { initialRouteName: 'Home' });
+}, { initialRouteName: 'Map' });
 
 const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {
@@ -114,7 +86,7 @@ const SignInOrSignUpStack = StackNavigator({
 
 const AuthStack = SwitchNavigator({
     Home: {
-        screen: HomeStack
+        screen: MapStack
     },
     SignInOrSignUp: {
         screen: SignInOrSignUpStack,
@@ -126,15 +98,26 @@ const AuthStack = SwitchNavigator({
     headerMode: 'none'
 });
 
-const SettingsStack = StackNavigator({
+// Second Tab
+
+const DataStack = StackNavigator({
+    Data: {
+        screen: DataContainer
+    }
+}, { initialRouteName: 'Data' });
+
+// Third Tab
+
+const ProfileStack = StackNavigator({
     Settings: { screen: SettingsContainer }
 });
 
 
 const AppNavigator = TabNavigator({
-    HomeTab: { screen: AuthStack, title: 'Home' },
-    SettingsTab: { screen: SettingsStack, title: 'Profile' },
-}, { initialRouteName: 'HomeTab' });
+    MapTab: { screen: AuthStack, title: 'Home' },
+    DataTab: { screen: DataStack, title: 'Data' },
+    ProfileTab: { screen: ProfileStack, title: 'Profile' },
+}, { initialRouteName: 'MapTab' });
 
 export default class App extends Component {
     render() {
