@@ -5,6 +5,7 @@ import {
     Text
 } from 'react-native';
 import PropTypes from 'prop-types';
+import MapView from 'react-native-maps';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +39,15 @@ export default class MapScreen extends Component {
         const { userId } = this.props;
         return (
             <View style={styles.container}>
-                <Text>{userId}</Text>
+                <MapView
+                    initialRegion={{
+                        latitude: 37.78825,
+                        longitude: -122.4324,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    style={styles.container}
+                />
             </View>
         );
     }
