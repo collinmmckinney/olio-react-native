@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 
 export default class MapScreen extends Component {
     static propTypes = {
-        userId: PropTypes.string,
         isUserNull: PropTypes.bool,
         userLocation: PropTypes.shape({
             latitude: PropTypes.number,
@@ -59,13 +58,8 @@ export default class MapScreen extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isUserNull && !this.authTimeout) {
-            this.authTimeout = setTimeout(() => {
-                nextProps.onNullUser();
-            }, 500);
-        }
-        if (!nextProps.isUserNull && this.authTimeout) {
-            clearTimeout(this.authTimeout);
+        if (nextProps.isUserNull) {
+            nextProps.onNullUser();
         }
     }
 

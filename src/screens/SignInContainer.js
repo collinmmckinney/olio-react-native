@@ -17,7 +17,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                 refetchQueries: [{
                     query: loggedInUserQuery
                 }],
-                update: (store, { data: { authenticateUser: { token } } }) => {
+                update: (store, { data: { authenticateUser: { id, token } } }) => {
+                    store.writeQuery({
+                        query: loggedInUserQuery,
+                        data: { loggedInUser: { id, __typename: 'LoggedInUserPayload' } }
+                    });
                     AsyncStorage.setItem('token', token).then(() => {
                         ownProps.navigation.navigate('Map');
                     });

@@ -5,10 +5,8 @@ import { setUserLocation, setMapRegion } from '../actions/location';
 import MapScreen from './MapScreen';
 
 const mapStateToProps = ({ Location }, ownProps) => {
-    const userId = ownProps.data.loggedInUser ? ownProps.data.loggedInUser.id : null;
     const isUserNull = !ownProps.data.loading && !ownProps.data.loggedInUser;
     return {
-        userId,
         isUserNull,
         userLocation: {
             latitude: Location.userLocation.coords.latitude,
