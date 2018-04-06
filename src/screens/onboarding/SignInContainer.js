@@ -2,7 +2,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { loggedInUserQuery } from '../graphql/queries';
+import { loggedInUserQuery } from '../../graphql/queries';
 import SignInScreen from './SignInScreen';
 
 const mapStateToProps = (state, ownProps) => {

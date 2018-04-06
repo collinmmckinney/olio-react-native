@@ -2,7 +2,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { loggedInUserQuery } from '../graphql/queries';
+import { loggedInUserQuery } from '../../graphql/queries';
 import SignUpScreen from './SignUpScreen';
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,7 +23,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                         data: { loggedInUser: { id, __typename: 'LoggedInUserPayload' } }
                     });
                     AsyncStorage.setItem('token', token).then(() => {
-                        ownProps.navigation.navigate('Map');
+                        ownProps.navigation.navigate('Onboarding');
                     });
                 }
             });

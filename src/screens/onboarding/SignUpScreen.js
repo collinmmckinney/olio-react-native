@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { Button, TextInput } from '../components';
+import { Button, TextInput } from '../../components';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
         alignItems: 'stretch'
     },
     input: {
-        height: 48,
-        fontSize: 24,
-        borderWidth: 1,
         marginBottom: '5%'
     }
 });

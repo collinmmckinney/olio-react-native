@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { Button } from '../components';
+import { Button } from '../../components';
 
 const styles = StyleSheet.create({
     container: {

@@ -18,6 +18,7 @@ import {
     SignInOrSignUpContainer,
     SignInContainer,
     SignUpContainer,
+    OnboardingContainer,
     DataContainer,
     SettingsContainer
 } from './src/screens';
@@ -77,13 +78,18 @@ const MapStack = StackNavigator({
 
 const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {
-        screen: SignInOrSignUpContainer
+        screen: SignInOrSignUpContainer,
+        navigationOptions: { header: null }
     },
     SignIn: {
         screen: SignInContainer
     },
     SignUp: {
         screen: SignUpContainer
+    },
+    Onboarding: {
+        screen: OnboardingContainer,
+        navigationOptions: { header: null }
     }
 }, { initialRouteName: 'SignInOrSignUp' });
 

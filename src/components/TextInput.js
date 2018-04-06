@@ -4,8 +4,8 @@ import { StyleSheet, TextInput } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         height: 54,
+        fontSize: 24,
         borderRadius: 10,
-        borderColor: 'white',
         paddingHorizontal: 8,
         backgroundColor: 'white',
         shadowOffset: { width: 4, height: 4, },
