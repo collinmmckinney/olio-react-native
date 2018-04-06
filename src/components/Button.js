@@ -4,7 +4,7 @@ import {
     ViewPropTypes,
     StyleSheet,
     Text,
-    TouchableHighlight
+    TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 48,
-        backgroundColor: 'black'
+        height: 54,
+        backgroundColor: 'black',
+        borderRadius: 10
     },
     text: {
         color: 'white',
@@ -49,11 +50,11 @@ export default class Button extends Component {
     render() {
         const { label, style } = this.props;
         return (
-            <TouchableHighlight onPress={this.handlePress}>
+            <TouchableOpacity onPress={this.handlePress}>
                 <View style={[styles.container, style]}>
                     <Text style={styles.text}>{label}</Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF'
+        backgroundColor: 'white'
     },
     button: {
         flexDirection: 'row',

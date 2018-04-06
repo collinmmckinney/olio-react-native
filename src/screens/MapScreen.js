@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF'
+        backgroundColor: 'white'
     }
 });
 
@@ -59,8 +59,13 @@ export default class MapScreen extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isUserNull) {
-            nextProps.onNullUser();
+        if (nextProps.isUserNull && !this.authTimeout) {
+            this.authTimeout = setTimeout(() => {
+                nextProps.onNullUser();
+            }, 500);
+        }
+        if (!nextProps.isUserNull && this.authTimeout) {
+            clearTimeout(this.authTimeout);
         }
     }
 

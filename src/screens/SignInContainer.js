@@ -19,7 +19,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                 }],
                 update: (store, { data: { authenticateUser: { token } } }) => {
                     AsyncStorage.setItem('token', token).then(() => {
-                        ownProps.navigation.navigate('Home');
+                        ownProps.navigation.navigate('Map');
                     });
                 }
             });

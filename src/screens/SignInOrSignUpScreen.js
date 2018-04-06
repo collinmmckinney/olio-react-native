@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
-import {
-    View,
-    StyleSheet,
-    Text,
-    TouchableHighlight
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { Button } from '../components';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: '#F5FCFF'
+        justifyContent: 'space-between',
+        paddingHorizontal: 18,
+        backgroundColor: 'white'
     },
-    button: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48,
-        backgroundColor: 'black'
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 24
+    buttonsContainer: {
+        justifyContent: 'space-between',
+        height: 210,
+        paddingTop: 20,
+        paddingBottom: 60
     }
 });
 
@@ -53,16 +45,11 @@ export default class SignInOrSignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={this.handlePressSignIn}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Sign In</Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this.handlePressSignUp}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Sign Up</Text>
-                    </View>
-                </TouchableHighlight>
+                <View />
+                <View style={styles.buttonsContainer}>
+                    <Button label="SIGN IN" onPress={this.handlePressSignIn} />
+                    <Button label="SIGN UP" onPress={this.handlePressSignUp} />
+                </View>
             </View>
         );
     }

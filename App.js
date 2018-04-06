@@ -88,7 +88,7 @@ const SignInOrSignUpStack = StackNavigator({
 }, { initialRouteName: 'SignInOrSignUp' });
 
 const AuthStack = SwitchNavigator({
-    Home: {
+    Map: {
         screen: MapStack
     },
     SignInOrSignUp: {
@@ -96,7 +96,7 @@ const AuthStack = SwitchNavigator({
         navigationOptions: { tabBarVisible: false }
     }
 }, {
-    initialRouteName: 'Home',
+    initialRouteName: 'Map',
     mode: 'modal',
     headerMode: 'none'
 });
@@ -117,7 +117,7 @@ const ProfileStack = StackNavigator({
 
 
 const AppNavigator = TabNavigator({
-    MapTab: { screen: AuthStack, title: 'Home' },
+    MapTab: { screen: AuthStack, title: 'Map' },
     DataTab: { screen: DataStack, title: 'Data' },
     ProfileTab: { screen: ProfileStack, title: 'Profile' },
 }, { initialRouteName: 'MapTab' });
