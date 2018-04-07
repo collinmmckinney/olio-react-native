@@ -14,11 +14,12 @@ import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
 import { Location } from './src/reducers';
 import {
-    MapContainer,
+    AuthLoadingContainer,
     SignInOrSignUpContainer,
     SignInContainer,
     SignUpContainer,
     OnboardingContainer,
+    MapContainer,
     DataContainer,
     SettingsContainer
 } from './src/screens';
@@ -94,6 +95,10 @@ const SignInOrSignUpStack = StackNavigator({
 }, { initialRouteName: 'SignInOrSignUp' });
 
 const AuthStack = SwitchNavigator({
+    AuthLoading: {
+        screen: AuthLoadingContainer,
+        navigationOptions: { header: null, tabBarVisible: false }
+    },
     Map: {
         screen: MapStack
     },
@@ -102,7 +107,7 @@ const AuthStack = SwitchNavigator({
         navigationOptions: { tabBarVisible: false }
     }
 }, {
-    initialRouteName: 'Map',
+    initialRouteName: 'AuthLoading',
     mode: 'modal',
     headerMode: 'none'
 });
@@ -125,6 +130,7 @@ const ProfileStack = StackNavigator({
 const AppNavigator = TabNavigator({
     MapTab: { screen: AuthStack, title: 'Map' },
     DataTab: { screen: DataStack, title: 'Data' },
+    NetworkTab: { screen: DataStack, title: 'Network' },
     ProfileTab: { screen: ProfileStack, title: 'Profile' },
 }, { initialRouteName: 'MapTab' });
 

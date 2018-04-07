@@ -13,7 +13,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         onPressLogout: () => {
             AsyncStorage.setItem('token', '').then(() => {
                 ownProps.client.resetStore();
-                ownProps.navigation.navigate('SignInOrSignUpStack');
             });
         }
     };

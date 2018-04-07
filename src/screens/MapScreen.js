@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 
 export default class MapScreen extends Component {
     static propTypes = {
-        isUserNull: PropTypes.bool,
         userLocation: PropTypes.shape({
             latitude: PropTypes.number,
             longitude: PropTypes.number
@@ -26,15 +25,11 @@ export default class MapScreen extends Component {
             longitudeDelta: PropTypes.number
         }),
         mapFollowsLocation: PropTypes.bool,
-        onNullUser: PropTypes.func,
         onUserLocationChange: PropTypes.func.isRequired,
         onMapRegionChange: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
-        userId: '',
-        isUserNull: false,
-        onNullUser: () => {},
         userLocation: {
             latitude: null,
             longitude: null
@@ -55,12 +50,6 @@ export default class MapScreen extends Component {
         }, (error) => {
             console.log(error);
         }, { enableHighAccuracy: true });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.isUserNull) {
-            nextProps.onNullUser();
-        }
     }
 
     componentWillUnmount() {
