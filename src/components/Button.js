@@ -7,6 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { colors } from '../style';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 54,
-        backgroundColor: 'black',
+        backgroundColor: colors.primary,
         borderRadius: 10
     },
     text: {

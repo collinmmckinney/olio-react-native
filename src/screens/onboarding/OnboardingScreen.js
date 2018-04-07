@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
-import { Button } from '../../components';
+import { colors } from '../../style';
+import { Button, UserTypeSelect, UserInfoForm, AllergenSelect } from '../../components';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const ONBOARDING_SCREENS = [
@@ -15,6 +16,7 @@ const ONBOARDING_SCREENS = [
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 80,
         backgroundColor: 'white'
     },
     listContainer: {
@@ -24,6 +26,7 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         width: DEVICE_WIDTH - 36,
+        borderColor: colors.primary,
         borderWidth: 3,
         borderRadius: 8
     },
@@ -68,13 +71,13 @@ export default class OnboardingScreen extends Component {
         let screenContent = null;
         switch (item.key) {
             case 'userType':
-                screenContent = <Text>0</Text>;
+                screenContent = <UserTypeSelect />;
                 break;
             case 'info':
-                screenContent = <Text>1</Text>
+                screenContent = <UserInfoForm />;
                 break;
             case 'allergens':
-                screenContent = <Text>2</Text>
+                screenContent = <AllergenSelect />;
                 break;
             case 'peakFlow':
                 screenContent = <Text>3</Text>

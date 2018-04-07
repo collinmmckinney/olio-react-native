@@ -92,7 +92,7 @@ const SignInOrSignUpStack = StackNavigator({
         screen: OnboardingContainer,
         navigationOptions: { header: null }
     }
-}, { initialRouteName: 'SignInOrSignUp' });
+}, { initialRouteName: 'Onboarding' });
 
 const AuthStack = SwitchNavigator({
     AuthLoading: {
