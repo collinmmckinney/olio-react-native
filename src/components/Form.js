@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { View, ViewPropTypes } from 'react-native';
+import { View, ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { TextInput } from '.';
+
+const styles = StyleSheet.create({
+    input: {
+        marginBottom: 29
+    }
+});
 
 export default class UserInfoForm extends Component {
     static propTypes = {
@@ -41,6 +47,7 @@ export default class UserInfoForm extends Component {
             <TextInput
                 key={field.key}
                 value={field.value}
+                style={styles.input}
                 onChangeText={(value) => { this.handleChange(field.key, value); }}
             />
         ));

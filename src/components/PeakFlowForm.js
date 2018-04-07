@@ -4,18 +4,15 @@ import PropTypes from 'prop-types';
 import { Form } from '.';
 
 const FIELDS = [
-    'name',
-    'age',
-    'gender',
-    'hometown',
-    'email'
+    'fev1',
+    'fvc'
 ];
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         paddingHorizontal: 18,
         paddingVertical: 24,
+        justifyContent: 'space-between',
         alignItems: 'stretch'
     }
 });

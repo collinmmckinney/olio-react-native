@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { colors } from '../../style';
-import { Button, UserTypeSelect, UserInfoForm, AllergenSelect } from '../../components';
+import { Button, UserTypeSelect, UserInfoForm, AllergenSelect, PeakFlowForm } from '../../components';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const ONBOARDING_SCREENS = [
     'userType',
     'info',
     'allergens',
-    'peakFlow',
-    'network'
+    'peakFlow'
+    // 'network'
 ];
 
 const styles = StyleSheet.create({
@@ -38,10 +38,12 @@ const styles = StyleSheet.create({
 
 export default class OnboardingScreen extends Component {
     static propTypes = {
+        onPressNext: PropTypes.func,
         onPressDone: PropTypes.func
     }
 
     static defaultProps = {
+        onPressNext: () => {},
         onPressDone: () => {}
     }
 
@@ -80,10 +82,10 @@ export default class OnboardingScreen extends Component {
                 screenContent = <AllergenSelect />;
                 break;
             case 'peakFlow':
-                screenContent = <Text>3</Text>
+                screenContent = <PeakFlowForm />;
                 break;
             case 'network':
-                screenContent = <Text>4</Text>
+                screenContent = <Text>4</Text>;
                 break;
             default:
                 screenContent = null;
