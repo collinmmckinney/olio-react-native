@@ -18,7 +18,11 @@ import {
     SignInOrSignUpContainer,
     SignInContainer,
     SignUpContainer,
-    OnboardingContainer,
+    OnboardingUserTypeContainer,
+    OnboardingUserInfoContainer,
+    OnboardingAllergenContainer,
+    OnboardingPeakFlowContainer,
+    OnboardingNetworkContainer,
     MapContainer,
     DataContainer,
     SettingsContainer
@@ -88,8 +92,24 @@ const SignInOrSignUpStack = StackNavigator({
     SignUp: {
         screen: SignUpContainer
     },
-    Onboarding: {
-        screen: OnboardingContainer,
+    OnboardingUserType: {
+        screen: OnboardingUserTypeContainer,
+        navigationOptions: { header: null }
+    },
+    OnboardingUserInfo: {
+        screen: OnboardingUserInfoContainer,
+        navigationOptions: { header: null }
+    },
+    OnboardingAllergen: {
+        screen: OnboardingAllergenContainer,
+        navigationOptions: { header: null }
+    },
+    OnboardingPeakFlow: {
+        screen: OnboardingPeakFlowContainer,
+        navigationOptions: { header: null }
+    },
+    OnboardingNetwork: {
+        screen: OnboardingNetworkContainer,
         navigationOptions: { header: null }
     }
 }, { initialRouteName: 'SignInOrSignUp' });

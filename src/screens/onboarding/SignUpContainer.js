@@ -23,7 +23,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                         data: { loggedInUser: { id, __typename: 'LoggedInUserPayload' } }
                     });
                     AsyncStorage.setItem('token', token).then(() => {
-                        ownProps.navigation.navigate('Onboarding');
+                        ownProps.navigation.navigate('OnboardingUserType');
                     });
                 }
             });
