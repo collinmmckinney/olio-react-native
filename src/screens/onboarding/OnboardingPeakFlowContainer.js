@@ -6,7 +6,8 @@ import OnboardingPeakFlowScreen from './OnboardingPeakFlowScreen';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        onPressNext: () => {
+        onPressNext: (form) => {
+            console.log(form);
             ownProps.navigation.navigate('OnboardingNetwork');
         }
     };

@@ -6,7 +6,8 @@ import OnboardingUserInfoScreen from './OnboardingUserInfoScreen';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        onPressNext: () => {
+        onPressNext: (form) => {
+            console.log(form);
             ownProps.navigation.navigate('OnboardingAllergen');
         }
     };

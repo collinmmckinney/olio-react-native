@@ -7,12 +7,9 @@ import { Button, UserTypeSelect } from '../../components';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 18,
         paddingTop: 80,
         backgroundColor: 'white'
-    },
-    listContainer: {
-        flex: 1,
-        marginHorizontal: 18
     },
     screen: {
         flex: 1,
@@ -48,18 +45,14 @@ export default class OnboardingUserTypeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.listContainer}>
-                    <View style={styles.container}>
-                        <View style={styles.screen}>
-                            <UserTypeSelect onSelectUserType={this.handleSelectUserType} />
-                        </View>
-                    </View>
-                    <Button
-                        onPress={this.handlePressNext}
-                        label="NEXT"
-                        style={styles.nextButton}
-                    />
+                <View style={styles.screen}>
+                    <UserTypeSelect onSelectUserType={this.handleSelectUserType} />
                 </View>
+                <Button
+                    onPress={this.handlePressNext}
+                    label="NEXT"
+                    style={styles.nextButton}
+                />
             </View>
         );
     }

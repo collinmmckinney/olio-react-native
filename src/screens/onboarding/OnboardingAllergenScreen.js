@@ -7,12 +7,9 @@ import { Button, AllergenSelect } from '../../components';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 18,
         paddingTop: 80,
         backgroundColor: 'white'
-    },
-    listContainer: {
-        flex: 1,
-        marginHorizontal: 18
     },
     screen: {
         flex: 1,
@@ -53,18 +50,14 @@ export default class OnboardingAllergenScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.listContainer}>
-                    <View style={styles.container}>
-                        <View style={styles.screen}>
-                            <AllergenSelect onChange={this.handleSelectionChange} />
-                        </View>
-                    </View>
-                    <Button
-                        onPress={this.handlePressNext}
-                        label="NEXT"
-                        style={styles.nextButton}
-                    />
+                <View style={styles.screen}>
+                    <AllergenSelect onChange={this.handleSelectionChange} />
                 </View>
+                <Button
+                    onPress={this.handlePressNext}
+                    label="NEXT"
+                    style={styles.nextButton}
+                />
             </View>
         );
     }

@@ -37,7 +37,7 @@ export default class UserInfoForm extends Component {
         fields.forEach((field) => {
             updatedFields[field.key] = field.value;
         });
-        updatedFields[key].value = value;
+        updatedFields[key] = value;
         onChange(updatedFields);
     }
 
