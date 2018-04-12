@@ -10,11 +10,9 @@ const mapStateToProps = (state, ownProps) => {
         isUserNull,
         isUserAuthenticated,
         onNullUser: () => {
-            console.log("NULL USER");
             ownProps.navigation.navigate('SignInOrSignUp');
         },
         onAuthenticatedUser: () => {
-            console.log("AUTHENTIC USER")
             ownProps.navigation.navigate('Map');
         }
     };

@@ -1,24 +1,30 @@
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
+import { loggedInUserQuery } from '../../graphql/queries';
 import OnboardingScreen from './OnboardingScreen';
 
 const mapStateToProps = (state, ownProps) => {
     return {
         onPressDone: () => {
             ownProps.navigation.navigate('Map');
+        },
+        onSelectPatient: () => {
+            ownProps.createPatient({
+                variables: { userId: ownProps.data.loggedInUser.id }
+            });
         }
     };
 };
 
 export default compose(
+    graphql(loggedInUserQuery),
     graphql(gql`
-        mutation($email: String!, $password: String!) {
-            authenticateUser(email: $email, password: $password) {
+        mutation($userId: ID!) {
+            createPatient(userId: $userId) {
                 id
-                token
             }
         }
-    `, { name: 'authenticateUser' }),
+    `, { name: 'createPatient' }),
     connect(mapStateToProps)
 )(OnboardingScreen);

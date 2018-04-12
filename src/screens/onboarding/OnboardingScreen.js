@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
 export default class OnboardingScreen extends Component {
     static propTypes = {
         onPressNext: PropTypes.func,
+        onSelectPatient: PropTypes.func,
         onPressDone: PropTypes.func
     }
 
     static defaultProps = {
         onPressNext: () => {},
+        onSelectPatient: () => {},
         onPressDone: () => {}
     }
 
@@ -54,8 +56,17 @@ export default class OnboardingScreen extends Component {
             index: 0
         };
 
+        this.handleSelectUserType = this.handleSelectUserType.bind(this);
         this.handlePressNext = this.handlePressNext.bind(this);
         this.renderOnboardingScreen = this.renderOnboardingScreen.bind(this);
+    }
+
+    handleSelectUserType(userType) {
+        const { onSelectPatient } = this.props;
+        if (userType === 'user') {
+            onSelectPatient();
+        }
+        this.handlePressNext();
     }
 
     handlePressNext() {
@@ -73,7 +84,7 @@ export default class OnboardingScreen extends Component {
         let screenContent = null;
         switch (item.key) {
             case 'userType':
-                screenContent = <UserTypeSelect />;
+                screenContent = <UserTypeSelect onSelectUserType={this.handleSelectUserType} />;
                 break;
             case 'info':
                 screenContent = <UserInfoForm />;
