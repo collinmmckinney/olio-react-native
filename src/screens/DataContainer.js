@@ -8,8 +8,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const userId = ownProps.data.loggedInUser ? ownProps.data.loggedInUser.id : null;
-    const isUserNull = !ownProps.data.loading && !ownProps.data.loggedInUser;
+    const userId = ownProps.data.user ? ownProps.data.user.id : null;
+    const isUserNull = !ownProps.data.loading && !ownProps.data.user;
     return {
         userId,
         isUserNull,

@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         onSelectUserType: (userType) => {
             ownProps.createPatient({
-                variables: { userId: ownProps.data.loggedInUser.id }
+                variables: { userId: ownProps.data.user.id }
             });
             ownProps.navigation.navigate('OnboardingUserInfo');
         }

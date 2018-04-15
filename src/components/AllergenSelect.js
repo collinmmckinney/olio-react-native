@@ -3,15 +3,14 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 const OPTIONS = [
-    'bees',
-    'pollen',
-    'animals',
-    'insects',
-    'mold',
-    'peanuts',
-    'smoke',
-    'other',
-    'add'
+    'Bees',
+    'Pollen',
+    'Animals',
+    'Insects',
+    'Mold',
+    'Peanut',
+    'Smoke',
+    'Other'
 ];
 
 const styles = StyleSheet.create({

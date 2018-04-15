@@ -35,16 +35,20 @@ export default class OnboardingAllergenScreen extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            selection: []
+        };
+
         this.handleSelectionChange = this.handleSelectionChange.bind(this);
         this.handlePressNext = this.handlePressNext.bind(this);
     }
 
     handleSelectionChange(selection) {
-        console.log(selection);
+        this.setState({ selection });
     }
 
     handlePressNext() {
-        this.props.onPressNext();
+        this.props.onPressNext(this.state.selection);
     }
 
     render() {

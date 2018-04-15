@@ -1,8 +1,7 @@
 import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { loggedInUserQuery } from '../../graphql/queries';
+import { loggedInUserQuery, authenticateUserMutation } from '../../graphql/queries';
 import SignInScreen from './SignInScreen';
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,10 +17,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                     query: loggedInUserQuery
                 }],
                 update: (store, { data: { authenticateUser: { id, token } } }) => {
-                    store.writeQuery({
-                        query: loggedInUserQuery,
-                        data: { loggedInUser: { id, __typename: 'LoggedInUserPayload' } }
-                    });
                     AsyncStorage.setItem('token', token).then(() => {
                         ownProps.navigation.navigate('Map');
                     });
@@ -32,13 +27,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 export default compose(
-    graphql(gql`
-        mutation($email: String!, $password: String!) {
-            authenticateUser(email: $email, password: $password) {
-                id
-                token
-            }
-        }
-    `, { name: 'authenticateUser' }),
+    graphql(authenticateUserMutation, { name: 'authenticateUser' }),
     connect(mapStateToProps, undefined, mergeProps)
 )(SignInScreen);

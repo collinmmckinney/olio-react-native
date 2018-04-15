@@ -4,8 +4,8 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import AuthLoadingScreen from './AuthLoadingScreen';
 
 const mapStateToProps = (state, ownProps) => {
-    const isUserNull = !ownProps.data.loading && !ownProps.data.loggedInUser;
-    const isUserAuthenticated = !ownProps.data.loading && !!ownProps.data.loggedInUser;
+    const isUserNull = !ownProps.data.loading && !ownProps.data.user;
+    const isUserAuthenticated = !ownProps.data.loading && !!ownProps.data.user;
     return {
         isUserNull,
         isUserAuthenticated,

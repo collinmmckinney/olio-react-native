@@ -5,11 +5,13 @@ import { colors } from '../../style';
 import { Button, Form } from '../../components';
 
 const FIELDS = [
-    'name',
-    'age',
-    'gender',
-    'hometown',
-    'email'
+    'firstName',
+    'middleName',
+    'lastName',
+    'dateOfBirth',
+    'pronoun',
+    'town',
+    'state'
 ];
 
 const styles = StyleSheet.create({
