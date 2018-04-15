@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
 import { Button, Form } from '../../components';
 
 const FIELDS = [
-    'firstName',
-    'middleName',
-    'lastName',
-    'dateOfBirth',
-    'pronoun',
-    'town',
-    'state'
+    { key: 'firstName', label: "What's your first name?" },
+    { key: 'middleName', label: 'Middle name?' },
+    { key: 'lastName', label: 'Last name?' },
+    { key: 'dateOfBirth', label: "When's your birthday?" },
+    { key: 'pronoun', label: 'What are your pronouns?' },
+    { key: 'town', label: 'What town are you from?' },
+    { key: 'state', label: 'State?' }
 ];
 
 const styles = StyleSheet.create({
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
     form: {
         flex: 1,
         paddingHorizontal: 18,
-        paddingVertical: 24,
         alignItems: 'stretch'
     },
     screen: {
@@ -53,7 +53,7 @@ export default class OnboardingUserInfoScreen extends Component {
 
         this.state = {};
         FIELDS.forEach((field) => {
-            this.state[field] = '';
+            this.state[field.key] = '';
         });
 
         this.handleFormChange = this.handleFormChange.bind(this);
@@ -69,17 +69,17 @@ export default class OnboardingUserInfoScreen extends Component {
     }
 
     render() {
-        const fields = FIELDS.map(field => ({ key: field, value: this.state[field] }));
+        const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
 
         return (
             <View style={styles.container}>
-                <View style={styles.screen}>
+                <KeyboardAwareScrollView style={styles.screen}>
                     <Form
                         fields={fields}
                         onChange={this.handleFormChange}
                         style={styles.form}
                     />
-                </View>
+                </KeyboardAwareScrollView>
                 <Button
                     onPress={this.handlePressNext}
                     label="NEXT"

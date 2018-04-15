@@ -1,13 +1,19 @@
 import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../../graphql/queries';
+import { createReportMutation } from '../../graphql/mutations';
 import OnboardingPeakFlowScreen from './OnboardingPeakFlowScreen';
 
 const mapStateToProps = (state, ownProps) => {
     return {
         onPressNext: (form) => {
-            console.log(form);
+            ownProps.createReport({
+                variables: {
+                    patientId: ownProps.data.user.patient.id,
+                    fev1: parseFloat(form.fev1),
+                    fvc: parseFloat(form.fvc)
+                }
+            });
             ownProps.navigation.navigate('OnboardingNetwork');
         }
     };
@@ -15,5 +21,6 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
     graphql(loggedInUserQuery),
+    graphql(createReportMutation, { name: 'createReport' }),
     connect(mapStateToProps)
 )(OnboardingPeakFlowScreen);

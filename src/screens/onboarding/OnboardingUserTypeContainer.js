@@ -8,7 +8,10 @@ const mapStateToProps = (state, ownProps) => {
     return {
         onSelectUserType: (userType) => {
             ownProps.createPatient({
-                variables: { userId: ownProps.data.user.id }
+                variables: { userId: ownProps.data.user.id },
+                refetchQueries: [{
+                    query: loggedInUserQuery
+                }]
             });
             ownProps.navigation.navigate('OnboardingUserInfo');
         }

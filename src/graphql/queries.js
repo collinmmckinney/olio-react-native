@@ -16,21 +16,3 @@ export const loggedInUserQuery = gql`
         }
     }
 `;
-
-export const signupUserMutation = gql`
-    mutation($email: String!, $username: String!, $password: String!) {
-        signupUser(email: $email, username: $username, password: $password) {
-            id
-            token
-        }
-    }
-`;
-
-export const authenticateUserMutation = gql`
-    mutation($email: String!, $password: String!) {
-        authenticateUser(email: $email, password: $password) {
-            id
-            token
-        }
-    }
-`;

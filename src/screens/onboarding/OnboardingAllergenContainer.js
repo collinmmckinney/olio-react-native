@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
             allergensSelected.forEach((allergenType) => {
                 ownProps.addEmptyAllergen({
                     variables: {
-                        patientId: ownProps.data.loggedInPatient.patient.id,
+                        patientId: ownProps.data.user.patient.id,
                         allergenType
                     }
                 });

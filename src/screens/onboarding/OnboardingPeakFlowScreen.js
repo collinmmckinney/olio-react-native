@@ -5,8 +5,8 @@ import { colors } from '../../style';
 import { Button, Form } from '../../components';
 
 const FIELDS = [
-    'fev1',
-    'fvc'
+    { key: 'fev1', placeholder: 'FEV1' },
+    { key: 'fvc', placeholder: 'FVC' }
 ];
 
 const styles = StyleSheet.create({
@@ -48,7 +48,7 @@ export default class OnboardingPeakFlowScreen extends Component {
 
         this.state = {};
         FIELDS.forEach((field) => {
-            this.state[field] = '';
+            this.state[field.key] = '';
         });
 
         this.handleFormChange = this.handleFormChange.bind(this);
@@ -64,7 +64,7 @@ export default class OnboardingPeakFlowScreen extends Component {
     }
 
     render() {
-        const fields = FIELDS.map(field => ({ key: field, value: this.state[field] }));
+        const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
 
         return (
             <View style={styles.container}>

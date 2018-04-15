@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { View, ViewPropTypes, StyleSheet } from 'react-native';
+import { View, ViewPropTypes, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { TextInput } from '.';
 
 const styles = StyleSheet.create({
-    input: {
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 29
+    },
+    input: {
+        flex: 1
+    },
+    inputWithLabel: {
+        flex: 0,
+        width: 120
     }
 });
 
@@ -13,7 +23,9 @@ export default class UserInfoForm extends Component {
     static propTypes = {
         fields: PropTypes.arrayOf(PropTypes.shape({
             key: PropTypes.string,
-            value: PropTypes.string
+            value: PropTypes.string,
+            placeholder: PropTypes.string,
+            label: PropTypes.string
         })),
         onChange: PropTypes.func,
         style: ViewPropTypes.style
@@ -44,12 +56,15 @@ export default class UserInfoForm extends Component {
     render() {
         const { fields, style } = this.props;
         const elements = fields.map(field => (
-            <TextInput
-                key={field.key}
-                value={field.value}
-                style={styles.input}
-                onChangeText={(value) => { this.handleChange(field.key, value); }}
-            />
+            <View key={field.key} style={styles.row}>
+                <Text>{field.label}</Text>
+                <TextInput
+                    value={field.value}
+                    placeholder={field.placeholder}
+                    style={[styles.input, field.label ? styles.inputWithLabel : {}]}
+                    onChangeText={(value) => { this.handleChange(field.key, value); }}
+                />
+            </View>
         ));
 
         return (

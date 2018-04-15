@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
                     middleName: form.middleName,
                     lastName: form.lastName,
                     dateOfBirth: (new Date()).toISOString(),
-                    pronoun: 'He',
+                    pronoun: form.pronoun[0].toUpperCase() + form.pronoun.substring(1),
                     town: form.town,
                     state: form.state
                 }
