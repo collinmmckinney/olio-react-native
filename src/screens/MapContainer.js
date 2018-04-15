@@ -5,13 +5,13 @@ import { setUserLocation, setMapRegion } from '../actions/location';
 import MapScreen from './MapScreen';
 
 const mapStateToProps = ({ Location }, ownProps) => {
+    console.log(Location.mapRegion);
     return {
         userLocation: {
             latitude: Location.userLocation.coords.latitude,
             longitude: Location.userLocation.coords.longitude
         },
-        mapRegion: Location.mapRegion,
-        mapFollowsLocation: Location.mapFollowsLocation
+        mapRegion: Location.mapRegion
     };
 };
 

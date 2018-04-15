@@ -24,7 +24,6 @@ export default class MapScreen extends Component {
             latitudeDelta: PropTypes.number,
             longitudeDelta: PropTypes.number
         }),
-        mapFollowsLocation: PropTypes.bool,
         onUserLocationChange: PropTypes.func.isRequired,
         onMapRegionChange: PropTypes.func.isRequired,
     };
@@ -39,9 +38,14 @@ export default class MapScreen extends Component {
             longitude: null,
             latitudeDelta: null,
             longitudeDelta: null
-        },
-        mapFollowsLocation: false
+        }
     };
+
+    constructor(props) {
+        super(props);
+
+        this.handleMapRegionChange = this.handleMapRegionChange.bind(this);
+    }
 
     componentWillMount() {
         navigator.geolocation.requestAuthorization();
@@ -57,16 +61,20 @@ export default class MapScreen extends Component {
     }
 
     handleUserLocationChange(location) {
-        const { mapFollowsLocation, onUserLocationChange, onMapRegionChange } = this.props;
+        const { mapRegion, onUserLocationChange, onMapRegionChange } = this.props;
         onUserLocationChange(location);
-        if (mapFollowsLocation) {
+        if (mapRegion.latitude === null) {
             onMapRegionChange({
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-                latitudeDelta: 0.0222,
-                longitudeDelta: 0.0121
+                latitudeDelta: 0.02,
+                longitudeDelta: 0.01
             });
         }
+    }
+
+    handleMapRegionChange(mapRegion) {
+        this.props.onMapRegionChange(mapRegion);
     }
 
     render() {
@@ -76,7 +84,11 @@ export default class MapScreen extends Component {
             <View style={styles.container}>
                 { !!userLocation.latitude && !!mapRegion.latitude &&
                     <MapView
-                        region={mapRegion}
+                        provider="google"
+                        showsUserLocation
+                        showsMyLocationButton
+                        initialRegion={mapRegion}
+                        onRegionChange={this.handleMapRegionChange}
                         style={styles.container}
                     />
                 }

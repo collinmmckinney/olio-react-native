@@ -18,8 +18,7 @@ const initialState = {
         longitude: null,
         latitudeDelta: null,
         longitudeDelta: null
-    },
-    mapFollowsLocation: true
+    }
 };
 
 export default function Location(state = initialState, action) {
