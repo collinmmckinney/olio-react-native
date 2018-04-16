@@ -1,11 +1,10 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
-import { loggedInUserQuery } from '../graphql/queries';
-import { setUserLocation, setMapRegion } from '../actions/location';
+import { loggedInUserQuery } from '../../graphql/queries';
+import { setUserLocation, setMapRegion } from '../../actions/location';
 import MapScreen from './MapScreen';
 
 const mapStateToProps = ({ Location }, ownProps) => {
-    console.log(Location.mapRegion);
     return {
         userLocation: {
             latitude: Location.userLocation.coords.latitude,
@@ -22,6 +21,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onMapRegionChange: (mapRegion) => {
             dispatch(setMapRegion(mapRegion));
+        },
+        onPressAdd: () => {
+            ownProps.navigation.navigate('AddMapItem');
+        },
+        onPressFilters: () => {
+            ownProps.navigation.navigate('MapFilters');
         }
     };
 };

@@ -24,6 +24,8 @@ import {
     OnboardingPeakFlowContainer,
     OnboardingNetworkContainer,
     MapContainer,
+    AddMapItemContainer,
+    MapFiltersContainer,
     DataContainer,
     SettingsContainer
 } from './src/screens';
@@ -78,8 +80,14 @@ const client = new ApolloClient({
 const MapStack = StackNavigator({
     Map: {
         screen: MapContainer
+    },
+    AddMapItem: {
+        screen: AddMapItemContainer
+    },
+    MapFilters: {
+        screen: MapFiltersContainer
     }
-}, { initialRouteName: 'Map' });
+}, { initialRouteName: 'Map', mode: 'modal' });
 
 const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {

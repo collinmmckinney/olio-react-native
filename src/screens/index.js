@@ -1,4 +1,6 @@
-export { default as MapContainer } from './MapContainer';
+export { default as MapContainer } from './map/MapContainer';
+export { default as AddMapItemContainer } from './map/AddMapItemContainer';
+export { default as MapFiltersContainer } from './map/MapFiltersContainer';
 
 export { default as AuthLoadingContainer } from './onboarding/AuthLoadingContainer';
 export { default as SignInOrSignUpContainer } from './onboarding/SignInOrSignUpContainer';

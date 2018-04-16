@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { MapButton } from '../../components';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white'
+        flex: 1
+    },
+    buttonColumn: {
+        position: 'absolute',
+        right: 0,
+        flexDirection: 'column',
+        paddingTop: 12,
+        paddingRight: 12
+    },
+    button: {
+        marginBottom: 10
     }
 });
 
@@ -26,6 +34,8 @@ export default class MapScreen extends Component {
         }),
         onUserLocationChange: PropTypes.func.isRequired,
         onMapRegionChange: PropTypes.func.isRequired,
+        onPressAdd: PropTypes.func.isRequired,
+        onPressFilters: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -78,13 +88,18 @@ export default class MapScreen extends Component {
     }
 
     render() {
-        const { userLocation, mapRegion } = this.props;
+        const {
+            userLocation,
+            mapRegion,
+            onPressAdd,
+            onPressFilters
+        } = this.props;
 
         return (
             <View style={styles.container}>
                 { !!userLocation.latitude && !!mapRegion.latitude &&
                     <MapView
-                        provider="google"
+                        provider={PROVIDER_GOOGLE}
                         showsUserLocation
                         showsMyLocationButton
                         initialRegion={mapRegion}
@@ -92,6 +107,10 @@ export default class MapScreen extends Component {
                         style={styles.container}
                     />
                 }
+                <View style={styles.buttonColumn}>
+                    <MapButton onPress={onPressAdd} style={styles.button} />
+                    <MapButton onPress={onPressFilters} style={styles.button} />
+                </View>
             </View>
         );
     }
