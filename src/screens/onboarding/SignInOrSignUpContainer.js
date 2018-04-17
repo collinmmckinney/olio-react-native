@@ -1,11 +1,5 @@
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import SignInOrSignUpScreen from './SignInOrSignUpScreen';
-
-const mapStateToProps = (state, ownProps) => {
-    return {};
-};
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onPressSignIn: () => {
@@ -16,13 +10,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     }
 });
 
-export default compose(
-    graphql(gql`
-        query {
-            loggedInUser {
-                id
-            }
-        }
-    `),
-    connect(mapStateToProps, undefined, mergeProps)
-)(SignInOrSignUpScreen);
+export default connect(undefined, undefined, mergeProps)(SignInOrSignUpScreen);

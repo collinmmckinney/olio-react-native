@@ -5,29 +5,23 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import { authenticateUserMutation } from '../../graphql/mutations';
 import SignInScreen from './SignInScreen';
 
-const mapStateToProps = (state, ownProps) => {
-    return {};
-};
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return {
-        onPressSignIn: (email, password) => {
-            ownProps.authenticateUser({
-                variables: { email, password },
-                refetchQueries: [{
-                    query: loggedInUserQuery
-                }],
-                update: (store, { data: { authenticateUser: { id, token } } }) => {
-                    AsyncStorage.setItem('token', token).then(() => {
-                        ownProps.navigation.navigate('Map');
-                    });
-                }
-            });
-        }
-    };
-};
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    onPressSignIn: (email, password) => {
+        ownProps.authenticateUser({
+            variables: { email, password },
+            refetchQueries: [{
+                query: loggedInUserQuery
+            }],
+            update: (store, { data: { authenticateUser: { token } } }) => {
+                AsyncStorage.setItem('token', token).then(() => {
+                    ownProps.navigation.navigate('Map');
+                });
+            }
+        });
+    }
+});
 
 export default compose(
     graphql(authenticateUserMutation, { name: 'authenticateUser' }),
-    connect(mapStateToProps, undefined, mergeProps)
+    connect(undefined, undefined, mergeProps)
 )(SignInScreen);

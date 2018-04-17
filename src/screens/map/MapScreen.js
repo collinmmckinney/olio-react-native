@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
     },
     button: {
         marginBottom: 10
+    },
+    marker: {
+        width: 10,
+        height: 10,
+        borderRadius: 10
     }
 });
 
@@ -107,7 +112,10 @@ export default class MapScreen extends Component {
         const markers = mapItems.map(mapItem => (
             <Marker
                 key={mapItem.id}
-                draggable
+                title={mapItem.allergenType}
+                description={mapItem.comment}
+                pinColor={mapItem.isOwnedByUser ? 'green' : 'red'}
+                draggable={mapItem.isOwnedByUser}
                 coordinate={{ latitude: mapItem.latitude, longitude: mapItem.longitude }}
                 onDragEnd={(e) => console.log(e.nativeEvent.coordinate)}
             />

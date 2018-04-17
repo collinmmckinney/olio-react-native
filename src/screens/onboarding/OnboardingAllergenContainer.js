@@ -4,31 +4,38 @@ import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../../graphql/queries';
 import OnboardingAllergenScreen from './OnboardingAllergenScreen';
 
-const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps);
-    return {
-        onPressNext: (allergensSelected) => {
-            ownProps.navigation.navigate('OnboardingPeakFlow');
-            allergensSelected.forEach((allergenType) => {
-                ownProps.addEmptyAllergen({
-                    variables: {
-                        patientId: ownProps.data.user.patient.id,
-                        allergenType
-                    }
-                });
-            });
-        }
-    };
-};
+const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
+    patientId: loading ? null : user.patient.id
+});
+
+const mapCreateAllergenMutationToProps = ({ mutate }) => ({
+    createAllergen: (patientId, allergenType) => {
+        mutate({
+            variables: {
+                patientId,
+                allergenType
+            }
+        });
+    }
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    onPressNext: (allergensSelected) => {
+        ownProps.navigation.navigate('OnboardingPeakFlow');
+        allergensSelected.forEach((allergenType) => {
+            ownProps.createAllergen(ownProps.patientId, allergenType);
+        });
+    }
+});
 
 export default compose(
-    graphql(loggedInUserQuery),
+    graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
     graphql(gql`
         mutation($patientId: ID!, $allergenType: AllergenType!) {
             createAllergen(patientId: $patientId, type: $allergenType) {
                 id
             }
         }
-    `, { name: 'addEmptyAllergen' }),
-    connect(mapStateToProps)
+    `, { props: mapCreateAllergenMutationToProps }),
+    connect(undefined, undefined, mergeProps)
 )(OnboardingAllergenScreen);

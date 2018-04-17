@@ -9,13 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const userId = ownProps.data.user ? ownProps.data.user.id : null;
-    const isUserNull = !ownProps.data.loading && !ownProps.data.user;
     return {
-        userId,
-        isUserNull,
-        onNullUser: () => {
-            ownProps.navigation.navigate('SignInOrSignUp');
-        }
+        userId
     };
 };
 

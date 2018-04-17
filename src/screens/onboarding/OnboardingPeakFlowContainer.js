@@ -4,23 +4,37 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import { createReportMutation } from '../../graphql/mutations';
 import OnboardingPeakFlowScreen from './OnboardingPeakFlowScreen';
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        onPressNext: (form) => {
-            ownProps.createReport({
-                variables: {
-                    patientId: ownProps.data.user.patient.id,
-                    fev1: parseFloat(form.fev1),
-                    fvc: parseFloat(form.fvc)
-                }
-            });
-            ownProps.navigation.navigate('OnboardingNetwork');
-        }
-    };
-};
+const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
+    patientId: loading ? null : user.patient.id
+});
+
+const mapCreateReportMutationToProps = ({ mutate }) => ({
+    createReport: (patientId, form) => {
+        mutate({
+            variables: {
+                patientId,
+                fev1: form.fev1,
+                fvc: form.fvc
+            },
+            refetchQueries: [{
+                query: loggedInUserQuery
+            }]
+        });
+    }
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    onPressNext: (form) => {
+        ownProps.createReport(ownProps.patientId, {
+            fev1: parseFloat(form.fev1),
+            fvc: parseFloat(form.fvc)
+        });
+        ownProps.navigation.navigate('OnboardingNetwork');
+    }
+});
 
 export default compose(
-    graphql(loggedInUserQuery),
-    graphql(createReportMutation, { name: 'createReport' }),
-    connect(mapStateToProps)
+    graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
+    graphql(createReportMutation, { props: mapCreateReportMutationToProps }),
+    connect(undefined, undefined, mergeProps)
 )(OnboardingPeakFlowScreen);

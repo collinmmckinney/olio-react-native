@@ -17,22 +17,12 @@ const styles = StyleSheet.create({
 
 export default class DataScreen extends Component {
     static propTypes = {
-        userId: PropTypes.string,
-        isUserNull: PropTypes.bool,
-        onNullUser: PropTypes.func
+        userId: PropTypes.string
     };
 
     static defaultProps = {
-        userId: '',
-        isUserNull: false,
-        onNullUser: () => {}
+        userId: ''
     };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.isUserNull) {
-            nextProps.onNullUser();
-        }
-    }
 
     render() {
         const { userId } = this.props;

@@ -4,43 +4,50 @@ import { loggedInUserQuery, allMapItemsQuery } from '../../graphql/queries';
 import { setUserLocation, setMapRegion } from '../../actions/location';
 import MapScreen from './MapScreen';
 
-const mapStateToProps = ({ Location }, ownProps) => {
-    return {
-        userLocation: {
-            latitude: Location.userLocation.coords.latitude,
-            longitude: Location.userLocation.coords.longitude
-        },
-        mapRegion: Location.mapRegion
-    };
+const mapStateToProps = ({ Location }) => ({
+    userLocation: {
+        latitude: Location.userLocation.coords.latitude,
+        longitude: Location.userLocation.coords.longitude
+    },
+    mapRegion: Location.mapRegion
+});
+
+const mapDispatchToProps = {
+    setUserLocation,
+    setMapRegion
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onUserLocationChange: (location) => {
-            dispatch(setUserLocation(location));
-        },
-        onMapRegionChange: (mapRegion) => {
-            dispatch(setMapRegion(mapRegion));
-        },
-        onPressAdd: () => {
-            ownProps.navigation.navigate('AddMapItem');
-        },
-        onPressFilters: () => {
-            ownProps.navigation.navigate('MapFilters');
-        }
-    };
-};
+const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
+    userId: loading ? null : user.id
+});
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return {
-        ...stateProps,
-        ...dispatchProps,
-        mapItems: ownProps.data.allMapItems
-    };
-};
+const mapAllMapItemsQueryToProps = ({ data: { loading, allMapItems } }) => ({
+    mapItems: loading ? [] : allMapItems
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...stateProps,
+    ...dispatchProps,
+    mapItems: ownProps.mapItems.map(mapItem => ({
+        ...mapItem,
+        isOwnedByUser: mapItem.user.id === ownProps.userId
+    })),
+    onUserLocationChange: (location) => {
+        dispatchProps.setUserLocation(location);
+    },
+    onMapRegionChange: (mapRegion) => {
+        dispatchProps.setMapRegion(mapRegion);
+    },
+    onPressAdd: () => {
+        ownProps.navigation.navigate('AddMapItem');
+    },
+    onPressFilters: () => {
+        ownProps.navigation.navigate('MapFilters');
+    }
+});
 
 export default compose(
-    graphql(loggedInUserQuery),
-    graphql(allMapItemsQuery),
+    graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
+    graphql(allMapItemsQuery, { props: mapAllMapItemsQueryToProps }),
     connect(mapStateToProps, mapDispatchToProps, mergeProps)
 )(MapScreen);
