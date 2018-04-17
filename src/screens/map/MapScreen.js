@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapButton } from '../../components';
 
 const styles = StyleSheet.create({
@@ -32,6 +32,13 @@ export default class MapScreen extends Component {
             latitudeDelta: PropTypes.number,
             longitudeDelta: PropTypes.number
         }),
+        mapItems: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string,
+            latitude: PropTypes.number,
+            longitude: PropTypes.number,
+            allergenType: PropTypes.string,
+            comment: PropTypes.string
+        })),
         onUserLocationChange: PropTypes.func.isRequired,
         onMapRegionChange: PropTypes.func.isRequired,
         onPressAdd: PropTypes.func.isRequired,
@@ -48,7 +55,8 @@ export default class MapScreen extends Component {
             longitude: null,
             latitudeDelta: null,
             longitudeDelta: null
-        }
+        },
+        mapItems: []
     };
 
     constructor(props) {
@@ -91,9 +99,19 @@ export default class MapScreen extends Component {
         const {
             userLocation,
             mapRegion,
+            mapItems,
             onPressAdd,
             onPressFilters
         } = this.props;
+
+        const markers = mapItems.map(mapItem => (
+            <Marker
+                key={mapItem.id}
+                draggable
+                coordinate={{ latitude: mapItem.latitude, longitude: mapItem.longitude }}
+                onDragEnd={(e) => console.log(e.nativeEvent.coordinate)}
+            />
+        ));
 
         return (
             <View style={styles.container}>
@@ -105,7 +123,9 @@ export default class MapScreen extends Component {
                         initialRegion={mapRegion}
                         onRegionChange={this.handleMapRegionChange}
                         style={styles.container}
-                    />
+                    >
+                        {markers}
+                    </MapView>
                 }
                 <View style={styles.buttonColumn}>
                     <MapButton onPress={onPressAdd} style={styles.button} />

@@ -25,3 +25,11 @@ export const createReportMutation = gql`
         }
     }
 `;
+
+export const createMapItemMutation = gql`
+    mutation($userId: ID!, $latitude: Float!, $longitude: Float!, $allergenType: AllergenType!, $comment: String) {
+        createMapItem(userId: $userId, latitude: $latitude, longitude: $longitude, allergenType: $allergenType, comment: $comment) {
+            id
+        }
+    }
+`;

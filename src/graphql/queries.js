@@ -16,3 +16,18 @@ export const loggedInUserQuery = gql`
         }
     }
 `;
+
+export const allMapItemsQuery = gql`
+    query {
+        allMapItems {
+            id
+            user {
+                id
+            }
+            latitude
+            longitude
+            allergenType
+            comment
+        }
+    }
+`;

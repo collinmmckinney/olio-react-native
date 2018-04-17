@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {
-    View,
-    StyleSheet,
-    Text,
-    TouchableHighlight
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { Button } from '../components';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,17 +9,6 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: 'white'
-    },
-    button: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48,
-        backgroundColor: 'black'
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 24
     }
 });
 
@@ -46,11 +31,7 @@ export default class SettingsScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={this.handlePressLogout}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Log Out</Text>
-                    </View>
-                </TouchableHighlight>
+                <Button label="Log Out" onPress={this.handlePressLogout} />
             </View>
         );
     }

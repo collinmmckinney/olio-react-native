@@ -1,6 +1,6 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
-import { loggedInUserQuery } from '../../graphql/queries';
+import { loggedInUserQuery, allMapItemsQuery } from '../../graphql/queries';
 import { setUserLocation, setMapRegion } from '../../actions/location';
 import MapScreen from './MapScreen';
 
@@ -31,7 +31,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     };
 };
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return {
+        ...stateProps,
+        ...dispatchProps,
+        mapItems: ownProps.data.allMapItems
+    };
+};
+
 export default compose(
     graphql(loggedInUserQuery),
-    connect(mapStateToProps, mapDispatchToProps)
+    graphql(allMapItemsQuery),
+    connect(mapStateToProps, mapDispatchToProps, mergeProps)
 )(MapScreen);
