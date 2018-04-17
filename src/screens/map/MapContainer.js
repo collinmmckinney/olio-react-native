@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 };
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    userId: loading ? null : user.id
+    userId: loading && !user ? null : user.id
 });
 
 const mapAllMapItemsQueryToProps = ({ data: { loading, allMapItems } }) => ({

@@ -5,7 +5,7 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import OnboardingUserTypeScreen from './OnboardingUserTypeScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    userId: loading ? null : user.id
+    userId: loading && !user ? null : user.id
 });
 
 const mapCreatePatientMutationToProps = ({ mutate }) => ({

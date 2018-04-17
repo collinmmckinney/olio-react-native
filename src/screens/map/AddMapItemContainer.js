@@ -4,40 +4,43 @@ import { loggedInUserQuery, allMapItemsQuery } from '../../graphql/queries';
 import { createMapItemMutation } from '../../graphql/mutations';
 import AddMapItemScreen from './AddMapItemScreen';
 
-const mapStateToProps = ({ Location }, ownProps) => {
-    return {
-        userLocation: {
-            latitude: Location.userLocation.coords.latitude,
-            longitude: Location.userLocation.coords.longitude
-        }
-    };
-};
+const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
+    userId: loading && !user ? null : user.id
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {};
-};
+const mapCreateMapItemMutationToProps = ({ mutate }) => ({
+    createMapItem: (userId, latitude, longitude, allergenType, comment) => {
+        mutate({
+            variables: {
+                userId,
+                latitude,
+                longitude,
+                allergenType,
+                comment
+            },
+            refetchQueries: [{ query: allMapItemsQuery }]
+        });
+    }
+});
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return {
-        onSubmit: (allergenType, comment) => {
-            const { latitude, longitude } = stateProps.userLocation;
-            ownProps.createMapItem({
-                variables: {
-                    userId: ownProps.data.user.id,
-                    latitude,
-                    longitude,
-                    allergenType,
-                    comment
-                },
-                refetchQueries: [{ query: allMapItemsQuery }]
-            });
-            ownProps.navigation.goBack();
-        }
-    };
-};
+const mapStateToProps = ({ Location }) => ({
+    userLocation: {
+        latitude: Location.userLocation.coords.latitude,
+        longitude: Location.userLocation.coords.longitude
+    }
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    onSubmit: (allergenType, comment) => {
+        const { userId, navigation } = ownProps;
+        const { latitude, longitude } = stateProps.userLocation;
+        ownProps.createMapItem(userId, latitude, longitude, allergenType, comment);
+        navigation.goBack();
+    }
+});
 
 export default compose(
-    graphql(loggedInUserQuery),
-    graphql(createMapItemMutation, { name: 'createMapItem' }),
-    connect(mapStateToProps, mapDispatchToProps, mergeProps)
+    graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
+    graphql(createMapItemMutation, { props: mapCreateMapItemMutationToProps }),
+    connect(mapStateToProps, undefined, mergeProps)
 )(AddMapItemScreen);
