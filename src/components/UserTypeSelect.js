@@ -38,7 +38,6 @@ export default class UserTypeSelect extends Component {
             <View style={styles.container}>
                 <Button label="USER" onPress={() => { onSelectUserType('user'); }} style={styles.userButton} />
                 <Button label="HELPER" onPress={() => { onSelectUserType('helper'); }} style={styles.helperButton} />
-                <Button label="DOCTOR" onPress={() => { onSelectUserType('doctor'); }} style={styles.doctorButton} />
             </View>
         );
     }
