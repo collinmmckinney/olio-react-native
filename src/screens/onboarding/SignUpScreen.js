@@ -44,7 +44,7 @@ export default class SignUpScreen extends Component {
         } else if (!this.validate(this.state.email)) {
             Alert.alert('Please enter a valid email');
         } else {
-            // TODO: if the username already exists get an error
+            // TODO: if the email (or whatever the primary key is) already exists get an error
             const { onPressSignUp } = this.props;
             const { email, username, password } = this.state;
             onPressSignUp(email, username, password);
