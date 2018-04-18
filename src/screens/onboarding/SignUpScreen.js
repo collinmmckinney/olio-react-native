@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button, TextInput } from '../../components';
 
@@ -37,9 +37,26 @@ export default class SignUpScreen extends Component {
     }
 
     handlePressSignUp() {
-        const { onPressSignUp } = this.props;
-        const { email, username, password } = this.state;
-        onPressSignUp(email, username, password);
+        if (this.state.username.length === 0) {
+            Alert.alert('Username must exceed 0 characters');
+        } else if (this.state.password.length === 0) {
+            Alert.alert('Password must exceed 0 characters');
+        } else if (!this.validate(this.state.email)) {
+            Alert.alert('Please enter a valid email');
+        } else {
+            // TODO: if the username already exists get an error
+            const { onPressSignUp } = this.props;
+            const { email, username, password } = this.state;
+            onPressSignUp(email, username, password);
+        }
+    }
+
+    validate = (text) => {
+        const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(text) === false) {
+            return false;
+        }
+        return true;
     }
 
     render() {
