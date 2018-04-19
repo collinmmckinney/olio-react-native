@@ -8,9 +8,8 @@ import { Button } from '../../components';
 const FIELDS = [
     { key: 'firstName', label: "What's your first name?" },
     { key: 'lastName', label: 'Last name?' },
-    { key: 'age', label: 'How old are you?' },
+    { key: 'age', label: "What's your age?" },
     { key: 'pronoun', label: 'What are your pronouns?' },
-    { key: 'photo', label: 'Add a photo' },
 ];
 
 const styles = StyleSheet.create({
