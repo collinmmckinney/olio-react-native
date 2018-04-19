@@ -5,7 +5,7 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import OnboardingUserTypeScreen from './OnboardingUserTypeScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    userId: loading && !user ? null : user.id
+    userId: loading || !user ? null : user.id
 });
 
 const mapCreatePatientMutationToProps = ({ mutate }) => ({
@@ -19,9 +19,24 @@ const mapCreatePatientMutationToProps = ({ mutate }) => ({
     }
 });
 
+const mapCreateCaregiverMutationToProps = ({ mutate }) => ({
+    createCaregiver: (userId) => {
+        mutate({
+            variables: { userId },
+            refetchQueries: [{
+                query: loggedInUserQuery
+            }]
+        });
+    }
+});
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onSelectUserType: (userType) => {
-        ownProps.createPatient(ownProps.userId);
+        if (userType === 'user') {
+            ownProps.createPatient(ownProps.userId);
+        } else if (userType === 'helper') {
+            ownProps.createCaregiver(ownProps.userId);
+        }
         ownProps.navigation.navigate('OnboardingUserInfo');
     }
 });
@@ -35,5 +50,12 @@ export default compose(
             }
         }
     `, { props: mapCreatePatientMutationToProps }),
+    graphql(gql`
+        mutation($userId: ID!) {
+            createCaregiver(userId: $userId) {
+                id
+            }
+        }
+    `, { props: mapCreateCaregiverMutationToProps }),
     connect(undefined, undefined, mergeProps)
 )(OnboardingUserTypeScreen);

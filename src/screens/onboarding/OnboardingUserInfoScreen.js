@@ -7,12 +7,9 @@ import { Button, Form } from '../../components';
 
 const FIELDS = [
     { key: 'firstName', label: "What's your first name?" },
-    { key: 'middleName', label: 'Middle name?' },
     { key: 'lastName', label: 'Last name?' },
-    { key: 'dateOfBirth', label: "When's your birthday?" },
-    { key: 'pronoun', label: 'What are your pronouns?' },
-    { key: 'town', label: 'What town are you from?' },
-    { key: 'state', label: 'State?' }
+    { key: 'age', label: "What's your age?" },
+    { key: 'pronoun', label: 'What are your pronouns?' }
 ];
 
 const styles = StyleSheet.create({

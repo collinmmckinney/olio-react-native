@@ -9,17 +9,14 @@ const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
 });
 
 const mapUpdateUserMutationToProps = ({ mutate }) => ({
-    updateUser: (userId, form) => {
+    updateUser: (userId, args) => {
         mutate({
             variables: {
                 userId,
-                firstName: form.firstName,
-                middleName: form.middleName,
-                lastName: form.lastName,
-                dateOfBirth: (new Date()).toISOString(),
-                pronoun: form.pronoun === '' ? form.pronoun : form.pronoun[0].toUpperCase() + form.pronoun.substring(1),
-                town: form.town,
-                state: form.state
+                firstName: args.firstName,
+                lastName: args.lastName,
+                age: args.age,
+                pronoun: args.pronoun
             }
         });
     }
@@ -30,12 +27,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         ownProps.navigation.navigate('OnboardingAllergen');
         ownProps.updateUser(ownProps.userId, {
             firstName: form.firstName,
-            middleName: form.middleName,
             lastName: form.lastName,
-            dateOfBirth: (new Date()).toISOString(),
-            pronoun: form.pronoun === '' ? form.pronoun : form.pronoun[0].toUpperCase() + form.pronoun.substring(1),
-            town: form.town,
-            state: form.state
+            age: parseInt(form.age, 10),
+            pronoun: form.pronoun === '' ? form.pronoun : form.pronoun[0].toUpperCase() + form.pronoun.substring(1)
         });
     }
 });
@@ -43,8 +37,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 export default compose(
     graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
     graphql(gql`
-        mutation($userId: ID!, $firstName: String!, $middleName: String!, $lastName: String!, $dateOfBirth: DateTime!, $pronoun: Pronoun!, $town: String!, $state: String!) {
-            updateUser(id: $userId, firstName: $firstName, middleName: $middleName, lastName: $lastName, dateOfBirth: $dateOfBirth, pronoun: $pronoun, town: $town, state: $state) {
+        mutation($userId: ID!, $firstName: String!, $lastName: String!, $age: Int!, $pronoun: Pronoun!) {
+            updateUser(id: $userId, firstName: $firstName, lastName: $lastName, age: $age, pronoun: $pronoun) {
                 id
             }
         }
