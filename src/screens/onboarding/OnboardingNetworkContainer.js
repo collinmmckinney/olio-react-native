@@ -43,7 +43,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             form.doctorLastName
         );
         ownProps.refetchCaregiverQuery({ email: form.caregiverEmail }).then(({ data }) => {
-            ownProps.addCaregiver(ownProps.patientId, data.User.caregiver.id);
+            if (data.User) {
+                ownProps.addCaregiver(ownProps.patientId, data.User.caregiver.id);
+            }
             ownProps.navigation.navigate('Map');
         });
     }

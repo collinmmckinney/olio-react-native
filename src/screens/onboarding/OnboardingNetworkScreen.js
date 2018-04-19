@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { Form, Button } from '../../components';
+import { TextInputRow, Button } from '../../components';
 
 const FIELDS = [
     { key: 'doctorEmail', label: "Doctor's email?" },
@@ -66,16 +66,38 @@ export default class OnboardingNetworkScreen extends Component {
     }
 
     render() {
-        const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
+        const {
+            doctorEmail,
+            doctorFirstName,
+            doctorLastName,
+            caregiverEmail
+        } = this.state;
 
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView style={styles.screen}>
-                    <Form
-                        fields={fields}
-                        onChange={this.handleFormChange}
-                        style={styles.form}
-                    />
+                    <View style={styles.form}>
+                        <TextInputRow
+                            value={doctorEmail}
+                            label="What's your doctor's email?"
+                            onChangeText={value => this.setState({ doctorEmail: value })}
+                        />
+                        <TextInputRow
+                            value={doctorFirstName}
+                            label="What's your doctor's first name?"
+                            onChangeText={value => this.setState({ doctorFirstName: value })}
+                        />
+                        <TextInputRow
+                            value={doctorLastName}
+                            label="Last name?"
+                            onChangeText={value => this.setState({ doctorLastName: value })}
+                        />
+                        <TextInputRow
+                            value={caregiverEmail}
+                            label="What's your caregiver's email?"
+                            onChangeText={value => this.setState({ caregiverEmail: value })}
+                        />
+                    </View>
                 </KeyboardAwareScrollView>
                 <Button
                     onPress={this.handlePressDone}

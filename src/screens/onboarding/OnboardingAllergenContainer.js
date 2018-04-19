@@ -5,7 +5,7 @@ import { loggedInUserQuery } from '../../graphql/queries';
 import OnboardingAllergenScreen from './OnboardingAllergenScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    patientId: loading && !user ? null : user.patient.id
+    patientId: loading || !user ? null : user.patient.id
 });
 
 const mapCreateAllergenMutationToProps = ({ mutate }) => ({
