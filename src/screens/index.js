@@ -1,3 +1,5 @@
+export { default as AvatarContainer } from './AvatarContainer';
+
 export { default as MapContainer } from './map/MapContainer';
 export { default as AddMapItemContainer } from './map/AddMapItemContainer';
 export { default as MapFiltersContainer } from './map/MapFiltersContainer';

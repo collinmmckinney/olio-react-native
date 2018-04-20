@@ -23,6 +23,7 @@ import {
     OnboardingAllergenContainer,
     OnboardingPeakFlowContainer,
     OnboardingNetworkContainer,
+    AvatarContainer,
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
@@ -77,7 +78,10 @@ const client = new ApolloClient({
 
 // First Tab
 
-const MapStack = StackNavigator({
+const AvatarStack = StackNavigator({
+    Avatar: {
+        screen: AvatarContainer
+    },
     Map: {
         screen: MapContainer
     },
@@ -87,7 +91,7 @@ const MapStack = StackNavigator({
     MapFilters: {
         screen: MapFiltersContainer
     }
-}, { initialRouteName: 'Map', mode: 'modal' });
+}, { initialRouteName: 'Avatar', mode: 'modal' });
 
 const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {
@@ -127,8 +131,8 @@ const AuthStack = SwitchNavigator({
         screen: AuthLoadingContainer,
         navigationOptions: { header: null, tabBarVisible: false }
     },
-    Map: {
-        screen: MapStack
+    Avatar: {
+        screen: AvatarStack
     },
     SignInOrSignUp: {
         screen: SignInOrSignUpStack,
@@ -156,11 +160,10 @@ const ProfileStack = StackNavigator({
 
 
 const AppNavigator = TabNavigator({
-    MapTab: { screen: AuthStack, title: 'Map' },
+    AvatarTab: { screen: AuthStack, title: 'Avatar' },
     DataTab: { screen: DataStack, title: 'Data' },
-    NetworkTab: { screen: DataStack, title: 'Network' },
     ProfileTab: { screen: ProfileStack, title: 'Profile' },
-}, { initialRouteName: 'MapTab' });
+}, { initialRouteName: 'AvatarTab' });
 
 export default class App extends Component {
     render() {

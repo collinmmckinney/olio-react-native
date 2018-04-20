@@ -46,7 +46,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             if (data.User) {
                 ownProps.addCaregiver(ownProps.patientId, data.User.caregiver.id);
             }
-            ownProps.navigation.navigate('Map');
+            ownProps.navigation.navigate('Avatar');
         });
     }
 });

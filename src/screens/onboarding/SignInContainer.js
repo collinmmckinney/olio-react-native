@@ -14,7 +14,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             }],
             update: (store, { data: { authenticateUser: { token } } }) => {
                 AsyncStorage.setItem('token', token).then(() => {
-                    ownProps.navigation.navigate('Map');
+                    ownProps.navigation.navigate('Avatar');
                 });
             }
         });
