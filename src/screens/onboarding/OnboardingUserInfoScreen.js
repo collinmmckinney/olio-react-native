@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Picker } from 'react-native';
+import { View, StyleSheet, Text, Picker, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     },
     entry: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
 
@@ -88,26 +89,42 @@ export default class OnboardingUserInfoScreen extends Component {
     }
 
     render() {
+        console.log("hello");
+        console.log(this.state);
+        console.log(this.state.age);
+        console.log(this.state.firstName);
+        console.log(this.state.lastName);
         const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
+        const ageRange = [];
+        for (let i = 0; i <= 100; i += 1) {
+            ageRange.push(<Picker.Item label={i.toString()} value={i.toString()} key={i.toString()} />);
+        }
         return (
             <View style={styles.container}>
                 <View style={styles.progressBar} />
                 <KeyboardAwareScrollView style={styles.screen}>
                     <View style={styles.entry}>
                         <Text>What{"'"}s your first name?</Text>
+                        <TextInput
+                            onChangeText={text => this.setState({ [fields[0].key]: text })}
+                            value={this.state[fields[0].key]}
+                        />
                     </View>
                     <View style={styles.entry}>
                         <Text>Last name?</Text>
+                        <TextInput
+                            onChangeText={text => this.setState({ [fields[1].key]: text })}
+                            value={this.state[fields[1].key]}
+                        />
                     </View>
                     <View style={styles.entry}>
                         <Text>How old are you?</Text>
                         <Picker
-                            selectedValue={fields.age}
-                            style={{ height: 50, width: 100 }}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ [fields.age]: itemValue })}
+                            selectedValue={fields[2].key}
+                            style={{ height: 50, width: 100, flex: 1 }}
+                            onValueChange={(itemValue, itemIndex) => this.setState({ [fields[2].key]: itemValue })}
                         >
-                            <Picker.Item label="2" value="2" />
-                            <Picker.Item label="3" value="3" />
+                            {ageRange}
                         </Picker>
                     </View>
                     <View style={styles.entry}>
