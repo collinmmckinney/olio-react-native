@@ -30,7 +30,7 @@ import {
     SettingsContainer
 } from './src/screens';
 
-const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjfmlnicx0evz0146b22cjekm';
+const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjg6t4f9f0j5l0137824h9apr';
 
 // Redux
 const store = createStore(
