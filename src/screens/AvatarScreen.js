@@ -7,8 +7,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white'
+        justifyContent: 'center'
     }
 });
 
@@ -28,12 +27,7 @@ export default class AvatarScreen extends Component {
     render() {
         const { bubbles } = this.props;
         const bubbleElements = bubbles.map(bubble => (
-            <Bubble
-                key={bubble.label}
-                radius={bubble.radius}
-                label={bubble.label}
-                onPress={bubble.onPress}
-            />
+            <Bubble key={bubble.label} {...bubble} />
         ));
 
         return (
