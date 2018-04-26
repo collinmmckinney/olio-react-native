@@ -5,7 +5,7 @@ import { createReportMutation } from '../../graphql/mutations';
 import OnboardingPeakFlowScreen from './OnboardingPeakFlowScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    patientId: loading && !user ? null : user.patient.id
+    patientId: loading || !user ? null : user.patient.id
 });
 
 const mapCreateReportMutationToProps = ({ mutate }) => ({

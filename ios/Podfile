@@ -43,6 +43,8 @@ target 'RNMeteorStarter' do
   pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
 
+  pod 'Interactable', :path => '../node_modules/react-native-interactable'
+
   target 'RNMeteorStarterTests' do
     inherit! :search_paths
     # Pods for testing

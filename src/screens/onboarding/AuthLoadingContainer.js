@@ -14,7 +14,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         ownProps.navigation.navigate('SignInOrSignUp');
     },
     onAuthenticatedUser: () => {
-        ownProps.navigation.navigate('Map');
+        ownProps.navigation.navigate('Avatar');
     }
 });
 

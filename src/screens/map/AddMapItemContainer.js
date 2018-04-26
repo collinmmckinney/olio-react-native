@@ -5,7 +5,7 @@ import { createMapItemMutation } from '../../graphql/mutations';
 import AddMapItemScreen from './AddMapItemScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
-    userId: loading && !user ? null : user.id
+    userId: loading || !user ? null : user.id
 });
 
 const mapCreateMapItemMutationToProps = ({ mutate }) => ({

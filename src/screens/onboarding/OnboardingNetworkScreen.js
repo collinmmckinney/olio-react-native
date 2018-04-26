@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { Form, Button } from '../../components';
+import { TextInputRow, Button } from '../../components';
 
 const FIELDS = [
     { key: 'doctorEmail', label: "Doctor's email?" },
@@ -88,7 +88,12 @@ export default class OnboardingNetworkScreen extends Component {
     }
 
     render() {
-        const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
+        const {
+            doctorEmail,
+            doctorFirstName,
+            doctorLastName,
+            caregiverEmail
+        } = this.state;
 
         return (
             <View style={styles.container}>
