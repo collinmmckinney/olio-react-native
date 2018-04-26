@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
 import { Button, TextInput } from '../../components';
 
+=======
+import { View, StyleSheet, Text, Picker, TextInput } from 'react-native';
+import PropTypes from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import { colors } from '../../style';
+import { Button } from '../../components';
+>>>>>>> 324bf51f107c164307851d7e904eb910080642f2
 
 const FIELDS = [
     { key: 'firstName', label: "What's your first name?" },
     { key: 'lastName', label: 'Last name?' },
+<<<<<<< HEAD
     { key: 'age', label: 'How old are you?' },
     { key: 'avatar', label: 'Choose your avatar:' }
+=======
+    { key: 'age', label: "What's your age?" },
+    { key: 'pronoun', label: 'What are your pronouns?' },
+>>>>>>> 324bf51f107c164307851d7e904eb910080642f2
 ];
 
 const styles = StyleSheet.create({
@@ -24,8 +37,11 @@ const styles = StyleSheet.create({
     },
     screen: {
         flex: 4,
+<<<<<<< HEAD
         flexDirection: 'column',
         justifyContent: 'space-between',
+=======
+>>>>>>> 324bf51f107c164307851d7e904eb910080642f2
         borderColor: colors.primary,
         borderWidth: 4,
         borderRadius: 8
@@ -52,11 +68,16 @@ const styles = StyleSheet.create({
     buttons: {
         flex: 1,
         flexDirection: 'row',
+<<<<<<< HEAD
         justifyContent: 'space-between',
+=======
+        justifyContent: 'space-between'
+>>>>>>> 324bf51f107c164307851d7e904eb910080642f2
     },
     entry: {
         flex: 1,
         flexDirection: 'row',
+<<<<<<< HEAD
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 12,
@@ -77,6 +98,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         margin: 15
+=======
+        justifyContent: 'space-between'
+>>>>>>> 324bf51f107c164307851d7e904eb910080642f2
     }
 });
 
