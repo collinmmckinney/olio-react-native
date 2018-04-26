@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Picker, TextInput } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { Button } from '../../components';
+import { Button, TextInput } from '../../components';
+
 
 const FIELDS = [
     { key: 'firstName', label: "What's your first name?" },
     { key: 'lastName', label: 'Last name?' },
-    { key: 'age', label: "What's your age?" },
-    { key: 'pronoun', label: 'What are your pronouns?' }
+    { key: 'age', label: 'How old are you?' },
+    { key: 'avatar', label: 'Choose your avatar:' }
 ];
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 18,
-        paddingTop: 80,
         backgroundColor: 'white'
     },
     progressBar: {
@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
     },
     screen: {
         flex: 4,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         borderColor: colors.primary,
-        borderWidth: 3,
+        borderWidth: 4,
         borderRadius: 8
     },
     nextButton: {
@@ -50,12 +52,31 @@ const styles = StyleSheet.create({
     buttons: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     entry: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 12,
+        marginBottom: 12
+    },
+    text: {
+        flex: 1,
+        color: colors.grayText,
+        margin: 15
+    },
+    textInput: {
+        flex: 1,
+        margin: 15,
+    },
+    avatar: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: 15
     }
 });
 
@@ -89,51 +110,65 @@ export default class OnboardingUserInfoScreen extends Component {
     }
 
     render() {
-        console.log("hello");
         console.log(this.state);
-        console.log(this.state.age);
-        console.log(this.state.firstName);
-        console.log(this.state.lastName);
         const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
-        const ageRange = [];
-        for (let i = 0; i <= 100; i += 1) {
-            ageRange.push(<Picker.Item label={i.toString()} value={i.toString()} key={i.toString()} />);
-        }
+        const boyImage = require('../../assets/boy.png');
+        const girlImage = require('../../assets/girl.png');
+        const girl2Image = require('../../assets/girl2.png');
         return (
             <View style={styles.container}>
                 <View style={styles.progressBar} />
-                <KeyboardAwareScrollView style={styles.screen}>
-                    <View style={styles.entry}>
-                        <Text>What{"'"}s your first name?</Text>
-                        <TextInput
-                            onChangeText={text => this.setState({ [fields[0].key]: text })}
-                            value={this.state[fields[0].key]}
-                        />
-                    </View>
-                    <View style={styles.entry}>
-                        <Text>Last name?</Text>
-                        <TextInput
-                            onChangeText={text => this.setState({ [fields[1].key]: text })}
-                            value={this.state[fields[1].key]}
-                        />
-                    </View>
-                    <View style={styles.entry}>
-                        <Text>How old are you?</Text>
-                        <Picker
-                            selectedValue={fields[2].key}
-                            style={{ height: 50, width: 100, flex: 1 }}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ [fields[2].key]: itemValue })}
-                        >
-                            {ageRange}
-                        </Picker>
-                    </View>
-                    <View style={styles.entry}>
-                        <Text>What are your pronouns?</Text>
-                    </View>
-                    <View style={styles.entry}>
-                        <Text>Add a picture</Text>
-                    </View>
-                </KeyboardAwareScrollView>
+                <View style={styles.screen}>
+                    <KeyboardAwareScrollView>
+                        <View style={styles.entry}>
+                            <Text style={styles.text}>{fields[0].label}</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                onChangeText={text => this.setState({ [fields[0].key]: text })}
+                                value={this.state[fields[0].key]}
+                            />
+                        </View>
+                        <View style={styles.entry}>
+                            <Text style={styles.text}>{fields[1].label}</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                onChangeText={text => this.setState({ [fields[1].key]: text })}
+                                value={this.state[fields[1].key]}
+                            />
+                        </View>
+                        <View style={styles.entry}>
+                            <Text style={styles.text}>{fields[2].label}</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                onChangeText={text => this.setState({ [fields[2].key]: text })}
+                                value={this.state[fields[2].key]}
+                            />
+                        </View>
+                        <View style={styles.entry}>
+                            <Text style={styles.text}>{fields[3].label}</Text>
+                            <View style={styles.avatar}>
+                                <TouchableOpacity onPress={() => this.setState({ [fields[3].key]: 1 })}>
+                                    <Image
+                                        style={{ width: 46, height: 46 }}
+                                        source={boyImage}
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.setState({ [fields[3].key]: 2 })}>
+                                    <Image
+                                        style={{ width: 46, height: 46 }}
+                                        source={girlImage}
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.setState({ [fields[3].key]: 3 })}>
+                                    <Image
+                                        style={{ width: 40, height: 40 }}
+                                        source={girl2Image}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </KeyboardAwareScrollView>
+                </View>
                 <View style={styles.buttons}>
                     <View style={styles.backWrapper}>
                         <Button
