@@ -110,7 +110,6 @@ export default class OnboardingUserInfoScreen extends Component {
     }
 
     render() {
-        console.log(this.state);
         const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
         const boyImage = require('../../assets/boy.png');
         const girlImage = require('../../assets/girl.png');

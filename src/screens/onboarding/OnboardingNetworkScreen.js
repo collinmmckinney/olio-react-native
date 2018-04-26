@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 18,
-        paddingTop: 80,
         backgroundColor: 'white'
     },
     form: {
@@ -25,15 +24,38 @@ const styles = StyleSheet.create({
         alignItems: 'stretch'
     },
     screen: {
-        flex: 1,
+        flex: 4,
         borderColor: colors.primary,
-        borderWidth: 3,
+        borderWidth: 4,
         borderRadius: 8
+    },
+    progressBar: {
+        flex: 1,
     },
     nextButton: {
         marginBottom: 40,
-        marginTop: 30
-    }
+        marginTop: 30,
+        backgroundColor: colors.primaryDarker
+    },
+    nextWrapper: {
+        flex: 2,
+        marginLeft: 5
+    },
+    backButton: {
+        marginBottom: 40,
+        marginTop: 30,
+        backgroundColor: colors.primaryDarker,
+        opacity: 0.5
+    },
+    backWrapper: {
+        flex: 1,
+        marginRight: 5
+    },
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
 });
 
 export default class OnboardingNetworkScreen extends Component {
@@ -70,18 +92,31 @@ export default class OnboardingNetworkScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <KeyboardAwareScrollView style={styles.screen}>
-                    <Form
-                        fields={fields}
-                        onChange={this.handleFormChange}
-                        style={styles.form}
-                    />
-                </KeyboardAwareScrollView>
-                <Button
-                    onPress={this.handlePressDone}
-                    label="DONE"
-                    style={styles.nextButton}
-                />
+                <View style={styles.progressBar} />
+                <View style={styles.screen}>
+                    <KeyboardAwareScrollView>
+                        <Form
+                            fields={fields}
+                            onChange={this.handleFormChange}
+                            style={styles.form}
+                        />
+                    </KeyboardAwareScrollView>
+                </View>
+                <View style={styles.buttons}>
+                    <View style={styles.backWrapper}>
+                        <Button
+                            label="←"
+                            style={styles.backButton}
+                        />
+                    </View>
+                    <View style={styles.nextWrapper}>
+                        <Button
+                            onPress={this.handlePressDone}
+                            label="DONE"
+                            style={styles.nextButton}
+                        />
+                    </View>
+                </View>
             </View>
         );
     }

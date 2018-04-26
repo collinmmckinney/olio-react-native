@@ -16,7 +16,8 @@ const mapUpdateUserMutationToProps = ({ mutate }) => ({
                 firstName: args.firstName,
                 lastName: args.lastName,
                 age: args.age,
-                pronoun: args.pronoun
+                avatar: args.avatar,
+                pronoun: ''
             }
         });
     }
@@ -24,12 +25,12 @@ const mapUpdateUserMutationToProps = ({ mutate }) => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onPressNext: (form) => {
-        ownProps.navigation.navigate('OnboardingAllergen');
+        ownProps.navigation.navigate('OnboardingNetwork');
         ownProps.updateUser(ownProps.userId, {
             firstName: form.firstName,
             lastName: form.lastName,
             age: parseInt(form.age, 10),
-            pronoun: form.pronoun === '' ? form.pronoun : form.pronoun[0].toUpperCase() + form.pronoun.substring(1)
+            avatar: parseInt(form.avatar, 10)
         });
     }
 });
