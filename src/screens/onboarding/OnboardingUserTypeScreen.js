@@ -69,17 +69,24 @@ const styles = StyleSheet.create({
 
 export default class OnboardingUserTypeScreen extends Component {
     static propTypes = {
+        onPressBack: PropTypes.func,
         onSelectUserType: PropTypes.func
     }
 
     static defaultProps = {
+        onPressBack: () => {},
         onSelectUserType: () => {}
     }
 
     constructor(props) {
         super(props);
 
+        this.handlePressBack = this.handlePressBack.bind(this);
         this.handleSelectUserType = this.handleSelectUserType.bind(this);
+    }
+
+    handlePressBack() {
+        this.props.onPressBack();
     }
 
     handleSelectUserType(userType) {
@@ -106,6 +113,7 @@ export default class OnboardingUserTypeScreen extends Component {
                 <View style={styles.buttons}>
                     <View style={styles.backWrapper}>
                         <Button
+                            onPress={this.handlePressBack}
                             label="←"
                             style={styles.backButton}
                         />

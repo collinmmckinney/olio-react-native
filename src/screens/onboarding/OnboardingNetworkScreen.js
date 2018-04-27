@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 18,
+        paddingTop: 80,
         backgroundColor: 'white'
     },
     form: {
@@ -24,47 +25,26 @@ const styles = StyleSheet.create({
         alignItems: 'stretch'
     },
     screen: {
-        flex: 4,
-        borderColor: colors.primary,
-        borderWidth: 4,
-        borderRadius: 8
-    },
-    progressBar: {
         flex: 1,
+        borderColor: colors.primary,
+        borderWidth: 3,
+        borderRadius: 8
     },
     nextButton: {
         marginBottom: 40,
-        marginTop: 30,
-        backgroundColor: colors.primaryDarker
-    },
-    nextWrapper: {
-        flex: 2,
-        marginLeft: 5
-    },
-    backButton: {
-        marginBottom: 40,
-        marginTop: 30,
-        backgroundColor: colors.primaryDarker,
-        opacity: 0.5
-    },
-    backWrapper: {
-        flex: 1,
-        marginRight: 5
-    },
-    buttons: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
+        marginTop: 30
+    }
 });
 
 export default class OnboardingNetworkScreen extends Component {
     static propTypes = {
-        onPressDone: PropTypes.func
+        onPressDone: PropTypes.func,
+        onPressBack: PropTypes.func
     }
 
     static defaultProps = {
-        onPressDone: () => {}
+        onPressDone: () => {},
+        onPressBack: () => {}
     }
 
     constructor(props) {
@@ -77,6 +57,7 @@ export default class OnboardingNetworkScreen extends Component {
 
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handlePressDone = this.handlePressDone.bind(this);
+        this.handlePressBack = this.handlePressBack.bind(this);
     }
 
     handleFormChange(form) {
@@ -85,6 +66,10 @@ export default class OnboardingNetworkScreen extends Component {
 
     handlePressDone() {
         this.props.onPressDone(this.state);
+    }
+
+    handlePressBack() {
+        this.props.onPressBack();
     }
 
     render() {
@@ -97,31 +82,35 @@ export default class OnboardingNetworkScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.progressBar} />
-                <View style={styles.screen}>
-                    <KeyboardAwareScrollView>
-                        <Form
-                            fields={fields}
-                            onChange={this.handleFormChange}
-                            style={styles.form}
+                <KeyboardAwareScrollView style={styles.screen}>
+                    <View style={styles.form}>
+                        <TextInputRow
+                            value={doctorEmail}
+                            label="What's your doctor's email?"
+                            onChangeText={value => this.setState({ doctorEmail: value })}
                         />
-                    </KeyboardAwareScrollView>
-                </View>
-                <View style={styles.buttons}>
-                    <View style={styles.backWrapper}>
-                        <Button
-                            label="←"
-                            style={styles.backButton}
+                        <TextInputRow
+                            value={doctorFirstName}
+                            label="What's your doctor's first name?"
+                            onChangeText={value => this.setState({ doctorFirstName: value })}
+                        />
+                        <TextInputRow
+                            value={doctorLastName}
+                            label="Last name?"
+                            onChangeText={value => this.setState({ doctorLastName: value })}
+                        />
+                        <TextInputRow
+                            value={caregiverEmail}
+                            label="What's your caregiver's email?"
+                            onChangeText={value => this.setState({ caregiverEmail: value })}
                         />
                     </View>
-                    <View style={styles.nextWrapper}>
-                        <Button
-                            onPress={this.handlePressDone}
-                            label="DONE"
-                            style={styles.nextButton}
-                        />
-                    </View>
-                </View>
+                </KeyboardAwareScrollView>
+                <Button
+                    onPress={this.handlePressDone}
+                    label="DONE"
+                    style={styles.nextButton}
+                />
             </View>
         );
     }

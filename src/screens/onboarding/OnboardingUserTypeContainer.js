@@ -38,7 +38,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             ownProps.createCaregiver(ownProps.userId);
         }
         ownProps.navigation.navigate('OnboardingUserInfo');
-    }
+    },
+    onPressBack: ownProps.navigation.goBack
 });
 
 export default compose(

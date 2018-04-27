@@ -82,11 +82,13 @@ const styles = StyleSheet.create({
 
 export default class OnboardingUserInfoScreen extends Component {
     static propTypes = {
-        onPressNext: PropTypes.func
+        onPressNext: PropTypes.func,
+        onPressBack: PropTypes.func
     }
 
     static defaultProps = {
-        onPressNext: () => {}
+        onPressNext: () => {},
+        onPressBack: () => {}
     }
 
     constructor(props) {
@@ -99,6 +101,7 @@ export default class OnboardingUserInfoScreen extends Component {
 
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handlePressNext = this.handlePressNext.bind(this);
+        this.handlePressBack = this.handlePressBack.bind(this);
     }
 
     handleFormChange(form) {
@@ -107,6 +110,10 @@ export default class OnboardingUserInfoScreen extends Component {
 
     handlePressNext() {
         this.props.onPressNext(this.state);
+    }
+
+    handlePressBack() {
+        this.props.onPressBack();
     }
 
     render() {
@@ -171,6 +178,7 @@ export default class OnboardingUserInfoScreen extends Component {
                 <View style={styles.buttons}>
                     <View style={styles.backWrapper}>
                         <Button
+                            onPress={this.handlePressBack}
                             label="←"
                             style={styles.backButton}
                         />

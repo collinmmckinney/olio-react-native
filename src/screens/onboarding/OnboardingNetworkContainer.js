@@ -48,7 +48,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             }
             ownProps.navigation.navigate('Avatar');
         });
-    }
+    },
+    onPressBack: ownProps.navigation.goBack
 });
 
 export default compose(
