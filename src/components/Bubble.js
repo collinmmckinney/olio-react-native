@@ -113,8 +113,10 @@ export default class Bubble extends Component {
         const radiusDelta = radius - (0.5 * ((Math.sqrt(2) * radius) - radius));
         const subBubbleElements = subBubbles.map((subBubble, i) => {
             const angle = (i + 2) * (Math.PI / 4);
-            const subBubbleX = -(subBubbleContainerRadius * Math.sin(angle)) + radiusDelta;
-            const subBubbleY = (subBubbleContainerRadius * Math.cos(angle)) + radiusDelta;
+            const subBubbleX = initialX +
+                -(subBubbleContainerRadius * Math.sin(angle)) + radiusDelta;
+            const subBubbleY = initialY +
+                (subBubbleContainerRadius * Math.cos(angle)) + radiusDelta;
             const subBubblePositionStyle = { top: subBubbleY, left: subBubbleX };
             return (
                 <TouchableOpacity
@@ -125,8 +127,9 @@ export default class Bubble extends Component {
             );
         });
 
-        return (
+        const primaryBubble = (
             <Interactable.View
+                key={label}
                 boundaries={{
                     left: -initialX,
                     right: sizes.DEVICE_WIDTH - initialX - (2 * radius),
@@ -148,9 +151,10 @@ export default class Bubble extends Component {
                             <Text style={styles.text}>{label}</Text>
                         </View>
                     </TouchableOpacity>
-                    { showSubBubbles && subBubbleElements }
                 </View>
             </Interactable.View>
         );
+
+        return [primaryBubble, ...showSubBubbles && subBubbleElements];
     }
 }

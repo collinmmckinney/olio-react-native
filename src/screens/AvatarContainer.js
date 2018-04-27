@@ -35,9 +35,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                 },
                 {
                     label: '8'
-                },
-                {
-                    label: '9'
                 }
             ],
             initialX: 120,
