@@ -24,10 +24,30 @@ export default class AvatarScreen extends Component {
         bubbles: []
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            arrangeModeEnabled: false
+        };
+
+        this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
+    }
+
+    handleBubbleLongPress() {
+        this.setState({ arrangeModeEnabled: true });
+    }
+
     render() {
         const { bubbles } = this.props;
+        const { arrangeModeEnabled } = this.state;
         const bubbleElements = bubbles.map(bubble => (
-            <Bubble key={bubble.label} {...bubble} />
+            <Bubble
+                key={bubble.label}
+                interactable={arrangeModeEnabled}
+                {...bubble}
+                onLongPress={this.handleBubbleLongPress}
+            />
         ));
 
         return (

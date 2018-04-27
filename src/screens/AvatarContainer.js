@@ -10,28 +10,57 @@ const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     bubbles: [
         {
+            subBubbles: [
+                {
+                    label: '1',
+                    onPress: () => { ownProps.navigation.navigate('Map'); }
+                },
+                {
+                    label: '2'
+                },
+                {
+                    label: '3'
+                },
+                {
+                    label: '4'
+                },
+                {
+                    label: '5'
+                },
+                {
+                    label: '6'
+                },
+                {
+                    label: '7'
+                },
+                {
+                    label: '8'
+                },
+                {
+                    label: '9'
+                }
+            ],
             initialX: 120,
             initialY: 250,
-            radius: 60,
-            label: 'Map',
-            onPress: () => { ownProps.navigation.navigate('Map'); }
+            radius: 90,
+            label: 'Map'
         },
         {
             initialX: 110,
-            initialY: 400,
-            radius: 50,
+            initialY: 440,
+            radius: 70,
             label: 'Sample1'
         },
         {
             initialX: 200,
             initialY: 120,
-            radius: 50,
+            radius: 70,
             label: 'Sample2'
         },
         {
             initialX: 50,
             initialY: 50,
-            radius: 55,
+            radius: 70,
             label: 'Sample3'
         }
     ]
