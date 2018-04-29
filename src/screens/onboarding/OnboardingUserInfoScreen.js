@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { Button, TextInput } from '../../components';
+import { Button, TextInput, CloudMan } from '../../components';
 
 
 const FIELDS = [
@@ -12,6 +12,10 @@ const FIELDS = [
     { key: 'age', label: 'How old are you?' },
     { key: 'avatar', label: 'Choose your avatar:' }
 ];
+
+const boyImage = require('../../assets/boy.png');
+const girlImage = require('../../assets/girl.png');
+const girl2Image = require('../../assets/girl2.png');
 
 const styles = StyleSheet.create({
     container: {
@@ -118,12 +122,12 @@ export default class OnboardingUserInfoScreen extends Component {
 
     render() {
         const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
-        const boyImage = require('../../assets/boy.png');
-        const girlImage = require('../../assets/girl.png');
-        const girl2Image = require('../../assets/girl2.png');
+
         return (
             <View style={styles.container}>
-                <View style={styles.progressBar} />
+                <View style={styles.progressBar}>
+                    <CloudMan winds={2} />
+                </View>
                 <View style={styles.screen}>
                     <KeyboardAwareScrollView>
                         <View style={styles.entry}>

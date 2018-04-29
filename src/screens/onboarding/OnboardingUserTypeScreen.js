@@ -96,7 +96,9 @@ export default class OnboardingUserTypeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.progressBar} />
+                <View style={styles.progressBar}>
+                    <CloudMan winds={1} />
+                </View>
                 <View style={styles.screen}>
                     <View style={styles.text}>
                         <Text style={styles.title}>

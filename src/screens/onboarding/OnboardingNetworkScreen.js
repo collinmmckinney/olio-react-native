@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { TextInputRow, Button } from '../../components';
+import { TextInputRow, Button, CloudMan } from '../../components';
 
 const FIELDS = [
     { key: 'doctorEmail', label: "Doctor's email?" },
@@ -104,7 +104,9 @@ export default class OnboardingNetworkScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.progressBar} />
+                <View style={styles.progressBar}>
+                    <CloudMan winds={3} />
+                </View>
                 <View style={styles.screen}>
                     <KeyboardAwareScrollView>
                         <View style={styles.form}>
