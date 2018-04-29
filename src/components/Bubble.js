@@ -10,6 +10,9 @@ import Interactable from 'react-native-interactable';
 import { colors, sizes } from '../style';
 
 const styles = StyleSheet.create({
+    interactable: {
+        position: 'absolute'
+    },
     container: {
         alignItems: 'center',
         justifyContent: 'center'
@@ -33,81 +36,78 @@ const styles = StyleSheet.create({
 
 export default class Bubble extends Component {
     static propTypes = {
+        id: PropTypes.string.isRequired,
         subBubbles: PropTypes.arrayOf(PropTypes.shape({
             label: PropTypes.string,
             onPress: PropTypes.func
         })),
+        showSubBubbles: PropTypes.bool,
         initialX: PropTypes.number,
         initialY: PropTypes.number,
         radius: PropTypes.number,
         label: PropTypes.string,
         interactable: PropTypes.bool,
         onPress: PropTypes.func,
-        onLongPress: PropTypes.func
+        onLongPress: PropTypes.func,
+        onStopInteraction: PropTypes.func
     }
 
     static defaultProps = {
         subBubbles: [],
+        showSubBubbles: false,
         initialX: 0,
         initialY: 0,
         radius: 40,
         label: '',
         interactable: true,
         onPress: () => {},
-        onLongPress: () => {}
+        onLongPress: () => {},
+        onStopInteraction: () => {}
     }
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            showSubBubbles: false
-        };
-
         this.handlePress = this.handlePress.bind(this);
         this.handleLongPress = this.handleLongPress.bind(this);
+        this.handleStopInteraction = this.handleStopInteraction.bind(this);
     }
 
     handlePress() {
-        const { onPress, subBubbles } = this.props;
-        const { showSubBubbles } = this.state;
-        if (subBubbles.length > 0) {
-            this.setState({ showSubBubbles: !showSubBubbles });
-        } else {
-            onPress();
-        }
+        const { id } = this.props;
+        this.props.onPress(id);
     }
 
     handleLongPress() {
-        const { onLongPress } = this.props;
-        onLongPress();
+        this.props.onLongPress();
+    }
+
+    handleStopInteraction(event) {
+        const { id } = this.props;
+        const { x, y } = event.nativeEvent;
+        this.props.onStopInteraction(id, x, y);
     }
 
     render() {
         const {
             subBubbles,
+            showSubBubbles,
             initialX,
             initialY,
             radius,
             label,
             interactable
         } = this.props;
-        const { showSubBubbles } = this.state;
 
         const sizeStyle = {
             height: radius * 2,
             width: radius * 2,
             borderRadius: radius
         };
-        const positionStyle = {
-            position: 'absolute',
-            top: initialY,
-            left: initialX
-        };
         const colorStyle = {
             backgroundColor: interactable ? colors.primaryDarker : colors.primary
         };
-        const style = [sizeStyle, positionStyle, colorStyle];
+        const style = [sizeStyle, colorStyle];
 
         const subBubbleContainerRadius = radius;
         const radiusDelta = radius - (0.5 * ((Math.sqrt(2) * radius) - radius));
@@ -130,16 +130,19 @@ export default class Bubble extends Component {
         const primaryBubble = (
             <Interactable.View
                 key={label}
+                initialPosition={{ x: initialX, y: initialY }}
                 boundaries={{
-                    left: -initialX,
-                    right: sizes.DEVICE_WIDTH - initialX - (2 * radius),
-                    top: -initialY,
-                    bottom: sizes.DEVICE_HEIGHT - initialY - (2 * radius),
-                    bounce: 0.5
+                    left: 0,
+                    right: sizes.DEVICE_WIDTH - (2 * radius),
+                    top: 0,
+                    bottom: sizes.DEVICE_HEIGHT - (2 * radius),
+                    bounce: 0.5,
+                    haptics: true
                 }}
                 frictionAreas={[{ damping: 0.9 }]}
-                style={style}
+                style={[styles.interactable, style]}
                 dragEnabled={interactable}
+                onStop={this.handleStopInteraction}
             >
                 <View>
                     <TouchableOpacity
