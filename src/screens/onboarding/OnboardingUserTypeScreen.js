@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { colors } from '../../style';
-import { Button, UserTypeSelect } from '../../components';
+import { Button, UserTypeSelect, CloudMan } from '../../components';
 
 const styles = StyleSheet.create({
     container: {
