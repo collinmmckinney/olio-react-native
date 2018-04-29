@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     wind: {
         flex: 1,
         margin: 15,
+        transform: [{ rotateY: '180deg' }]
     },
 });
 
@@ -38,14 +39,13 @@ export default class CloudMan extends Component {
             <View style={styles.bar}>
                 {winds.split(',').map(c => (
                     <View style={styles.wind}>
-                        <Icon name="weather-windy" size={30} key={c} color={colors.windBlue} style={{ transform: [{ rotateX: '180deg' }] }} />
+                        <Icon name="weather-windy" size={30} key={c} color={colors.windBlue} />
                     </View>))}
                 <Image
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 20,
+                        height: 45,
                         flex: 1,
-                        padding: 15
                     }}
                     source={cloudy}
                 />

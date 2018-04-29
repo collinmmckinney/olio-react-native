@@ -5,6 +5,7 @@ export { default as Form } from './Form';
 export { default as MapButton } from './MapButton';
 export { default as TextInput } from './TextInput';
 export { default as TextInputRow } from './TextInputRow';
+export { default as CloudMan } from './CloudMan';
 
 // Onboarding
 export { default as UserTypeSelect } from './UserTypeSelect';

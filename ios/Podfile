@@ -45,6 +45,8 @@ target 'RNMeteorStarter' do
 
   pod 'Interactable', :path => '../node_modules/react-native-interactable'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'RNMeteorStarterTests' do
     inherit! :search_paths
     # Pods for testing
