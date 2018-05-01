@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, Switch } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { colors } from '../../style';
-import { TextInputRow, Button, CloudMan } from '../../components';
+import { TextInput, Button, CloudMan } from '../../components';
 
 const FIELDS = [
     { key: 'doctorEmail', label: "Doctor's email?" },
-    { key: 'doctorFirstName', label: "Doctor's first name?" },
-    { key: 'doctorLastName', label: "Doctor's last name?" },
-    { key: 'caregiverEmail', label: "Caregiver's email?" }
+    { key: 'doctorName', label: "Doctor's name?" },
+    { key: 'caregiver1Email', label: "Caregiver's email?" },
+    { key: 'caregiver2Email', label: "Caregiver's email?" }
 ];
 
 const styles = StyleSheet.create({
@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
     },
     screen: {
         flex: 4,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         borderColor: colors.primary,
         borderWidth: 4,
         borderRadius: 8
@@ -56,6 +58,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    header: {
+        color: colors.primary,
+        margin: 10,
+        fontSize: 30,
+        flex: 1
+    },
+    entry: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginLeft: 15,
+        marginRight: 15
+    },
+    textInput: {
+        flex: 4,
+        margin: 15,
+        height: 35,
+        fontSize: 16,
+    },
+    subhead: {
+        color: colors.primaryDarker,
+        fontSize: 14,
+        margin: 5,
+    },
+    switcher: {
+        flex: 1
+    }
 });
 
 export default class OnboardingNetworkScreen extends Component {
@@ -97,9 +127,9 @@ export default class OnboardingNetworkScreen extends Component {
     render() {
         const {
             doctorEmail,
-            doctorFirstName,
-            doctorLastName,
-            caregiverEmail
+            doctorName,
+            caregiver1Email,
+            caregiver2Email
         } = this.state;
 
         return (
@@ -109,28 +139,57 @@ export default class OnboardingNetworkScreen extends Component {
                 </View>
                 <View style={styles.screen}>
                     <KeyboardAwareScrollView>
-                        <View style={styles.form}>
-                            <TextInputRow
-                                value={doctorEmail}
-                                label="What's your doctor's email?"
-                                onChangeText={value => this.setState({ doctorEmail: value })}
-                            />
-                            <TextInputRow
-                                value={doctorFirstName}
-                                label="What's your doctor's first name?"
-                                onChangeText={value => this.setState({ doctorFirstName: value })}
-                            />
-                            <TextInputRow
-                                value={doctorLastName}
-                                label="Last name?"
-                                onChangeText={value => this.setState({ doctorLastName: value })}
-                            />
-                            <TextInputRow
-                                value={caregiverEmail}
-                                label="What's your caregiver's email?"
-                                onChangeText={value => this.setState({ caregiverEmail: value })}
-                            />
+                        <Text style={styles.header}>Connect your network</Text>
+                        <View style={styles.entry}>
+                            <Text style={styles.subhead}>Add your Helpers</Text>
+                            <Text style={styles.subhead}>Share</Text>
                         </View>
+                        <View style={styles.entry}>
+                            <TextInput
+                                value={caregiver1Email}
+                                onChangeText={value => this.setState({ caregiver1Email: value })}
+                                placeholder="Username/Email"
+                                style={styles.textInput}
+                            />
+                            <View style={styles.switcher}>
+                                <Switch onTintColor={colors.primary} />
+                            </View>
+                        </View>
+                        <View style={styles.entry}>
+                            <TextInput
+                                value={caregiver2Email}
+                                onChangeText={value => this.setState({ caregiver2Email: value })}
+                                placeholder="Username/Email"
+                                style={styles.textInput}
+                            />
+                            <View style={styles.switcher}>
+                                <Switch onTintColor={colors.primary} />
+                            </View>
+                        </View>
+                        <View style={styles.entry}>
+                            <Text style={styles.subhead}>Add your Doctor{"'"}s name and practice</Text>
+                        </View>
+                        <View style={styles.entry}>
+                            <TextInput
+                                value={doctorName}
+                                onChangeText={value => this.setState({ doctorName: value })}
+                                placeholder="Name"
+                                style={styles.textInput}
+                            />
+                            <View style={styles.switcher}>
+                                <Switch onTintColor={colors.primary} />
+                            </View>
+                        </View>
+                        <View style={styles.entry}>
+                            <TextInput
+                                value={doctorEmail}
+                                onChangeText={value => this.setState({ doctorEmail: value })}
+                                placeholder="Email"
+                                style={styles.textInput}
+                            />
+                            <View style={styles.switcher} />
+                        </View>
+
                     </KeyboardAwareScrollView>
                 </View>
                 <View style={styles.buttons}>
