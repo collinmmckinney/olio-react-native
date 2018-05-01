@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         color: colors.primary,
         margin: 10,
         fontSize: 30,
-        flex: 1
+        flex: 1,
+        marginTop: 15
     },
     entry: {
         flex: 1,

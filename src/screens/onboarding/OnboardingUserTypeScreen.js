@@ -54,16 +54,20 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     subText: {
-        fontSize: 14,
-        lineHeight: 20,
+        fontSize: 16,
+        lineHeight: 21,
         color: colors.grayText,
-        opacity: 0.8,
-        margin: 24,
+        opacity: 0.85,
+        marginTop: 10,
+        marginLeft: 24,
+        marginRight: 16,
+        marginBottom: 10,
     },
     buttons: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: 20,
     }
 });
 
@@ -105,9 +109,8 @@ export default class OnboardingUserTypeScreen extends Component {
                           Who are you?
                         </Text>
                         <Text style={styles.subText}>
-                          Before we start, remember that you can
-                          never cross the ocean until you have the
-                          courage to lose sight of the shore.
+                          As a {'"'}user{'"'}, you are someone WITH asthma.
+                          As a {'"'}helper{'"'}, you want to SUPPORT someone with asthma.
                         </Text>
                     </View>
                     <UserTypeSelect onSelectUserType={this.handleSelectUserType} />
