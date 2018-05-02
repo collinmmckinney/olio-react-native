@@ -3,11 +3,14 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    PanResponder
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Interactable from 'react-native-interactable';
 import { colors, sizes } from '../style';
+
+const SUB_BUBBLE_RADIUS = 19;
 
 const styles = StyleSheet.create({
     interactable: {
@@ -27,9 +30,9 @@ const styles = StyleSheet.create({
     },
     subBubble: {
         position: 'absolute',
-        width: 38,
-        height: 38,
-        borderRadius: 38,
+        width: SUB_BUBBLE_RADIUS * 2,
+        height: SUB_BUBBLE_RADIUS * 2,
+        borderRadius: SUB_BUBBLE_RADIUS * 2,
         backgroundColor: colors.primaryDarkest
     }
 });
@@ -49,7 +52,8 @@ export default class Bubble extends Component {
         interactable: PropTypes.bool,
         onPress: PropTypes.func,
         onLongPress: PropTypes.func,
-        onStopInteraction: PropTypes.func
+        onStopInteraction: PropTypes.func,
+        onResize: PropTypes.func
     }
 
     static defaultProps = {
@@ -62,20 +66,65 @@ export default class Bubble extends Component {
         interactable: true,
         onPress: () => {},
         onLongPress: () => {},
-        onStopInteraction: () => {}
+        onStopInteraction: () => {},
+        onResize: () => {}
     }
 
     constructor(props) {
         super(props);
 
+        this.state = {
+            startDelta: null
+        };
+
         this.handlePress = this.handlePress.bind(this);
         this.handleLongPress = this.handleLongPress.bind(this);
         this.handleStopInteraction = this.handleStopInteraction.bind(this);
+        this.handleResize = this.handleResize.bind(this);
+    }
+
+    componentWillMount() {
+        this.panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: ({ nativeEvent: { touches } }) => {
+                const { interactable } = this.props;
+                return interactable && touches.length === 2;
+            },
+            onMoveShouldSetPanResponder: ({ nativeEvent: { touches } }) => {
+                const { interactable } = this.props;
+                return interactable && touches.length === 2;
+            },
+            onPanResponderGrant: ({ nativeEvent: { touches } }) => {
+                const { interactable } = this.props;
+                if (interactable && touches.length === 2) {
+                    const xDelta = touches[0].locationX - touches[1].locationX;
+                    const yDelta = touches[0].locationY - touches[1].locationY;
+                    const deltaSquared = ((xDelta) ** 2) + ((yDelta) ** 2);
+                    const delta = Math.sqrt(deltaSquared);
+                    this.setState({
+                        startDelta: delta
+                    });
+                }
+            },
+            onPanResponderMove: ({ nativeEvent: { touches } }) => {
+                const { interactable } = this.props;
+                const { startDelta } = this.state;
+                if (interactable && touches.length === 2) {
+                    const xDelta = touches[0].locationX - touches[1].locationX;
+                    const yDelta = touches[0].locationY - touches[1].locationY;
+                    const deltaSquared = ((xDelta) ** 2) + ((yDelta) ** 2);
+                    const delta = Math.sqrt(deltaSquared);
+                    this.handleResize(delta - startDelta);
+                    this.setState({
+                        startDelta: delta
+                    });
+                }
+            }
+        });
     }
 
     handlePress() {
-        const { id } = this.props;
-        this.props.onPress(id);
+        const { id, onPress } = this.props;
+        onPress(id);
     }
 
     handleLongPress() {
@@ -83,9 +132,14 @@ export default class Bubble extends Component {
     }
 
     handleStopInteraction(event) {
-        const { id } = this.props;
+        const { id, onStopInteraction } = this.props;
         const { x, y } = event.nativeEvent;
-        this.props.onStopInteraction(id, x, y);
+        onStopInteraction(id, x, y);
+    }
+
+    handleResize(delta) {
+        const { id, onResize } = this.props;
+        onResize(id, delta);
     }
 
     render() {
@@ -109,14 +163,13 @@ export default class Bubble extends Component {
         };
         const style = [sizeStyle, colorStyle];
 
-        const subBubbleContainerRadius = radius;
-        const radiusDelta = radius - (0.5 * ((Math.sqrt(2) * radius) - radius));
+        const cx = initialX + (radius - SUB_BUBBLE_RADIUS);
+        const cy = initialY + (radius - SUB_BUBBLE_RADIUS);
+        const subBubbleContainerRadius = radius + SUB_BUBBLE_RADIUS + 1;
         const subBubbleElements = subBubbles.map((subBubble, i) => {
             const angle = (i + 2) * (Math.PI / 4);
-            const subBubbleX = initialX +
-                -(subBubbleContainerRadius * Math.sin(angle)) + radiusDelta;
-            const subBubbleY = initialY +
-                (subBubbleContainerRadius * Math.cos(angle)) + radiusDelta;
+            const subBubbleX = cx - (subBubbleContainerRadius * Math.sin(angle));
+            const subBubbleY = cy + (subBubbleContainerRadius * Math.cos(angle));
             const subBubblePositionStyle = { top: subBubbleY, left: subBubbleX };
             return (
                 <TouchableOpacity
@@ -143,18 +196,17 @@ export default class Bubble extends Component {
                 style={[styles.interactable, style]}
                 dragEnabled={interactable}
                 onStop={this.handleStopInteraction}
+                {...this.panResponder.panHandlers}
             >
-                <View>
-                    <TouchableOpacity
-                        disabled={interactable}
-                        onPress={this.handlePress}
-                        onLongPress={this.handleLongPress}
-                    >
-                        <View style={[styles.container, sizeStyle]}>
-                            <Text style={styles.text}>{label}</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                    disabled={interactable}
+                    onPress={this.handlePress}
+                    onLongPress={this.handleLongPress}
+                >
+                    <View style={[styles.container, sizeStyle]}>
+                        <Text style={styles.text}>{label}</Text>
+                    </View>
+                </TouchableOpacity>
             </Interactable.View>
         );
 

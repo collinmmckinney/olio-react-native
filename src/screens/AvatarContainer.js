@@ -1,7 +1,13 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../graphql/queries';
-import { addBubble, setArrangeMode, updateBubbleLocation, toggleShowSubBubbles } from '../actions/bubbles';
+import {
+    addBubble,
+    setArrangeMode,
+    updateBubbleLocation,
+    resizeBubble,
+    toggleShowSubBubbles
+} from '../actions/bubbles';
 import AvatarScreen from './AvatarScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
@@ -17,6 +23,7 @@ const mapDispatchToProps = {
     addBubble,
     setArrangeMode,
     updateBubbleLocation,
+    resizeBubble,
     toggleShowSubBubbles
 };
 
@@ -26,7 +33,8 @@ const mergeProps = (stateProps, dispatchProps) => ({
     onCloseButtonPress: () => dispatchProps.setArrangeMode(false),
     onBubblePress: id => dispatchProps.toggleShowSubBubbles(id),
     onBubbleLongPress: () => dispatchProps.setArrangeMode(true),
-    onBubbleDragStop: (id, x, y) => dispatchProps.updateBubbleLocation(id, x, y)
+    onBubbleDragStop: (id, x, y) => dispatchProps.updateBubbleLocation(id, x, y),
+    onBubbleResize: (id, delta) => dispatchProps.resizeBubble(id, delta)
 });
 
 export default compose(

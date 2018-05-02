@@ -27,6 +27,7 @@ export default class AvatarScreen extends Component {
         onBubblePress: PropTypes.func,
         onBubbleLongPress: PropTypes.func,
         onBubbleDragStop: PropTypes.func,
+        onBubbleResize: PropTypes.func,
         onAddButtonPress: PropTypes.func,
         onCloseButtonPress: PropTypes.func
     };
@@ -37,6 +38,7 @@ export default class AvatarScreen extends Component {
         onBubblePress: () => {},
         onBubbleLongPress: () => {},
         onBubbleDragStop: () => {},
+        onBubbleResize: () => {},
         onAddButtonPress: () => {},
         onCloseButtonPress: () => {}
     };
@@ -47,6 +49,7 @@ export default class AvatarScreen extends Component {
         this.handleBubblePress = this.handleBubblePress.bind(this);
         this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
         this.handleBubbleDragStop = this.handleBubbleDragStop.bind(this);
+        this.handleBubbleResize = this.handleBubbleResize.bind(this);
         this.handleAddButtonPress = this.handleAddButtonPress.bind(this);
         this.handleCloseButtonPress = this.handleCloseButtonPress.bind(this);
     }
@@ -61,6 +64,10 @@ export default class AvatarScreen extends Component {
 
     handleBubbleDragStop(id, x, y) {
         this.props.onBubbleDragStop(id, x, y);
+    }
+
+    handleBubbleResize(id, delta) {
+        this.props.onBubbleResize(id, delta);
     }
 
     handleAddButtonPress(bubbleType) {
@@ -81,11 +88,13 @@ export default class AvatarScreen extends Component {
                 onPress={this.handleBubblePress}
                 onLongPress={this.handleBubbleLongPress}
                 onStopInteraction={this.handleBubbleDragStop}
+                onResize={this.handleBubbleResize}
             />
         ));
 
         return (
             <View style={styles.container}>
+                {bubbleElements}
                 <View style={styles.addButtonRow}>
                     <AddButton
                         close={arrangeMode}
@@ -93,7 +102,6 @@ export default class AvatarScreen extends Component {
                         onClosePress={this.handleCloseButtonPress}
                     />
                 </View>
-                {bubbleElements}
             </View>
         );
     }

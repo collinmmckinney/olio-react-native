@@ -1,5 +1,11 @@
 import uuidv4 from 'uuid/v4';
-import { ADD_BUBBLE, SET_ARRANGE_MODE, UPDATE_BUBBLE_LOCATION, TOGGLE_SHOW_SUB_BUBBLES } from '../actions/bubbles';
+import {
+    ADD_BUBBLE,
+    SET_ARRANGE_MODE,
+    UPDATE_BUBBLE_LOCATION,
+    RESIZE_BUBBLE,
+    TOGGLE_SHOW_SUB_BUBBLES
+} from '../actions/bubbles';
 import { sizes } from '../style';
 
 const initialState = {
@@ -15,8 +21,8 @@ export default function Bubbles(state = initialState, action) {
             const newBubble = {
                 id,
                 initialX: Math.floor(Math.random() * sizes.DEVICE_WIDTH),
-                initialY: Math.floor(Math.random() * sizes.DEVICE_HEIGHT),
-                radius: 90,
+                initialY: Math.floor(Math.random() * (sizes.DEVICE_HEIGHT - 200)),
+                radius: 100,
                 label: 'Map',
                 subBubbles: [
                     {
@@ -59,6 +65,18 @@ export default function Bubbles(state = initialState, action) {
         case UPDATE_BUBBLE_LOCATION: {
             updatedState.byId[action.payload.id].initialX = action.payload.x;
             updatedState.byId[action.payload.id].initialY = action.payload.y;
+            break;
+        }
+        case RESIZE_BUBBLE: {
+            const { radius } = updatedState.byId[action.payload.id];
+            const updatedSize = radius + (action.payload.delta / 2);
+            if (updatedSize > 200) {
+                updatedState.byId[action.payload.id].radius = 200;
+            } else if (updatedSize < 30) {
+                updatedState.byId[action.payload.id].radius = 30;
+            } else {
+                updatedState.byId[action.payload.id].radius = updatedSize;
+            }
             break;
         }
         case TOGGLE_SHOW_SUB_BUBBLES: {
