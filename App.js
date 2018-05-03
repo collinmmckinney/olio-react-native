@@ -12,7 +12,11 @@ import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
 import ReduxLink from 'apollo-link-redux';
 import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
+import Icon from 'react-native-vector-icons/Entypo';
+import Octicon from 'react-native-vector-icons/Octicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Location, Bubbles } from './src/reducers';
+import { colors } from './src/style';
 import {
     AuthLoadingContainer,
     SignInOrSignUpContainer,
@@ -161,10 +165,39 @@ const ProfileStack = StackNavigator({
 
 
 const AppNavigator = TabNavigator({
-    AvatarTab: { screen: AuthStack, title: 'Avatar' },
-    DataTab: { screen: DataStack, title: 'Data' },
-    ProfileTab: { screen: ProfileStack, title: 'Profile' },
-}, { initialRouteName: 'AvatarTab' });
+    AvatarTab: {
+        screen: AuthStack,
+        title: 'Avatar',
+        navigationOptions: {
+            tabBarIcon: <Icon name="network" size={40} color={colors.primary} />,
+            showIcon: true,
+        }
+    },
+    ProfileTab: {
+        screen: ProfileStack,
+        title: 'Profile',
+        navigationOptions: {
+            tabBarIcon: <MaterialIcon name="bubble-chart" size={45} color={colors.primary} />,
+            showIcon: true,
+        }
+    },
+    DataTab: {
+        screen: DataStack,
+        title: 'Data',
+        navigationOptions: {
+            tabBarIcon: <Octicon name="graph" size={40} color={colors.primary} />,
+            showIcon: true,
+        }
+    },
+}, {
+    initialRouteName: 'AvatarTab',
+    tabBarOptions: {
+        showLabel: false,
+        style: {
+            height: 60,
+        }
+    },
+});
 
 export default class App extends Component {
     render() {
