@@ -8,15 +8,14 @@ const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
     patientId: loading || !user ? null : user.patient.id
 });
 
-const mapCaregiverQueryToProps = ({ data: { loading, User, refetch } }) => ({
-    caregiverId: loading || !User ? null : User.caregiver.id,
+const mapCaregiversQueryToProps = ({ data: { refetch } }) => ({
     refetchCaregiverQuery: refetch
 });
 
 const mapAddCaregiverMutationToProps = ({ mutate }) => ({
-    addCaregiver: (patientId, caregiverId) => {
+    addCaregivers: (patientId, caregiversIds) => {
         mutate({
-            variables: { patientId, caregiverId }
+            variables: { patientId, caregiversIds }
         });
     }
 });
@@ -42,12 +41,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             form.doctorFirstName,
             form.doctorLastName
         );
-        ownProps.refetchCaregiverQuery({ email: form.caregiverEmail }).then(({ data }) => {
-            if (data.User) {
-                ownProps.addCaregiver(ownProps.patientId, data.User.caregiver.id);
-            }
-            ownProps.navigation.navigate('Avatar');
-        });
+        ownProps.refetchCaregiverQuery({ emails: [form.caregiver1Email, form.caregiver2Email] })
+            .then(({ data }) => {
+                const caregiversIds = data.allUsers.map(user => user.caregiver.id);
+                ownProps.addCaregivers(ownProps.patientId, caregiversIds);
+                ownProps.navigation.navigate('Avatar');
+            });
     },
     onPressBack: ownProps.navigation.goBack
 });
@@ -55,17 +54,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 export default compose(
     graphql(loggedInUserQuery, { props: mapLoggedInUserQueryToProps }),
     graphql(gql`
-        query($email: String) {
-            User(email: $email) {
+        query($emails: [String!]) {
+            allUsers(filter: { email_in: $emails }) {
                 caregiver {
                     id
                 }
             }
         }
-    `, { props: mapCaregiverQueryToProps }),
+    `, { props: mapCaregiversQueryToProps }),
     graphql(gql`
-        mutation($patientId: ID!, $caregiverId: ID!) {
-            updatePatient(id: $patientId, caregiversIds: [$caregiverId]) {
+        mutation($patientId: ID!, $caregiversIds: [ID!]!) {
+            updatePatient(id: $patientId, caregiversIds: $caregiversIds) {
                 id
             }
         }

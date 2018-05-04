@@ -128,7 +128,8 @@ export default class OnboardingNetworkScreen extends Component {
     render() {
         const {
             doctorEmail,
-            doctorName,
+            doctorFirstName,
+            doctorLastName,
             caregiver1Email,
             caregiver2Email
         } = this.state;
@@ -172,14 +173,23 @@ export default class OnboardingNetworkScreen extends Component {
                         </View>
                         <View style={styles.entry}>
                             <TextInput
-                                value={doctorName}
-                                onChangeText={value => this.setState({ doctorName: value })}
-                                placeholder="Name"
+                                value={doctorFirstName}
+                                onChangeText={value => this.setState({ doctorFirstName: value })}
+                                placeholder="First Name"
                                 style={styles.textInput}
                             />
                             <View style={styles.switcher}>
                                 <Switch onTintColor={colors.primary} />
                             </View>
+                        </View>
+                        <View style={styles.entry}>
+                            <TextInput
+                                value={doctorLastName}
+                                onChangeText={value => this.setState({ doctorLastName: value })}
+                                placeholder="LastName"
+                                style={styles.textInput}
+                            />
+                            <View style={styles.switcher} />
                         </View>
                         <View style={styles.entry}>
                             <TextInput
