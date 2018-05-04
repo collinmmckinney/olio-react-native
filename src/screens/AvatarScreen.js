@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/Foundation';
 import { AddButton, Bubble } from '../components';
+
+const girlImage = require('../assets/girl.png');
+const lungImage = require('../assets/whiteLungs.png');
 
 const styles = StyleSheet.create({
     container: {
@@ -12,6 +16,22 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         paddingTop: 13,
         paddingRight: 13
+    },
+    avatarContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    heart: {
+        marginLeft: 120,
+        marginTop: 155,
+    },
+    lungs: {
+        marginLeft: 75,
+        marginTop: 0,
     }
 });
 
@@ -24,6 +44,7 @@ export default class AvatarScreen extends Component {
             onPress: PropTypes.func
         })),
         arrangeMode: PropTypes.bool,
+        onHeartPress: PropTypes.func,
         onBubblePress: PropTypes.func,
         onBubbleLongPress: PropTypes.func,
         onBubbleDragStop: PropTypes.func,
@@ -35,6 +56,7 @@ export default class AvatarScreen extends Component {
     static defaultProps = {
         bubbles: [],
         arrangeMode: false,
+        onHeartPress: () => {},
         onBubblePress: () => {},
         onBubbleLongPress: () => {},
         onBubbleDragStop: () => {},
@@ -46,12 +68,17 @@ export default class AvatarScreen extends Component {
     constructor(props) {
         super(props);
 
+        this.handleHeartPress = this.handleHeartPress.bind(this);
         this.handleBubblePress = this.handleBubblePress.bind(this);
         this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
         this.handleBubbleDragStop = this.handleBubbleDragStop.bind(this);
         this.handleBubbleResize = this.handleBubbleResize.bind(this);
         this.handleAddButtonPress = this.handleAddButtonPress.bind(this);
         this.handleCloseButtonPress = this.handleCloseButtonPress.bind(this);
+    }
+
+    handleHeartPress() {
+        this.props.onHeartPress();
     }
 
     handleBubblePress(id) {
@@ -94,6 +121,23 @@ export default class AvatarScreen extends Component {
 
         return (
             <View style={styles.container}>
+                <View style={styles.avatarContainer}>
+                    <ImageBackground
+                        source={girlImage}
+                        style={{
+                            width: 200,
+                            height: 250,
+                            flexDirection: 'column'
+                        }}
+                    >
+                        <TouchableOpacity style={styles.heart} onPress={this.handleHeartPress}>
+                            <Icon name="heart" size={20} color="white" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.lungs}>
+                            <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
+                        </TouchableOpacity>
+                    </ImageBackground>
+                </View>
                 {bubbleElements}
                 <View style={styles.addButtonRow}>
                     <AddButton

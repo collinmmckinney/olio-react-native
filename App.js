@@ -28,6 +28,7 @@ import {
     OnboardingPeakFlowContainer,
     OnboardingNetworkContainer,
     AvatarContainer,
+    WellbeingContainer,
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
@@ -87,6 +88,9 @@ const AvatarStack = StackNavigator({
     Avatar: {
         screen: AvatarContainer
     },
+    Wellbeing: {
+        screen: WellbeingContainer
+    },
     Map: {
         screen: MapContainer
     },
@@ -96,7 +100,17 @@ const AvatarStack = StackNavigator({
     MapFilters: {
         screen: MapFiltersContainer
     }
-}, { initialRouteName: 'Avatar', mode: 'modal' });
+}, {
+    initialRouteName: 'Avatar',
+    mode: 'modal',
+    cardStyle: {
+        opacity: 0.8
+    },
+    transitionConfig: () => ({
+        containerStyle: {
+        }
+    })
+});
 
 const SignInOrSignUpStack = StackNavigator({
     SignInOrSignUp: {
