@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/Foundation';
 import { AddButton, Bubble } from '../components';
+
+const girlImage = require('../assets/girl.png');
+const lungImage = require('../assets/whiteLungs.png');
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    elements: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
     addButtonRow: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         paddingTop: 13,
         paddingRight: 13
-    }
+    },
+    avatarContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    heart: {
+        marginLeft: 120,
+        marginTop: 155,
+    },
+    lungs: {
+        marginLeft: 75,
+        marginTop: 0,
+    },
 });
 
 export default class AvatarScreen extends Component {
@@ -95,12 +116,31 @@ export default class AvatarScreen extends Component {
         return (
             <View style={styles.container}>
                 {bubbleElements}
-                <View style={styles.addButtonRow}>
-                    <AddButton
-                        close={arrangeMode}
-                        onAddPress={this.handleAddButtonPress}
-                        onClosePress={this.handleCloseButtonPress}
-                    />
+                <View style={styles.elements}>
+                    <View style={styles.addButtonRow}>
+                        <AddButton
+                            close={arrangeMode}
+                            onAddPress={this.handleAddButtonPress}
+                            onClosePress={this.handleCloseButtonPress}
+                        />
+                    </View>
+                    <View style={styles.avatarContainer}>
+                        <ImageBackground
+                            source={girlImage}
+                            style={{
+                                width: 200,
+                                height: 250,
+                                flexDirection: 'column'
+                            }}
+                        >
+                            <TouchableOpacity style={styles.heart}>
+                                <Icon name="heart" size={20} color="white" />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.lungs}>
+                                <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
+                            </TouchableOpacity>
+                        </ImageBackground>
+                    </View>
                 </View>
             </View>
         );
