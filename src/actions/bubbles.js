@@ -1,13 +1,13 @@
-export const ADD_BUBBLE = 'ADD_BUBBLE';
+export const ADD_BUBBLES = 'ADD_BUBBLES';
 export const SET_ARRANGE_MODE = 'SET_ARRANGE_MODE';
 export const UPDATE_BUBBLE_LOCATION = 'UPDATE_BUBBLE_LOCATION';
 export const RESIZE_BUBBLE = 'RESIZE_BUBBLE';
 export const TOGGLE_SHOW_SUB_BUBBLES = 'TOGGLE_SHOW_SUB_BUBBLES';
 
-export function addBubble(bubbleType) {
+export function addBubbles(bubbles) {
     return {
-        type: ADD_BUBBLE,
-        payload: { bubbleType }
+        type: ADD_BUBBLES,
+        payload: { bubbles }
     };
 }
 

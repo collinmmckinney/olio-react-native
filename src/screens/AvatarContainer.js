@@ -30,7 +30,7 @@ const mapDispatchToProps = {
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     onHeartPress: () => ownProps.navigation.navigate('Wellbeing'),
-    onAddButtonPress: bubbleType => dispatchProps.addBubble(bubbleType),
+    onAddButtonPress: () => ownProps.navigation.navigate('AddBubble'),
     onCloseButtonPress: () => dispatchProps.setArrangeMode(false),
     onBubblePress: id => dispatchProps.toggleShowSubBubbles(id),
     onBubbleLongPress: () => dispatchProps.setArrangeMode(true),

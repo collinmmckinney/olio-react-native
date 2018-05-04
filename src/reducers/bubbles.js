@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4';
 import {
-    ADD_BUBBLE,
+    ADD_BUBBLES,
     SET_ARRANGE_MODE,
     UPDATE_BUBBLE_LOCATION,
     RESIZE_BUBBLE,
@@ -16,43 +16,45 @@ const initialState = {
 export default function Bubbles(state = initialState, action) {
     const updatedState = Object.assign({}, state);
     switch (action.type) {
-        case ADD_BUBBLE: {
-            const id = uuidv4();
-            const newBubble = {
-                id,
-                initialX: Math.floor(Math.random() * sizes.DEVICE_WIDTH),
-                initialY: Math.floor(Math.random() * (sizes.DEVICE_HEIGHT - 200)),
-                radius: 100,
-                label: 'Map',
-                subBubbles: [
-                    {
-                        label: '1',
-                    },
-                    {
-                        label: '2'
-                    },
-                    {
-                        label: '3'
-                    },
-                    {
-                        label: '4'
-                    },
-                    {
-                        label: '5'
-                    },
-                    {
-                        label: '6'
-                    },
-                    {
-                        label: '7'
-                    },
-                    {
-                        label: '8'
-                    }
-                ],
-                showSubBubbles: false
-            };
-            updatedState.byId[id] = newBubble;
+        case ADD_BUBBLES: {
+            action.payload.bubbles.forEach((bubble) => {
+                const id = uuidv4();
+                const newBubble = {
+                    id,
+                    initialX: Math.floor(Math.random() * sizes.DEVICE_WIDTH),
+                    initialY: Math.floor(Math.random() * (sizes.DEVICE_HEIGHT - 300)),
+                    radius: 100,
+                    label: bubble.label,
+                    subBubbles: [
+                        {
+                            label: '1',
+                        },
+                        {
+                            label: '2'
+                        },
+                        {
+                            label: '3'
+                        },
+                        {
+                            label: '4'
+                        },
+                        {
+                            label: '5'
+                        },
+                        {
+                            label: '6'
+                        },
+                        {
+                            label: '7'
+                        },
+                        {
+                            label: '8'
+                        }
+                    ],
+                    showSubBubbles: false
+                };
+                updatedState.byId[id] = newBubble;
+            });
             break;
         }
         case SET_ARRANGE_MODE: {
@@ -80,6 +82,11 @@ export default function Bubbles(state = initialState, action) {
             break;
         }
         case TOGGLE_SHOW_SUB_BUBBLES: {
+            Object.keys(updatedState.byId).forEach((id) => {
+                if (id !== action.payload.id) {
+                    updatedState.byId[id].showSubBubbles = false;
+                }
+            });
             updatedState.byId[action.payload.id].showSubBubbles =
                 !updatedState.byId[action.payload.id].showSubBubbles;
             break;

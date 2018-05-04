@@ -29,6 +29,7 @@ import {
     OnboardingNetworkContainer,
     AvatarContainer,
     WellbeingContainer,
+    AddBubbleContainer,
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
@@ -91,6 +92,9 @@ const AvatarStack = StackNavigator({
     Wellbeing: {
         screen: WellbeingContainer
     },
+    AddBubble: {
+        screen: AddBubbleContainer
+    },
     Map: {
         screen: MapContainer
     },
@@ -103,9 +107,7 @@ const AvatarStack = StackNavigator({
 }, {
     initialRouteName: 'Avatar',
     mode: 'modal',
-    cardStyle: {
-        opacity: 0.8
-    },
+    cardStyle: { opacity: 0.8 },
     transitionConfig: () => ({
         containerStyle: {
         }

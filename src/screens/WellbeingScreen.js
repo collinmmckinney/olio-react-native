@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderColor: colors.primary,
         borderWidth: 4,
-        borderRadius: 8,
-        opacity: 0.8
+        borderRadius: 8
     }
 });
 
