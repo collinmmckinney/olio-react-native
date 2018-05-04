@@ -11,11 +11,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    elements: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
     addButtonRow: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -23,6 +18,10 @@ const styles = StyleSheet.create({
         paddingRight: 13
     },
     avatarContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
         flexDirection: 'row',
         justifyContent: 'center'
     },
@@ -122,32 +121,30 @@ export default class AvatarScreen extends Component {
 
         return (
             <View style={styles.container}>
+                <View style={styles.avatarContainer}>
+                    <ImageBackground
+                        source={girlImage}
+                        style={{
+                            width: 200,
+                            height: 250,
+                            flexDirection: 'column'
+                        }}
+                    >
+                        <TouchableOpacity style={styles.heart} onPress={this.handleHeartPress}>
+                            <Icon name="heart" size={20} color="white" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.lungs}>
+                            <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
+                        </TouchableOpacity>
+                    </ImageBackground>
+                </View>
                 {bubbleElements}
-                <View style={styles.elements}>
-                    <View style={styles.addButtonRow}>
-                        <AddButton
-                            close={arrangeMode}
-                            onAddPress={this.handleAddButtonPress}
-                            onClosePress={this.handleCloseButtonPress}
-                        />
-                    </View>
-                    <View style={styles.avatarContainer}>
-                        <ImageBackground
-                            source={girlImage}
-                            style={{
-                                width: 200,
-                                height: 250,
-                                flexDirection: 'column'
-                            }}
-                        >
-                            <TouchableOpacity style={styles.heart} onPress={this.handleHeartPress}>
-                                <Icon name="heart" size={20} color="white" />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.lungs}>
-                                <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
-                            </TouchableOpacity>
-                        </ImageBackground>
-                    </View>
+                <View style={styles.addButtonRow}>
+                    <AddButton
+                        close={arrangeMode}
+                        onAddPress={this.handleAddButtonPress}
+                        onClosePress={this.handleCloseButtonPress}
+                    />
                 </View>
             </View>
         );
