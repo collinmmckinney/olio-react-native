@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image, ImageBackground } from 'react-native';
+import { View, StyleSheet, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { colors } from '../style';
 
 const redHeart = require('../assets/redHeart.png');
@@ -33,29 +33,33 @@ export default class Wellbeing extends Component {
                 <View style={styles.heart}>
                     <ImageBackground
                         style={{
-                            width: 60,
-                            height: 80,
+                            width: 65,
+                            height: 90,
                         }}
-                        source={redHeart}
+                        source={yellowHeart}
                     >
-                        <Image
-                            style={{
-                                width: 65,
-                                height: 90,
-                                marginLeft: 29,
-                                marginTop: 13,
-                            }}
-                            source={yellowHeart}
-                        />
-                        <Image
-                            style={{
-                                width: 60,
-                                height: 80,
-                                marginLeft: 60,
-                                marginTop: -104,
-                            }}
-                            source={greenHeart}
-                        />
+                        <TouchableOpacity>
+                            <Image
+                                style={{
+                                    width: 60,
+                                    height: 80,
+                                    marginLeft: -28,
+                                    marginTop: -13,
+                                }}
+                                source={redHeart}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Image
+                                style={{
+                                    width: 60,
+                                    height: 80,
+                                    marginLeft: 30,
+                                    marginTop: -80,
+                                }}
+                                source={greenHeart}
+                            />
+                        </TouchableOpacity>
                     </ImageBackground>
                 </View>
             </View>
