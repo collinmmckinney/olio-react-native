@@ -107,7 +107,7 @@ const AvatarStack = StackNavigator({
 }, {
     initialRouteName: 'Avatar',
     mode: 'modal',
-    cardStyle: { opacity: 0.8 },
+    cardStyle: { backgroundColor: 'transparent' },
     transitionConfig: () => ({
         containerStyle: {
         }

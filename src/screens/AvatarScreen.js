@@ -9,7 +9,8 @@ const lungImage = require('../assets/whiteLungs.png');
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     addButtonRow: {
         flexDirection: 'row',
