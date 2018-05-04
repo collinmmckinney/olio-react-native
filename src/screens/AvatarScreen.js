@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Foundation';
-import { AddButton, Bubble } from '../components';
+import Modal from 'react-native-modal';
+import { AddButton, Bubble, Wellbeing } from '../components';
+import { colors } from '../style';
 
 const girlImage = require('../assets/girl.png');
 const lungImage = require('../assets/whiteLungs.png');
@@ -33,6 +35,15 @@ const styles = StyleSheet.create({
     lungs: {
         marginLeft: 75,
         marginTop: 0,
+    },
+    modalScreen: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        borderColor: colors.primary,
+        borderWidth: 4,
+        borderRadius: 8,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
     },
 });
 
@@ -67,6 +78,10 @@ export default class AvatarScreen extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            isModalVisible: false,
+        };
+
         this.handleBubblePress = this.handleBubblePress.bind(this);
         this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
         this.handleBubbleDragStop = this.handleBubbleDragStop.bind(this);
@@ -99,7 +114,10 @@ export default class AvatarScreen extends Component {
         this.props.onCloseButtonPress();
     }
 
+    toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
+
     render() {
+        console.log(this.state.isModalVisible);
         const { bubbles, arrangeMode } = this.props;
         const bubbleElements = bubbles.map(bubble => (
             <Bubble
@@ -133,9 +151,20 @@ export default class AvatarScreen extends Component {
                                 flexDirection: 'column'
                             }}
                         >
-                            <TouchableOpacity style={styles.heart}>
+                            <TouchableOpacity style={styles.heart} onPress={this.toggleModal}>
                                 <Icon name="heart" size={20} color="white" />
                             </TouchableOpacity>
+                            <Modal
+                                isVisible={this.state.isModalVisible}
+                                onBackdropPress={this.toggleModal}
+                                onSwipe={this.toggleModal}
+                                swipeDirection="down"
+                                backdropColor="white"
+                            >
+                                <View style={styles.modalScreen}>
+                                    <Wellbeing />
+                                </View>
+                            </Modal>
                             <TouchableOpacity style={styles.lungs}>
                                 <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
                             </TouchableOpacity>
