@@ -46,6 +46,7 @@ export default class AvatarScreen extends Component {
         })),
         arrangeMode: PropTypes.bool,
         onHeartPress: PropTypes.func,
+        onLungsPress: PropTypes.func,
         onBubblePress: PropTypes.func,
         onBubbleLongPress: PropTypes.func,
         onBubbleDragStop: PropTypes.func,
@@ -58,6 +59,7 @@ export default class AvatarScreen extends Component {
         bubbles: [],
         arrangeMode: false,
         onHeartPress: () => {},
+        onLungsPress: () => {},
         onBubblePress: () => {},
         onBubbleLongPress: () => {},
         onBubbleDragStop: () => {},
@@ -70,6 +72,7 @@ export default class AvatarScreen extends Component {
         super(props);
 
         this.handleHeartPress = this.handleHeartPress.bind(this);
+        this.handleLungsPress = this.handleLungsPress.bind(this);
         this.handleBubblePress = this.handleBubblePress.bind(this);
         this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
         this.handleBubbleDragStop = this.handleBubbleDragStop.bind(this);
@@ -80,6 +83,10 @@ export default class AvatarScreen extends Component {
 
     handleHeartPress() {
         this.props.onHeartPress();
+    }
+
+    handleLungsPress() {
+        this.props.onLungsPress();
     }
 
     handleBubblePress(id) {
@@ -134,7 +141,7 @@ export default class AvatarScreen extends Component {
                         <TouchableOpacity style={styles.heart} onPress={this.handleHeartPress}>
                             <Icon name="heart" size={20} color="white" />
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.lungs}>
+                        <TouchableOpacity style={styles.lungs} onPress={this.handleLungsPress}>
                             <Image style={{ width: 50, height: 52 }} source={lungImage} resizeMode="contain" />
                         </TouchableOpacity>
                     </ImageBackground>

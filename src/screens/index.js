@@ -1,5 +1,6 @@
 export { default as AvatarContainer } from './AvatarContainer';
 export { default as WellbeingContainer } from './WellbeingContainer';
+export { default as CarePlanContainer } from './CarePlanContainer';
 export { default as AddBubbleContainer } from './AddBubbleContainer';
 
 export { default as MapContainer } from './map/MapContainer';
