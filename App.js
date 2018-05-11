@@ -110,12 +110,7 @@ const AvatarStack = StackNavigator({
     }
 }, {
     initialRouteName: 'Avatar',
-    mode: 'modal',
-    cardStyle: { backgroundColor: 'transparent' },
-    transitionConfig: () => ({
-        containerStyle: {
-        }
-    })
+    mode: 'modal'
 });
 
 const SignInOrSignUpStack = StackNavigator({

@@ -25,33 +25,10 @@ export default function Bubbles(state = initialState, action) {
                     initialY: Math.floor(Math.random() * (sizes.DEVICE_HEIGHT - 300)),
                     radius: 100,
                     label: bubble.label,
-                    subBubbles: [
-                        {
-                            label: '1',
-                        },
-                        {
-                            label: '2'
-                        },
-                        {
-                            label: '3'
-                        },
-                        {
-                            label: '4'
-                        },
-                        {
-                            label: '5'
-                        },
-                        {
-                            label: '6'
-                        },
-                        {
-                            label: '7'
-                        },
-                        {
-                            label: '8'
-                        }
-                    ],
-                    showSubBubbles: false
+                    onPress: bubble.onPress,
+                    subBubbles: [],
+                    showSubBubbles: false,
+                    ...bubble
                 };
                 updatedState.byId[id] = newBubble;
             });

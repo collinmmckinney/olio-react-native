@@ -144,6 +144,7 @@ export default class Bubble extends Component {
 
     render() {
         const {
+            id,
             subBubbles,
             showSubBubbles,
             initialX,
@@ -173,7 +174,7 @@ export default class Bubble extends Component {
             const subBubblePositionStyle = { top: subBubbleY, left: subBubbleX };
             return (
                 <TouchableOpacity
-                    key={subBubble.label}
+                    key={id + subBubble.label}
                     style={[styles.subBubble, subBubblePositionStyle]}
                     onPress={subBubble.onPress}
                 />
