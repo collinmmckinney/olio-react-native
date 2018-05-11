@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    TouchableOpacity,
     Text
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -10,8 +9,7 @@ import { colors } from '../style';
 import {
     Button,
     TextInput,
-    ScrollView,
-    StaticBubble
+    ScrollSelect
 } from '../components';
 
 const BUBBLE_OPTIONS = [
@@ -97,13 +95,21 @@ export default class AddBubbleScreen extends Component {
             bubbles: []
         };
 
+        this.handleBubblePress = this.handleBubblePress.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
     handleBubblePress(label) {
         const { bubbles } = this.state;
+        const updatedBubbles = bubbles.slice();
+        const i = bubbles.indexOf(label);
+        if (i > -1) {
+            updatedBubbles.splice(i, 1);
+        } else {
+            updatedBubbles.push(label);
+        }
         this.setState({
-            bubbles: bubbles.concat(label)
+            bubbles: updatedBubbles
         });
     }
 
@@ -113,31 +119,14 @@ export default class AddBubbleScreen extends Component {
 
     render() {
         const { bubbles } = this.state;
-        const bubbleRows = BUBBLE_OPTIONS.map((bubble) => {
-            const colorStyle = { backgroundColor: colors.primary };
-            const style = bubbles.indexOf(bubble.label) > -1 ?
-                [styles.bubbleRow, colorStyle] : styles.bubbleRow;
-            return (
-                <TouchableOpacity
-                    key={bubble.label}
-                    onPress={() => this.handleBubblePress(bubble.label)}
-                >
-                    <View style={style}>
-                        <StaticBubble
-                            style={{ backgroundColor: bubble.color }}
-                        />
-                        <Text>{bubble.label}</Text>
-                    </View>
-                </TouchableOpacity>
-            );
-        });
+
         return (
             <View style={styles.container}>
-                <ScrollView
-                    contentContainerStyle={styles.scrollViewContent}
-                >
-                    {bubbleRows}
-                </ScrollView>
+                <ScrollSelect
+                    options={BUBBLE_OPTIONS}
+                    selectedLabels={bubbles}
+                    onRowPress={this.handleBubblePress}
+                />
                 <Text>Search for your own</Text>
                 <TextInput />
                 <Button label="SAVE" onPress={this.handleSave} style={styles.saveButton} />

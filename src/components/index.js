@@ -3,6 +3,7 @@ export { default as Bubble } from './Bubble';
 export { default as Button } from './Button';
 export { default as Form } from './Form';
 export { default as MapButton } from './MapButton';
+export { default as ScrollSelect } from './ScrollSelect';
 export { default as ScrollView } from './ScrollView';
 export { default as StaticBubble } from './StaticBubble';
 export { default as TextInput } from './TextInput';

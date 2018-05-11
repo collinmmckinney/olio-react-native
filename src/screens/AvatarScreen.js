@@ -51,6 +51,7 @@ export default class AvatarScreen extends Component {
         onBubbleLongPress: PropTypes.func,
         onBubbleDragStop: PropTypes.func,
         onBubbleResize: PropTypes.func,
+        onBubbleDeletePress: PropTypes.func,
         onAddButtonPress: PropTypes.func,
         onCloseButtonPress: PropTypes.func
     };
@@ -64,6 +65,7 @@ export default class AvatarScreen extends Component {
         onBubbleLongPress: () => {},
         onBubbleDragStop: () => {},
         onBubbleResize: () => {},
+        onBubbleDeletePress: () => {},
         onAddButtonPress: () => {},
         onCloseButtonPress: () => {}
     };
@@ -77,6 +79,7 @@ export default class AvatarScreen extends Component {
         this.handleBubbleLongPress = this.handleBubbleLongPress.bind(this);
         this.handleBubbleDragStop = this.handleBubbleDragStop.bind(this);
         this.handleBubbleResize = this.handleBubbleResize.bind(this);
+        this.handleBubbleDeletePress = this.handleBubbleDeletePress.bind(this);
         this.handleAddButtonPress = this.handleAddButtonPress.bind(this);
         this.handleCloseButtonPress = this.handleCloseButtonPress.bind(this);
     }
@@ -105,6 +108,10 @@ export default class AvatarScreen extends Component {
         this.props.onBubbleResize(id, delta);
     }
 
+    handleBubbleDeletePress(id) {
+        this.props.onBubbleDeletePress(id);
+    }
+
     handleAddButtonPress(bubbleType) {
         this.props.onAddButtonPress(bubbleType);
     }
@@ -124,6 +131,7 @@ export default class AvatarScreen extends Component {
                 onLongPress={this.handleBubbleLongPress}
                 onStopInteraction={this.handleBubbleDragStop}
                 onResize={this.handleBubbleResize}
+                onDeletePress={this.handleBubbleDeletePress}
             />
         ));
 

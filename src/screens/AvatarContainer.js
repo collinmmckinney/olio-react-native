@@ -2,7 +2,7 @@ import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../graphql/queries';
 import {
-    addBubble,
+    deleteBubble,
     setArrangeMode,
     updateBubbleLocation,
     resizeBubble,
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    addBubble,
+    deleteBubble,
     setArrangeMode,
     updateBubbleLocation,
     resizeBubble,
@@ -36,7 +36,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onBubblePress: id => dispatchProps.toggleShowSubBubbles(id),
     onBubbleLongPress: () => dispatchProps.setArrangeMode(true),
     onBubbleDragStop: (id, x, y) => dispatchProps.updateBubbleLocation(id, x, y),
-    onBubbleResize: (id, delta) => dispatchProps.resizeBubble(id, delta)
+    onBubbleResize: (id, delta) => dispatchProps.resizeBubble(id, delta),
+    onBubbleDeletePress: id => dispatchProps.deleteBubble(id)
 });
 
 export default compose(

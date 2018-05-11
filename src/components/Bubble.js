@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
         height: SUB_BUBBLE_RADIUS * 2,
         borderRadius: SUB_BUBBLE_RADIUS * 2,
         backgroundColor: colors.primaryDarkest
+    },
+    deleteButton: {
+        position: 'absolute',
+        width: 40,
+        height: 40,
+        borderRadius: 40,
+        backgroundColor: 'red'
     }
 });
 
@@ -53,7 +60,8 @@ export default class Bubble extends Component {
         onPress: PropTypes.func,
         onLongPress: PropTypes.func,
         onStopInteraction: PropTypes.func,
-        onResize: PropTypes.func
+        onResize: PropTypes.func,
+        onDeletePress: PropTypes.func
     }
 
     static defaultProps = {
@@ -67,7 +75,8 @@ export default class Bubble extends Component {
         onPress: () => {},
         onLongPress: () => {},
         onStopInteraction: () => {},
-        onResize: () => {}
+        onResize: () => {},
+        onDeletePress: () => {}
     }
 
     constructor(props) {
@@ -81,6 +90,7 @@ export default class Bubble extends Component {
         this.handleLongPress = this.handleLongPress.bind(this);
         this.handleStopInteraction = this.handleStopInteraction.bind(this);
         this.handleResize = this.handleResize.bind(this);
+        this.handleDeletePress = this.handleDeletePress.bind(this);
     }
 
     componentWillMount() {
@@ -142,6 +152,11 @@ export default class Bubble extends Component {
         onResize(id, delta);
     }
 
+    handleDeletePress() {
+        const { id, onDeletePress } = this.props;
+        onDeletePress(id);
+    }
+
     render() {
         const {
             id,
@@ -163,6 +178,12 @@ export default class Bubble extends Component {
             backgroundColor: interactable ? colors.primaryDarker : colors.primary
         };
         const style = [sizeStyle, colorStyle];
+
+        const deleteButtonDelta = ((radius / 2) * (Math.sqrt(2) - 1)) / Math.sqrt(2);
+        const deleteButtonStyle = {
+            top: deleteButtonDelta,
+            left: deleteButtonDelta
+        };
 
         const cx = initialX + (radius - SUB_BUBBLE_RADIUS);
         const cy = initialY + (radius - SUB_BUBBLE_RADIUS);
@@ -206,6 +227,12 @@ export default class Bubble extends Component {
                 >
                     <View style={[styles.container, sizeStyle]}>
                         <Text style={styles.text}>{label}</Text>
+                        { interactable &&
+                            <TouchableOpacity
+                                onPress={this.handleDeletePress}
+                                style={[styles.deleteButton, deleteButtonStyle]}
+                            />
+                        }
                     </View>
                 </TouchableOpacity>
             </Interactable.View>

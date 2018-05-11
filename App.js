@@ -31,6 +31,7 @@ import {
     WellbeingContainer,
     CarePlanContainer,
     AddBubbleContainer,
+    AddAllergenContainer,
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
@@ -98,6 +99,9 @@ const AvatarStack = StackNavigator({
     },
     AddBubble: {
         screen: AddBubbleContainer
+    },
+    AddAllergen: {
+        screen: AddAllergenContainer
     },
     Map: {
         screen: MapContainer

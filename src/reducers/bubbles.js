@@ -1,6 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import {
     ADD_BUBBLES,
+    DELETE_BUBBLE,
     SET_ARRANGE_MODE,
     UPDATE_BUBBLE_LOCATION,
     RESIZE_BUBBLE,
@@ -34,10 +35,11 @@ export default function Bubbles(state = initialState, action) {
             });
             break;
         }
+        case DELETE_BUBBLE: {
+            delete updatedState.byId[action.payload.id];
+            break;
+        }
         case SET_ARRANGE_MODE: {
-            Object.keys(updatedState.byId).forEach((id) => {
-                updatedState.byId[id].showSubBubbles = false;
-            });
             updatedState.arrangeMode = action.payload.arrangeMode;
             break;
         }

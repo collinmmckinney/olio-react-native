@@ -1,4 +1,5 @@
 export const ADD_BUBBLES = 'ADD_BUBBLES';
+export const DELETE_BUBBLE = 'DELETE_BUBBLE';
 export const SET_ARRANGE_MODE = 'SET_ARRANGE_MODE';
 export const UPDATE_BUBBLE_LOCATION = 'UPDATE_BUBBLE_LOCATION';
 export const RESIZE_BUBBLE = 'RESIZE_BUBBLE';
@@ -8,6 +9,13 @@ export function addBubbles(bubbles) {
     return {
         type: ADD_BUBBLES,
         payload: { bubbles }
+    };
+}
+
+export function deleteBubble(id) {
+    return {
+        type: DELETE_BUBBLE,
+        payload: { id }
     };
 }
 
