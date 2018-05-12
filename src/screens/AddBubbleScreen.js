@@ -12,43 +12,51 @@ import {
     ScrollSelect
 } from '../components';
 
-const BUBBLE_OPTIONS = [
+const OPTIONS = [
     {
+        key: 'exercise',
         label: 'Exercise-Induced',
         color: colors.primary,
         image: null
     },
     {
+        key: 'weather',
         label: 'Weather-Induced',
         color: colors.primary,
         image: null
     },
     {
+        key: 'allergen',
         label: 'Allergen-Induced',
         color: colors.primary,
         image: null
     },
     {
+        key: 'flow',
         label: 'Peak Flow',
         color: colors.primary,
         image: null
     },
     {
+        key: 'other1',
         label: 'Other1',
         color: colors.primary,
         image: null
     },
     {
+        key: 'other2',
         label: 'Other2',
         color: colors.primary,
         image: null
     },
     {
+        key: 'other3',
         label: 'Other3',
         color: colors.primary,
         image: null
     },
     {
+        key: 'other4',
         label: 'Other4',
         color: colors.primary,
         image: null
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         alignItems: 'stretch'
     },
-    bubbleRow: {
+    row: {
         height: 74,
         flexDirection: 'row',
         alignItems: 'center'
@@ -92,40 +100,40 @@ export default class AddBubbleScreen extends Component {
         super(props);
 
         this.state = {
-            bubbles: []
+            selected: []
         };
 
-        this.handleBubblePress = this.handleBubblePress.bind(this);
+        this.handleRowPress = this.handleRowPress.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
-    handleBubblePress(label) {
-        const { bubbles } = this.state;
-        const updatedBubbles = bubbles.slice();
-        const i = bubbles.indexOf(label);
+    handleRowPress(key) {
+        const { selected } = this.state;
+        const updatedSelected = selected.slice();
+        const i = selected.indexOf(key);
         if (i > -1) {
-            updatedBubbles.splice(i, 1);
+            updatedSelected.splice(i, 1);
         } else {
-            updatedBubbles.push(label);
+            updatedSelected.push(key);
         }
         this.setState({
-            bubbles: updatedBubbles
+            selected: updatedSelected
         });
     }
 
     handleSave() {
-        this.props.onSave(this.state.bubbles);
+        this.props.onSave(this.state.selected);
     }
 
     render() {
-        const { bubbles } = this.state;
+        const { selected } = this.state;
 
         return (
             <View style={styles.container}>
                 <ScrollSelect
-                    options={BUBBLE_OPTIONS}
-                    selectedLabels={bubbles}
-                    onRowPress={this.handleBubblePress}
+                    options={OPTIONS}
+                    selectedKeys={selected}
+                    onRowPress={this.handleRowPress}
                 />
                 <Text>Search for your own</Text>
                 <TextInput />

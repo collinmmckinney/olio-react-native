@@ -19,25 +19,25 @@ const mapDispatchToProps = {
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     onSave: (bubbles) => {
-        dispatchProps.addBubbles(bubbles.map((bubbleLabel) => {
-            if (bubbleLabel === 'Allergen-Induced') {
+        dispatchProps.addBubbles(bubbles.map((key) => {
+            if (key === 'allergen') {
                 return {
-                    label: bubbleLabel,
+                    label: 'Allergen-Induced',
                     subBubbles: [
                         { label: '+', onPress: () => ownProps.navigation.navigate('AddAllergen') }
                     ]
                 };
-            } else if (bubbleLabel === 'Weather-Induced') {
+            } else if (key === 'weather') {
                 return {
-                    label: bubbleLabel,
+                    label: 'Weather-Induced',
                     subBubbles: [
                         { label: '+', onPress: () => ownProps.navigation.navigate('AddAllergen') }
                     ]
                 };
-            } else if (bubbleLabel === 'Exercise-Induced') {
+            } else if (key === 'exercise') {
                 return {
-                    label: bubbleLabel,
-                    subBubbels: [
+                    label: 'Exercise-Induced',
+                    subBubbles: [
                         { label: '+', onPress: () => ownProps.navigation.navigate('AddAllergen') }
                     ]
                 };

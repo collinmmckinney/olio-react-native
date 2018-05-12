@@ -2,15 +2,17 @@ import uuidv4 from 'uuid/v4';
 import {
     ADD_BUBBLES,
     DELETE_BUBBLE,
+    ADD_SUB_BUBBLES,
     SET_ARRANGE_MODE,
     UPDATE_BUBBLE_LOCATION,
     RESIZE_BUBBLE,
-    TOGGLE_SHOW_SUB_BUBBLES
+    SELECT_BUBBLE
 } from '../actions/bubbles';
 import { sizes } from '../style';
 
 const initialState = {
     byId: {},
+    selectedBubbleId: null,
     arrangeMode: false
 };
 
@@ -28,7 +30,6 @@ export default function Bubbles(state = initialState, action) {
                     label: bubble.label,
                     onPress: bubble.onPress,
                     subBubbles: [],
-                    showSubBubbles: false,
                     ...bubble
                 };
                 updatedState.byId[id] = newBubble;
@@ -39,7 +40,20 @@ export default function Bubbles(state = initialState, action) {
             delete updatedState.byId[action.payload.id];
             break;
         }
+        case ADD_SUB_BUBBLES: {
+            const { parentBubbleId, subBubbles } = action.payload;
+            const currentSubBubbles = updatedState.byId[parentBubbleId].subBubbles;
+            subBubbles.forEach((subBubble) => {
+                currentSubBubbles.push(subBubble);
+            });
+            break;
+        }
         case SET_ARRANGE_MODE: {
+            Object.keys(updatedState.byId).forEach((id) => {
+                if (id !== action.payload.id) {
+                    updatedState.byId[id].showSubBubbles = false;
+                }
+            });
             updatedState.arrangeMode = action.payload.arrangeMode;
             break;
         }
@@ -60,14 +74,12 @@ export default function Bubbles(state = initialState, action) {
             }
             break;
         }
-        case TOGGLE_SHOW_SUB_BUBBLES: {
-            Object.keys(updatedState.byId).forEach((id) => {
-                if (id !== action.payload.id) {
-                    updatedState.byId[id].showSubBubbles = false;
-                }
-            });
-            updatedState.byId[action.payload.id].showSubBubbles =
-                !updatedState.byId[action.payload.id].showSubBubbles;
+        case SELECT_BUBBLE: {
+            if (updatedState.selectedBubbleId === action.payload.id) {
+                updatedState.selectedBubbleId = null;
+            } else {
+                updatedState.selectedBubbleId = action.payload.id;
+            }
             break;
         }
         default:

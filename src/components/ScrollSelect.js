@@ -24,18 +24,19 @@ const styles = StyleSheet.create({
 export default class ScrollSelect extends Component {
     static propTypes = {
         options: PropTypes.arrayOf(PropTypes.shape({
+            key: PropTypes.string,
             label: PropTypes.string,
             color: PropTypes.string,
             image: PropTypes.string
         })),
-        selectedLabels: PropTypes.arrayOf(PropTypes.string),
+        selectedKeys: PropTypes.arrayOf(PropTypes.string),
         onRowPress: PropTypes.func,
         style: ViewPropTypes.style
     }
 
     static defaultProps = {
         options: [],
-        selectedLabels: [],
+        selectedKeys: [],
         onRowPress: () => {},
         style: null
     }
@@ -46,21 +47,21 @@ export default class ScrollSelect extends Component {
         this.handleRowPress = this.handleRowPress.bind(this);
     }
 
-    handleRowPress(label) {
-        this.props.onRowPress(label);
+    handleRowPress(key) {
+        this.props.onRowPress(key);
     }
 
     render() {
-        const { options, selectedLabels, style } = this.props;
+        const { options, selectedKeys, style } = this.props;
 
         const optionRows = options.map((option) => {
             const colorStyle = { backgroundColor: colors.primary };
-            const rowStyle = selectedLabels.indexOf(option.label) > -1 ?
+            const rowStyle = selectedKeys.indexOf(option.key) > -1 ?
                 [styles.optionRow, colorStyle] : styles.optionRow;
             return (
                 <TouchableOpacity
-                    key={option.label}
-                    onPress={() => this.handleRowPress(option.label)}
+                    key={option.key}
+                    onPress={() => this.handleRowPress(option.key)}
                 >
                     <View style={rowStyle}>
                         <StaticBubble

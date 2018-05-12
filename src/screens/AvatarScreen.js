@@ -127,7 +127,7 @@ export default class AvatarScreen extends Component {
                 key={bubble.id}
                 interactable={arrangeMode}
                 {...bubble}
-                onPress={bubble.subBubbles.length > 0 ? this.handleBubblePress : bubble.onPress}
+                onPress={this.handleBubblePress}
                 onLongPress={this.handleBubbleLongPress}
                 onStopInteraction={this.handleBubbleDragStop}
                 onResize={this.handleBubbleResize}

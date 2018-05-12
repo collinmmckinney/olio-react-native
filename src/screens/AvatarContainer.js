@@ -6,7 +6,7 @@ import {
     setArrangeMode,
     updateBubbleLocation,
     resizeBubble,
-    toggleShowSubBubbles
+    selectBubble
 } from '../actions/bubbles';
 import AvatarScreen from './AvatarScreen';
 
@@ -15,7 +15,12 @@ const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
 });
 
 const mapStateToProps = state => ({
-    bubbles: Object.keys(state.Bubbles.byId).map(id => state.Bubbles.byId[id]),
+    bubbles: Object.keys(state.Bubbles.byId).map((id) => {
+        const bubble = Object.assign({}, state.Bubbles.byId[id]);
+        bubble.showSubBubbles = id === state.Bubbles.selectedBubbleId;
+        console.log(bubble);
+        return bubble;
+    }),
     arrangeMode: state.Bubbles.arrangeMode
 });
 
@@ -24,7 +29,7 @@ const mapDispatchToProps = {
     setArrangeMode,
     updateBubbleLocation,
     resizeBubble,
-    toggleShowSubBubbles
+    selectBubble
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -33,8 +38,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onLungsPress: () => ownProps.navigation.navigate('CarePlan'),
     onAddButtonPress: () => ownProps.navigation.navigate('AddBubble'),
     onCloseButtonPress: () => dispatchProps.setArrangeMode(false),
-    onBubblePress: id => dispatchProps.toggleShowSubBubbles(id),
-    onBubbleLongPress: () => dispatchProps.setArrangeMode(true),
+    onBubblePress: id => dispatchProps.selectBubble(id),
+    onBubbleLongPress: () => {
+        dispatchProps.selectBubble(null);
+        dispatchProps.setArrangeMode(true);
+    },
     onBubbleDragStop: (id, x, y) => dispatchProps.updateBubbleLocation(id, x, y),
     onBubbleResize: (id, delta) => dispatchProps.resizeBubble(id, delta),
     onBubbleDeletePress: id => dispatchProps.deleteBubble(id)
