@@ -41,6 +41,8 @@
 	<string>We can track your location even when the app isn't open to show you allergens you may have encountered during your day.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We'd like to access your location when using the app to show you your allergen map.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We'd like to access your location when using the app to show you your allergen map and compile daily reports of your allergen contact.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
