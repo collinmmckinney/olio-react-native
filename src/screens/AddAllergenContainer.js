@@ -2,6 +2,7 @@ import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../graphql/queries';
 import { addSubBubbles } from '../actions/bubbles';
+import { selectAllegenType } from '../actions/map';
 import AddAllergenScreen from './AddAllergenScreen';
 
 const mapLoggedInUserQueryToProps = ({ data: { loading, user } }) => ({
@@ -13,24 +14,37 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    addSubBubbles
+    addSubBubbles,
+    selectAllegenType
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     onSave: (allergens) => {
         dispatchProps.addSubBubbles(stateProps.selectedBubbleId, allergens.map((key) => {
-            if (key === 'shellfish') {
+            if (key === 'Shellfish') {
                 return {
-                    onPress: () => ownProps.navigation.navigate('Map')
+                    onPress: () => {
+                        dispatchProps.selectAllegenType(key);
+                        ownProps.navigation.navigate('Map');
+                    },
+                    label: 'Shellfish'
                 };
-            } else if (key === 'pollen') {
+            } else if (key === 'Pollen') {
                 return {
-                    onPress: () => ownProps.navigation.navigate('Map')
+                    onPress: () => {
+                        dispatchProps.selectAllegenType(key);
+                        ownProps.navigation.navigate('Map');
+                    },
+                    label: 'Pollen'
                 };
-            } else if (key === 'treePollen') {
+            } else if (key === 'TreePollen') {
                 return {
-                    onPress: () => ownProps.navigation.navigate('Map')
+                    onPress: () => {
+                        dispatchProps.selectAllegenType(key);
+                        ownProps.navigation.navigate('Map');
+                    },
+                    label: 'TreePollen'
                 };
             }
             return {};

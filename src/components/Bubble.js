@@ -49,12 +49,14 @@ export default class Bubble extends Component {
         id: PropTypes.string.isRequired,
         subBubbles: PropTypes.arrayOf(PropTypes.shape({
             label: PropTypes.string,
+            image: PropTypes.string,
             onPress: PropTypes.func
         })),
         showSubBubbles: PropTypes.bool,
         initialX: PropTypes.number,
         initialY: PropTypes.number,
         radius: PropTypes.number,
+        image: PropTypes.string,
         label: PropTypes.string,
         interactable: PropTypes.bool,
         onPress: PropTypes.func,
@@ -70,6 +72,7 @@ export default class Bubble extends Component {
         initialX: 0,
         initialY: 0,
         radius: 40,
+        image: null,
         label: '',
         interactable: true,
         onPress: () => {},

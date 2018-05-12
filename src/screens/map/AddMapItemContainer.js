@@ -23,18 +23,25 @@ const mapCreateMapItemMutationToProps = ({ mutate }) => ({
     }
 });
 
-const mapStateToProps = ({ Location }) => ({
+const mapStateToProps = ({ Map }) => ({
     userLocation: {
-        latitude: Location.userLocation.coords.latitude,
-        longitude: Location.userLocation.coords.longitude
-    }
+        latitude: Map.userLocation.coords.latitude,
+        longitude: Map.userLocation.coords.longitude
+    },
+    selectedAllergenType: Map.selectedAllergenType
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-    onSubmit: (allergenType, comment) => {
+    onSubmit: (comment) => {
         const { userId, navigation } = ownProps;
         const { latitude, longitude } = stateProps.userLocation;
-        ownProps.createMapItem(userId, latitude, longitude, allergenType, comment);
+        ownProps.createMapItem(
+            userId,
+            latitude,
+            longitude,
+            stateProps.selectedAllergenType,
+            comment
+        );
         navigation.goBack();
     }
 });

@@ -2,21 +2,16 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { MapButton } from '../../components';
+import { AddButton } from '../../components';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    buttonColumn: {
+    addButton: {
         position: 'absolute',
-        right: 0,
-        flexDirection: 'column',
-        paddingTop: 12,
-        paddingRight: 12
-    },
-    button: {
-        marginBottom: 10
+        top: 13,
+        right: 13
     },
     marker: {
         width: 10,
@@ -135,9 +130,8 @@ export default class MapScreen extends Component {
                         {markers}
                     </MapView>
                 }
-                <View style={styles.buttonColumn}>
-                    <MapButton onPress={onPressAdd} style={styles.button} />
-                    <MapButton onPress={onPressFilters} style={styles.button} />
+                <View style={styles.addButton}>
+                    <AddButton onAddPress={onPressAdd} />
                 </View>
             </View>
         );

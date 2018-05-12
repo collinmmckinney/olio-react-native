@@ -1,15 +1,16 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery, allMapItemsQuery } from '../../graphql/queries';
-import { setUserLocation, setMapRegion } from '../../actions/location';
+import { setUserLocation, setMapRegion } from '../../actions/map';
 import MapScreen from './MapScreen';
 
-const mapStateToProps = ({ Location }) => ({
+const mapStateToProps = ({ Map }) => ({
     userLocation: {
-        latitude: Location.userLocation.coords.latitude,
-        longitude: Location.userLocation.coords.longitude
+        latitude: Map.userLocation.coords.latitude,
+        longitude: Map.userLocation.coords.longitude
     },
-    mapRegion: Location.mapRegion
+    mapRegion: Map.mapRegion,
+    selectedAllergenType: Map.selectedAllergenType
 });
 
 const mapDispatchToProps = {
@@ -28,10 +29,12 @@ const mapAllMapItemsQueryToProps = ({ data: { loading, allMapItems } }) => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     ...dispatchProps,
-    mapItems: ownProps.mapItems.map(mapItem => ({
-        ...mapItem,
-        isOwnedByUser: mapItem.user.id === ownProps.userId
-    })),
+    mapItems: ownProps.mapItems
+        .filter(mapItem => mapItem.allergenType === stateProps.selectedAllergenType)
+        .map(mapItem => ({
+            ...mapItem,
+            isOwnedByUser: mapItem.user.id === ownProps.userId
+        })),
     onUserLocationChange: (location) => {
         dispatchProps.setUserLocation(location);
     },
@@ -39,6 +42,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         dispatchProps.setMapRegion(mapRegion);
     },
     onPressAdd: () => {
+        console.log(stateProps.selectedAllergenType);
         ownProps.navigation.navigate('AddMapItem');
     },
     onPressFilters: () => {

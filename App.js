@@ -15,7 +15,7 @@ import { setContext } from 'apollo-link-context';
 import Icon from 'react-native-vector-icons/Entypo';
 import Octicon from 'react-native-vector-icons/Octicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { Location, Bubbles } from './src/reducers';
+import { Map, Bubbles } from './src/reducers';
 import { colors } from './src/style';
 import {
     AuthLoadingContainer,
@@ -45,7 +45,7 @@ const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjg6t4f9f0j5l0137824h9apr'
 const store = createStore(
     combineReducers({
         apollo: apolloReducer,
-        Location,
+        Map,
         Bubbles
     }),
     {}, // initial state

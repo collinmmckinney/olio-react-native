@@ -14,19 +14,19 @@ import {
 
 const OPTIONS = [
     {
-        key: 'pollen',
+        key: 'Pollen',
         label: 'Pollen',
         color: colors.primary,
         image: null
     },
     {
-        key: 'treePollen',
+        key: 'TreePollen',
         label: 'Tree-Pollen',
         color: colors.primary,
         image: null
     },
     {
-        key: 'shellfish',
+        key: 'Shellfish',
         label: 'Shellfish',
         color: colors.primary,
         image: null

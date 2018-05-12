@@ -23,7 +23,6 @@ export default class AddMapItemScreen extends Component {
         super(props);
 
         this.state = {
-            allergenType: 'Bees',
             comment: ''
         };
 
@@ -32,8 +31,8 @@ export default class AddMapItemScreen extends Component {
 
     handleSubmit() {
         const { onSubmit } = this.props;
-        const { allergenType, comment } = this.state;
-        onSubmit(allergenType, comment);
+        const { comment } = this.state;
+        onSubmit(comment);
     }
 
     render() {

@@ -18,7 +18,6 @@ const mapStateToProps = state => ({
     bubbles: Object.keys(state.Bubbles.byId).map((id) => {
         const bubble = Object.assign({}, state.Bubbles.byId[id]);
         bubble.showSubBubbles = id === state.Bubbles.selectedBubbleId;
-        console.log(bubble);
         return bubble;
     }),
     arrangeMode: state.Bubbles.arrangeMode

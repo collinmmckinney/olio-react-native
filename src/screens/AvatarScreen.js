@@ -12,12 +12,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
-    addButtonRow: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        paddingTop: 13,
-        paddingRight: 13
-    },
     avatarContainer: {
         position: 'absolute',
         left: 0,
@@ -33,6 +27,11 @@ const styles = StyleSheet.create({
     lungs: {
         marginLeft: 75,
         marginTop: 0,
+    },
+    addButton: {
+        position: 'absolute',
+        top: 13,
+        right: 13
     }
 });
 
@@ -155,7 +154,7 @@ export default class AvatarScreen extends Component {
                     </ImageBackground>
                 </View>
                 {bubbleElements}
-                <View style={styles.addButtonRow}>
+                <View style={styles.addButton}>
                     <AddButton
                         close={arrangeMode}
                         onAddPress={this.handleAddButtonPress}
