@@ -7,9 +7,11 @@ const mapStateToProps = (state, ownProps) => {
     return {};
 };
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return {};
-};
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...stateProps,
+    onPurpLungPress: () => ownProps.navigation.navigate('Medications'),
+    onBlueLungPress: () => ownProps.navigation.navigate('AsthmaCare'),
+});
 
 export default compose(
     withApollo,

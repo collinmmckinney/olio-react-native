@@ -9,7 +9,6 @@ export { default as StaticBubble } from './StaticBubble';
 export { default as TextInput } from './TextInput';
 export { default as TextInputRow } from './TextInputRow';
 export { default as CloudMan } from './CloudMan';
-export { default as Wellbeing } from './Wellbeing';
 
 // Onboarding
 export { default as UserTypeSelect } from './UserTypeSelect';

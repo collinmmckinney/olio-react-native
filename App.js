@@ -30,6 +30,11 @@ import {
     AvatarContainer,
     WellbeingContainer,
     CarePlanContainer,
+    MedicationsContainer,
+    AsthmaCareContainer,
+    AppleADayContainer,
+    EvalsContainer,
+    NowContainer,
     AddBubbleContainer,
     AddAllergenContainer,
     MapContainer,
@@ -94,8 +99,23 @@ const AvatarStack = StackNavigator({
     Wellbeing: {
         screen: WellbeingContainer
     },
+    AppleADay: {
+        screen: AppleADayContainer
+    },
+    Evals: {
+        screen: EvalsContainer
+    },
+    Now: {
+        screen: NowContainer
+    },
     CarePlan: {
         screen: CarePlanContainer
+    },
+    Medications: {
+        screen: MedicationsContainer
+    },
+    AsthmaCare: {
+        screen: AsthmaCareContainer
     },
     AddBubble: {
         screen: AddBubbleContainer

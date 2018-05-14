@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import PropTypes from 'prop-types';
 import { colors } from '../style';
-import { Wellbeing } from '../components';
+
+const blueLung = require('../assets/blueLung.png');
+const purpleLung = require('../assets/purpleLung.png');
 
 const styles = StyleSheet.create({
     container: {
@@ -11,15 +14,79 @@ const styles = StyleSheet.create({
         borderColor: colors.primary,
         borderWidth: 4,
         borderRadius: 8
-    }
+    },
+    inner: {
+        flex: 1,
+        paddingHorizontal: 18,
+        paddingVertical: 24,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    title: {
+        color: colors.primary,
+        fontSize: 24,
+        flex: 1
+    },
+    lungs: {
+        flex: 2,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
 });
 
 export default class CarePlanScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Wellbeing />
-            </View>
-        );
-    }
+  static propTypes = {
+      onPurpLungPress: PropTypes.func,
+      onBlueLungPress: PropTypes.func,
+  };
+
+  static defaultProps = {
+      onPurpLungPress: () => {},
+      onBlueLungPress: () => {},
+  };
+
+  constructor(props) {
+      super(props);
+
+      this.handlePurpLungPress = this.handlePurpLungPress.bind(this);
+      this.handleBlueLungPress = this.handleBlueLungPress.bind(this);
+  }
+
+  handlePurpLungPress() {
+      this.props.onPurpLungPress();
+  }
+
+  handleBlueLungPress() {
+      this.props.onBlueLungPress();
+  }
+
+  render() {
+      return (
+          <View style={styles.container}>
+              <View style={styles.inner}>
+                  <Text style={styles.title}>My CarePlan</Text>
+                  <View style={styles.lungs}>
+                      <TouchableOpacity onPress={this.handlePurpLungPress}>
+                          <Image
+                              style={{
+                                  width: 100,
+                                  height: 200,
+                              }}
+                              source={purpleLung}
+                          />
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={this.handleBlueLungPress}>
+                          <Image
+                              style={{
+                                  width: 95,
+                                  height: 200,
+                              }}
+                              source={blueLung}
+                          />
+                      </TouchableOpacity>
+                  </View>
+              </View>
+          </View>
+      );
+  }
 }
