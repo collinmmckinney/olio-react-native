@@ -27,8 +27,8 @@ export default function Bubbles(state = initialState, action) {
                     initialX: Math.floor(Math.random() * sizes.DEVICE_WIDTH),
                     initialY: Math.floor(Math.random() * (sizes.DEVICE_HEIGHT - 300)),
                     radius: 100,
-                    label: bubble.label,
-                    onPress: bubble.onPress,
+                    label: '',
+                    onPress: () => {},
                     subBubbles: [],
                     ...bubble
                 };

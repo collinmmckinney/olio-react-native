@@ -34,10 +34,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                     onPress: () => ownProps.navigation.navigate('Weather'),
                     image: null
                 };
-            } else if (key === 'exercise') {
+            } else if (key === 'airQuality') {
                 return {
-                    label: 'Exercise-Induced',
-                    onPress: () => ownProps.navigation.navigate('Exercise'),
+                    label: 'Air Quality',
+                    onPress: () => ownProps.navigation.navigate('AirQuality'),
                     image: null
                 };
             } else if (key === 'flow') {
@@ -48,7 +48,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                 };
             } else if (key === 'home') {
                 return {
-                    label: 'Home',
+                    label: 'Household',
                     onPress: () => ownProps.navigation.navigate('Home'),
                     image: null
                 };

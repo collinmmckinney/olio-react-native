@@ -44,6 +44,7 @@ export default class AvatarScreen extends Component {
             onPress: PropTypes.func
         })),
         arrangeMode: PropTypes.bool,
+        onUserLocationChange: PropTypes.func.isRequired,
         onHeartPress: PropTypes.func,
         onLungsPress: PropTypes.func,
         onBubblePress: PropTypes.func,
@@ -81,6 +82,24 @@ export default class AvatarScreen extends Component {
         this.handleBubbleDeletePress = this.handleBubbleDeletePress.bind(this);
         this.handleAddButtonPress = this.handleAddButtonPress.bind(this);
         this.handleCloseButtonPress = this.handleCloseButtonPress.bind(this);
+    }
+
+    componentWillMount() {
+        navigator.geolocation.requestAuthorization();
+        this.locationWatchId = navigator.geolocation.watchPosition((location) => {
+            this.handleUserLocationChange(location);
+        }, (error) => {
+            console.log(error);
+        }, { enableHighAccuracy: true });
+    }
+
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.locationWatchId);
+    }
+
+    handleUserLocationChange(location) {
+        const { onUserLocationChange } = this.props;
+        onUserLocationChange(location);
     }
 
     handleHeartPress() {
@@ -126,7 +145,10 @@ export default class AvatarScreen extends Component {
                 key={bubble.id}
                 interactable={arrangeMode}
                 {...bubble}
-                onPress={this.handleBubblePress}
+                onPress={(id) => {
+                    bubble.onPress();
+                    this.handleBubblePress(id);
+                }}
                 onLongPress={this.handleBubbleLongPress}
                 onStopInteraction={this.handleBubbleDragStop}
                 onResize={this.handleBubbleResize}

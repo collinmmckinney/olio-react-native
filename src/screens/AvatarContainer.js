@@ -1,6 +1,7 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../graphql/queries';
+import { setUserLocation } from '../actions/map';
 import {
     deleteBubble,
     setArrangeMode,
@@ -24,6 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    setUserLocation,
     deleteBubble,
     setArrangeMode,
     updateBubbleLocation,
@@ -33,6 +35,9 @@ const mapDispatchToProps = {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
+    onUserLocationChange: (location) => {
+        dispatchProps.setUserLocation(location);
+    },
     onHeartPress: () => ownProps.navigation.navigate('Wellbeing'),
     onLungsPress: () => ownProps.navigation.navigate('CarePlan'),
     onAddButtonPress: () => ownProps.navigation.navigate('AddBubble'),

@@ -39,7 +39,6 @@ export default class MapScreen extends Component {
             allergenType: PropTypes.string,
             comment: PropTypes.string
         })),
-        onUserLocationChange: PropTypes.func.isRequired,
         onMapRegionChange: PropTypes.func.isRequired,
         onPressAdd: PropTypes.func.isRequired,
         onPressFilters: PropTypes.func.isRequired
@@ -63,32 +62,6 @@ export default class MapScreen extends Component {
         super(props);
 
         this.handleMapRegionChange = this.handleMapRegionChange.bind(this);
-    }
-
-    componentWillMount() {
-        navigator.geolocation.requestAuthorization();
-        this.locationWatchId = navigator.geolocation.watchPosition((location) => {
-            this.handleUserLocationChange(location);
-        }, (error) => {
-            console.log(error);
-        }, { enableHighAccuracy: true });
-    }
-
-    componentWillUnmount() {
-        navigator.geolocation.clearWatch(this.locationWatchId);
-    }
-
-    handleUserLocationChange(location) {
-        const { mapRegion, onUserLocationChange, onMapRegionChange } = this.props;
-        onUserLocationChange(location);
-        if (mapRegion.latitude === null) {
-            onMapRegionChange({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.02,
-                longitudeDelta: 0.01
-            });
-        }
     }
 
     handleMapRegionChange(mapRegion) {

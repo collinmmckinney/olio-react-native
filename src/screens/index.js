@@ -13,6 +13,11 @@ export { default as MapContainer } from './map/MapContainer';
 export { default as AddMapItemContainer } from './map/AddMapItemContainer';
 export { default as MapFiltersContainer } from './map/MapFiltersContainer';
 
+export { default as AirQualityContainer } from './AirQualityContainer';
+export { default as HomeContainer } from './HomeContainer';
+export { default as SpirometryContainer } from './SpirometryContainer';
+export { default as WeatherContainer } from './WeatherContainer';
+
 export { default as AuthLoadingContainer } from './onboarding/AuthLoadingContainer';
 export { default as SignInOrSignUpContainer } from './onboarding/SignInOrSignUpContainer';
 export { default as SignInContainer } from './onboarding/SignInContainer';

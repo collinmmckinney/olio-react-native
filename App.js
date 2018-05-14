@@ -6,7 +6,8 @@ import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createHttpLink } from 'apollo-link-http';
-import { createStore, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
 import ReduxLink from 'apollo-link-redux';
@@ -15,7 +16,7 @@ import { setContext } from 'apollo-link-context';
 import Icon from 'react-native-vector-icons/Entypo';
 import Octicon from 'react-native-vector-icons/Octicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { Map, Bubbles } from './src/reducers';
+import { AirQuality, Bubbles, Map } from './src/reducers';
 import { colors } from './src/style';
 import {
     AuthLoadingContainer,
@@ -40,6 +41,10 @@ import {
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
+    AirQualityContainer,
+    HomeContainer,
+    SpirometryContainer,
+    WeatherContainer,
     DataContainer,
     SettingsContainer
 } from './src/screens';
@@ -50,11 +55,11 @@ const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjg6t4f9f0j5l0137824h9apr'
 const store = createStore(
     combineReducers({
         apollo: apolloReducer,
-        Map,
-        Bubbles
+        AirQuality,
+        Bubbles,
+        Map
     }),
-    {}, // initial state
-    composeWithDevTools(),
+    applyMiddleware(thunkMiddleware)
 );
 
 // Apollo
@@ -125,6 +130,18 @@ const AvatarStack = StackNavigator({
     },
     Map: {
         screen: MapContainer
+    },
+    AirQuality: {
+        screen: AirQualityContainer
+    },
+    Home: {
+        screen: HomeContainer
+    },
+    Spirometry: {
+        screen: SpirometryContainer
+    },
+    Weather: {
+        screen: WeatherContainer,
     },
     AddMapItem: {
         screen: AddMapItemContainer
@@ -204,17 +221,16 @@ const ProfileStack = StackNavigator({
 
 
 const AppNavigator = TabNavigator({
-    AvatarTab: {
-        screen: AuthStack,
-        title: 'Avatar',
-        navigationOptions: {
-            tabBarIcon: <Icon name="network" size={40} color={colors.primary} />,
-            showIcon: true,
-        }
-    },
     ProfileTab: {
         screen: ProfileStack,
         title: 'Profile',
+        navigationOptions: {
+            tabBarIcon: <Icon name="network" size={40} color={colors.primary} />
+        }
+    },
+    AvatarTab: {
+        screen: AuthStack,
+        title: 'Avatar',
         navigationOptions: {
             tabBarIcon: <MaterialIcon name="bubble-chart" size={45} color={colors.primary} />,
             showIcon: true,

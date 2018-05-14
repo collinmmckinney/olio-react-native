@@ -14,12 +14,6 @@ import {
 
 const OPTIONS = [
     {
-        key: 'exercise',
-        label: 'Exercise-Induced',
-        color: colors.primary,
-        image: null
-    },
-    {
         key: 'weather',
         label: 'Weather-Induced',
         color: colors.primary,
@@ -38,8 +32,14 @@ const OPTIONS = [
         image: null
     },
     {
+        key: 'airQuality',
+        label: 'Air Quality',
+        color: colors.primary,
+        image: null
+    },
+    {
         key: 'home',
-        label: 'Home',
+        label: 'Household',
         color: colors.primary,
         image: null
     }
