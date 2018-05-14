@@ -21,7 +21,9 @@ function receiveAirQuality(data) {
 export function fetchAirQuality(latitude, longitude) {
     return (dispatch) => {
         dispatch(requestAirQuality());
-        return fetch(`https://www.airnowapi.org/aq/observation/latLong/current/?format=application/json&latitude=${latitude}&longitude=${longitude}&API_KEY=4EED7A71-03D6-4958-B0C9-AE13F7BE4BB2`)
+        // TODO Load API keys securely
+        const apiKey = '';
+        return fetch(`https://www.airnowapi.org/aq/observation/latLong/current/?format=application/json&latitude=${latitude}&longitude=${longitude}&API_KEY=${apiKey}`)
             .then(response => response.json())
             .then(json => dispatch(receiveAirQuality(json)))
             .catch(error => console.log(error));

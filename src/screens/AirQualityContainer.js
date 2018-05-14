@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { fetchAirQuality, fetchAirQualityForecast } from '../actions/airQuality';
 import AirQualityScreen from './AirQualityScreen';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ AirQuality, Map }, ownProps) => {
     return {
-        latitude: state.Map.userLocation.coords.latitude,
-        longitude: state.Map.userLocation.coords.longitude
+        latitude: Map.userLocation.coords.latitude,
+        longitude: Map.userLocation.coords.longitude,
+        currentAirQuality: AirQuality.current.quality,
+        forecasts: AirQuality.forecasts
     };
 };
 
@@ -17,6 +19,7 @@ const mapDispatchToProps = {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...stateProps,
     fetchAirQuality: () => {
         dispatchProps.fetchAirQuality(stateProps.latitude, stateProps.longitude);
         dispatchProps.fetchAirQualityForecast(stateProps.latitude, stateProps.longitude);
