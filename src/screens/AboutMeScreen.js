@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class AppleADayScreen extends Component {
+export default class AboutMeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>

@@ -11,7 +11,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     onRedHeartPress: () => ownProps.navigation.navigate('Now'),
     onYellowHeartPress: () => ownProps.navigation.navigate('Evals'),
-    onGreenHeartPress: () => ownProps.navigation.navigate('AppleADay'),
+    onGreenHeartPress: () => ownProps.navigation.navigate('AboutMe'),
 });
 
 export default compose(
