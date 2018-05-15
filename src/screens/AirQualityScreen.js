@@ -16,16 +16,13 @@ const styles = StyleSheet.create({
 
 export default class AirQualityScreen extends Component {
     static propTypes = {
-        currentAirQuality: PropTypes.string,
         forecasts: PropTypes.arrayOf(PropTypes.shape({
             dayOfTheWeek: PropTypes.string,
             quality: PropTypes.string
-        })),
-        fetchAirQuality: PropTypes.func.isRequired
+        }))
     };
 
     static defaultProps = {
-        currentAirQuality: 'Unknown',
         forecasts: []
     }
 
@@ -34,7 +31,6 @@ export default class AirQualityScreen extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <View style={styles.container}>
             </View>
