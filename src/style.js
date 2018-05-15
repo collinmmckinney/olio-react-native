@@ -5,7 +5,9 @@ export const colors = {
     primaryDarker: '#0bafb6',
     primaryDarkest: '#454f63',
     grayText: '#353A50',
-    windBlue: '#D7F4FF'
+    windBlue: '#D7F4FF',
+    yellow: '#f3cd31',
+    green: '#82a936',
 };
 
 const { height, width } = Dimensions.get('window');
