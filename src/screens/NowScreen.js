@@ -10,10 +10,11 @@ import { colors } from '../style';
 import { Button, TextInput } from '../components';
 
 const redHeart = require('../assets/redHeart.png');
-const one = require('../assets/1.png');
-const two = require('../assets/2.png');
-const three = require('../assets/3.png');
-const four = require('../assets/4.png');
+const one = require('../assets/weary.png');
+const two = require('../assets/aghast.png');
+const three = require('../assets/neutral.png');
+const four = require('../assets/slight_smile.png');
+const five = require('../assets/star.png');
 
 const styles = StyleSheet.create({
     container: {
@@ -77,14 +78,16 @@ export default class NowScreen extends Component {
     }
 
     change(value) {
-        if (value === 1) {
+        if (value === 0) {
             this.setState({ emoji: one });
-        } else if (value === 2) {
+        } else if (value === 1) {
             this.setState({ emoji: two });
-        } else if (value === 3) {
+        } else if (value === 2) {
             this.setState({ emoji: three });
-        } else {
+        } else if (value === 3) {
             this.setState({ emoji: four });
+        } else {
+            this.setState({ emoji: five });
         }
     }
 
@@ -107,7 +110,7 @@ export default class NowScreen extends Component {
                 <View style={styles.bottom}>
                     <Slider
                         step={1}
-                        maximumValue={5}
+                        maximumValue={4}
                         minimumTrackTintColor={colors.primary}
                         thumbImage={emoji}
                         onValueChange={this.change}

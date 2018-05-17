@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 2,
-        margin: 10
+        margin: 10,
+        fontSize: 12
     },
     touch: {
         flexDirection: 'row',
@@ -84,6 +85,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    textBelow: {
+        fontSize: 14,
+        color: colors.primary,
+        marginLeft: 5,
+        marginRight: -50
     }
 });
 
@@ -147,10 +154,12 @@ export default class AsthmaCareScreen extends Component {
                                 style={{
                                     width: 50,
                                     height: 50,
-                                    margin: 15
+                                    margin: 15,
+                                    marginBottom: 0
                                 }}
                                 source={cat}
                             />
+                            <Text style={styles.textBelow}>Coughing</Text>
                         </View>
                         <View style={styles.clickWrapper}>
                             <TouchableOpacity style={styles.smallCircle} onPress={this.catDecrease}>
@@ -175,10 +184,12 @@ export default class AsthmaCareScreen extends Component {
                                 style={{
                                     width: 50,
                                     height: 50,
-                                    margin: 15
+                                    margin: 15,
+                                    marginBottom: 0
                                 }}
                                 source={elephant}
                             />
+                            <Text style={styles.textBelow} numberOfLines={1}>Asthma Attack</Text>
                         </View>
                         <View style={styles.clickWrapper}>
                             <TouchableOpacity style={styles.smallCircle} onPress={this.elephantDecrease}>
@@ -203,10 +214,12 @@ export default class AsthmaCareScreen extends Component {
                                 style={{
                                     width: 50,
                                     height: 50,
-                                    margin: 15
+                                    margin: 15,
+                                    marginBottom: 0
                                 }}
                                 source={owl}
                             />
+                            <Text style={styles.textBelow} numberOfLines={1}>Trouble Sleeping</Text>
                         </View>
                         <View style={styles.clickWrapper}>
                             <TouchableOpacity style={styles.smallCircle} onPress={this.owlDecrease}>
