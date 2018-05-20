@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Interactable from 'react-native-interactable';
 import { colors, sizes } from '../style';
-import { LABEL_TO_IMAGE, LABEL_TO_SUB_BUBBLE_IMAGE } from '../util';
+import { LABEL_TO_IMAGE } from '../util';
 
 const SUB_BUBBLE_RADIUS = 19;
 
@@ -210,7 +210,7 @@ export default class Bubble extends Component {
                     style={[styles.subBubble, subBubblePositionStyle]}
                     onPress={subBubble.onPress}
                 >
-                    {LABEL_TO_SUB_BUBBLE_IMAGE[subBubble.image]}
+                    {React.cloneElement(LABEL_TO_IMAGE[subBubble.image], { size: 30 })}
                 </TouchableOpacity>
             );
         });
@@ -239,7 +239,7 @@ export default class Bubble extends Component {
                     onLongPress={this.handleLongPress}
                 >
                     <View style={[styles.container, sizeStyle]}>
-                        {LABEL_TO_IMAGE[image]}
+                        {React.cloneElement(LABEL_TO_IMAGE[image], { size: 80 })}
                         { interactable &&
                             <TouchableOpacity
                                 onPress={this.handleDeletePress}

@@ -6,6 +6,11 @@ export const loggedInUserQuery = gql`
             id
             patient {
                 id
+                reports {
+                    id
+                    createdAt
+                    fev1
+                }
             }
             caregiver {
                 id

@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
         height: 74,
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    bubble: {
+        marginRight: 14
+    },
+    rowLabel: {
+        fontSize: 16,
+        color: colors.lightGrayText
     }
 });
 
@@ -65,9 +72,10 @@ export default class ScrollSelect extends Component {
                 >
                     <View style={rowStyle}>
                         <StaticBubble
-                            style={{ backgroundColor: option.color }}
+                            image={option.image}
+                            style={[styles.bubble, { backgroundColor: option.color }]}
                         />
-                        <Text>{option.label}</Text>
+                        <Text style={styles.rowLabel}>{option.label}</Text>
                     </View>
                 </TouchableOpacity>
             );

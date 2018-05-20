@@ -16,19 +16,15 @@ export const DAY_ARRAY = [
 ];
 
 export const LABEL_TO_IMAGE = {
-    flower: <Ionicons name="md-flower" color="white" size={80} />,
-    tree: <FontAwesome name="map-marker" color="white" size={80} />,
-    shellfish: <Ionicons name="md-flower" color="white" size={80} />,
-    map: <FontAwesome name="map-marker" color="white" size={80} />,
-    airQuality: <MaterialCommunityIcons name="weather-fog" color="white" size={80} />,
-    weather: <Entypo name="cloud" color="white" size={80} />,
-    household: <Entypo name="home" color="white" size={80} />,
-    spirometry: <Feather name="wind" color="white" size={80} />
-};
-
-export const LABEL_TO_SUB_BUBBLE_IMAGE = {
-    pollen: <Ionicons name="md-flower" color="white" size={30} />,
-    treePollen: <MaterialCommunityIcons name="tree" color="white" size={30} />,
-    shellfish: <MaterialCommunityIcons name="fish" color="white" size={30} />,
-    add: <Ionicons name="md-add" color="white" size={30} />
+    flower: <Ionicons name="md-flower" color="white" />,
+    tree: <FontAwesome name="map-marker" color="white" />,
+    map: <FontAwesome name="map-marker" color="white" />,
+    airQuality: <MaterialCommunityIcons name="weather-fog" color="white" />,
+    weather: <Entypo name="cloud" color="white" />,
+    household: <Entypo name="home" color="white" />,
+    spirometry: <Feather name="wind" color="white" />,
+    pollen: <Ionicons name="md-flower" color="white" />,
+    treePollen: <MaterialCommunityIcons name="tree" color="white" />,
+    shellfish: <MaterialCommunityIcons name="fish" color="white" />,
+    add: <Ionicons name="md-add" color="white" />
 };

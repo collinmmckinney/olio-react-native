@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderRadius: 8,
         paddingHorizontal: 18,
-        paddingVertical: 20
+        paddingVertical: 20,
+        backgroundColor: 'white'
     },
     keyContainer: {
         flexDirection: 'column'

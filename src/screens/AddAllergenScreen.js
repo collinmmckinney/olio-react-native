@@ -17,19 +17,19 @@ const OPTIONS = [
         key: 'Pollen',
         label: 'Pollen',
         color: colors.primary,
-        image: null
+        image: 'pollen'
     },
     {
         key: 'TreePollen',
         label: 'Tree-Pollen',
         color: colors.primary,
-        image: null
+        image: 'treePollen'
     },
     {
         key: 'Shellfish',
         label: 'Shellfish',
         color: colors.primary,
-        image: null
+        image: 'shellfish'
     }
 ];
 
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderRadius: 8,
         paddingHorizontal: 18,
-        paddingBottom: 18
+        paddingBottom: 18,
+        backgroundColor: 'white'
     },
     scrollViewContent: {
         alignItems: 'stretch'

@@ -48,9 +48,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                 .then(({ data }) => {
                     const caregiversIds = data.allUsers.map(user => user.caregiver.id);
                     ownProps.addCaregivers(ownProps.patientId, caregiversIds);
-                    ownProps.navigation.navigate('Avatar');
                 });
         }
+        ownProps.navigation.navigate('Avatar');
     },
     onPressBack: ownProps.navigation.goBack
 });

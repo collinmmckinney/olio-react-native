@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {
-    View,
-    ViewPropTypes,
-    StyleSheet,
-    Text
-} from 'react-native';
+import { View, ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { LABEL_TO_IMAGE } from '../util';
 
 const styles = StyleSheet.create({
     container: {
@@ -21,20 +17,20 @@ const styles = StyleSheet.create({
 export default class StaticBubble extends Component {
     static propTypes = {
         radius: PropTypes.number,
-        label: PropTypes.string,
+        image: PropTypes.string,
         style: ViewPropTypes.style
     }
 
     static defaultProps = {
         radius: 32,
-        label: '',
+        image: null,
         style: null
     }
 
     render() {
         const {
             radius,
-            label,
+            image,
             style
         } = this.props;
 
@@ -45,8 +41,8 @@ export default class StaticBubble extends Component {
         };
 
         return (
-            <View style={[styles.containter, sizeStyle, style]}>
-                <Text style={styles.text}>{label}</Text>
+            <View style={[styles.container, sizeStyle, style]}>
+                {React.cloneElement(LABEL_TO_IMAGE[image], { size: 50 })}
             </View>
         );
     }

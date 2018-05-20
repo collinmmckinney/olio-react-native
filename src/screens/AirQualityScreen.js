@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 18,
         paddingTop: 112,
-        paddingBottom: 80
+        paddingBottom: 80,
+        backgroundColor: 'white'
     },
     indicator: {
         justifyContent: 'center',
