@@ -5,6 +5,7 @@ export { default as AsthmaCareContainer } from './AsthmaCareContainer';
 export { default as MedicationsContainer } from './MedicationsContainer';
 export { default as AboutMeContainer } from './AboutMeContainer';
 export { default as EvalsContainer } from './EvalsContainer';
+export { default as HealthPlanContainer } from './HealthPlanContainer';
 export { default as NowContainer } from './NowContainer';
 export { default as AddBubbleContainer } from './AddBubbleContainer';
 export { default as AddAllergenContainer } from './AddAllergenContainer';

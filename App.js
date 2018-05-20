@@ -47,7 +47,8 @@ import {
     SpirometryContainer,
     WeatherContainer,
     DataContainer,
-    SettingsContainer
+    SettingsContainer,
+    HealthPlanContainer
 } from './src/screens';
 
 const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjg6t4f9f0j5l0137824h9apr';
@@ -122,6 +123,9 @@ const AvatarStack = StackNavigator({
     },
     AsthmaCare: {
         screen: AsthmaCareContainer
+    },
+    HealthPlan: {
+        screen: HealthPlanContainer
     },
     AddBubble: {
         screen: AddBubbleContainer

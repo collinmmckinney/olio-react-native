@@ -5,6 +5,7 @@ import {
     Text,
     Image
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { colors } from '../style';
 import { Button } from '../components';
 
@@ -61,6 +62,22 @@ const styles = StyleSheet.create({
 });
 
 export default class EvalsScreen extends Component {
+    static propTypes = {
+        onHealthPlanPress: PropTypes.func
+    };
+
+    static defaultProps = {
+        onHealthPlanPress: () => {}
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.handleHealthPlanPress = this.handleHealthPlanPress.bind(this);
+    }
+    handleHealthPlanPress() {
+        this.props.onHealthPlanPress();
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -77,7 +94,7 @@ export default class EvalsScreen extends Component {
                     <Text style={styles.title}>Evals</Text>
                 </View>
                 <View style={styles.bottom}>
-                    <Button label="Your Health Plan" onPress={this.handleSave} style={styles.button1} />
+                    <Button label="Your Health Plan" onPress={this.handleHealthPlanPress} style={styles.button1} />
                     <Button label="CAT" onPress={this.handleSave} style={styles.button2} />
                     <Button label="PHQ-2" onPress={this.handleSave} style={styles.button3} />
                 </View>
