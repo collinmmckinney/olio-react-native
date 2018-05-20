@@ -13,6 +13,8 @@ export { default as MapContainer } from './map/MapContainer';
 export { default as AddMapItemContainer } from './map/AddMapItemContainer';
 export { default as MapFiltersContainer } from './map/MapFiltersContainer';
 
+export { default as PollenMapContainer } from './map/PollenMapContainer';
+
 export { default as AirQualityContainer } from './AirQualityContainer';
 export { default as HomeContainer } from './HomeContainer';
 export { default as SpirometryContainer } from './SpirometryContainer';

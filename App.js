@@ -41,6 +41,7 @@ import {
     MapContainer,
     AddMapItemContainer,
     MapFiltersContainer,
+    PollenMapContainer,
     AirQualityContainer,
     HomeContainer,
     SpirometryContainer,
@@ -130,6 +131,9 @@ const AvatarStack = StackNavigator({
     },
     Map: {
         screen: MapContainer
+    },
+    PollenMap: {
+        screen: PollenMapContainer
     },
     AirQuality: {
         screen: AirQualityContainer

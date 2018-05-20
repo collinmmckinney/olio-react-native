@@ -34,7 +34,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                 return {
                     onPress: () => {
                         dispatchProps.selectAllegenType(key);
-                        ownProps.navigation.navigate('Map');
+                        ownProps.navigation.navigate('PollenMap');
                     },
                     label: 'Pollen'
                 };

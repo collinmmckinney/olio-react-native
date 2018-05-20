@@ -9,6 +9,7 @@ const mapStateToProps = ({ Weather, Map }, ownProps) => {
         latitude: Map.userLocation.coords.latitude,
         longitude: Map.userLocation.coords.longitude,
         forecasts: Weather.hourlyForecasts.map(forecast => ({
+            date: forecast.date,
             temperature: forecast.temperature,
             humidity: forecast.humidity
         }))

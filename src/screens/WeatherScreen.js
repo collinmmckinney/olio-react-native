@@ -21,7 +21,11 @@ export default class WeatherScreen extends Component {
             temperature: PropTypes.string,
             humidity: PropTypes.string
         })),
-        fetchAirQuality: PropTypes.func.isRequired
+        fetchWeather: PropTypes.func.isRequired
+    };
+
+    static defaultProps = {
+        forecasts: []
     };
 
     componentWillMount() {
@@ -29,7 +33,6 @@ export default class WeatherScreen extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <View style={styles.container}>
             </View>
