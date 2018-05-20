@@ -16,7 +16,8 @@ const mapStateToProps = ({ Map, Weather }) => ({
         latitudeDelta: 0.02,
         longitudeDelta: 0.01
     },
-    windDirection: Weather.dailyForecasts[0] ? Weather.dailyForecasts[0].windDirection : null,
+    windDirection: Weather.dailyForecasts[0] ?
+        Weather.dailyForecasts[0].windDirection.charAt(0) : null,
     severity: Weather.dailyForecasts[0] ? Weather.dailyForecasts[0].grass : null,
     selectedAllergenType: Map.selectedAllergenType
 });

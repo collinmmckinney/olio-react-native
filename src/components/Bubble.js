@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Interactable from 'react-native-interactable';
 import { colors, sizes } from '../style';
+import { LABEL_TO_IMAGE, LABEL_TO_SUB_BUBBLE_IMAGE } from '../util';
 
 const SUB_BUBBLE_RADIUS = 19;
 
@@ -25,11 +26,12 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     subBubbleContainer: {
-        position: 'absolute',
-        backgroundColor: 'red'
+        position: 'absolute'
     },
     subBubble: {
         position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: SUB_BUBBLE_RADIUS * 2,
         height: SUB_BUBBLE_RADIUS * 2,
         borderRadius: SUB_BUBBLE_RADIUS * 2,
@@ -40,7 +42,13 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 40,
-        backgroundColor: 'red'
+        backgroundColor: colors.grayText
+    },
+    deleteSymbol: {
+        color: 'white',
+        fontSize: 40,
+        position: 'relative',
+        left: -10
     }
 });
 
@@ -56,7 +64,7 @@ export default class Bubble extends Component {
         initialX: PropTypes.number,
         initialY: PropTypes.number,
         radius: PropTypes.number,
-        image: PropTypes.string,
+        image: PropTypes.oneOf(['flower', 'tree', 'shellfish', 'map', 'weather', 'household', 'spirometry', 'airQuality']),
         label: PropTypes.string,
         interactable: PropTypes.bool,
         onPress: PropTypes.func,
@@ -163,12 +171,12 @@ export default class Bubble extends Component {
     render() {
         const {
             id,
+            image,
             subBubbles,
             showSubBubbles,
             initialX,
             initialY,
             radius,
-            label,
             interactable
         } = this.props;
 
@@ -201,13 +209,15 @@ export default class Bubble extends Component {
                     key={id + subBubble.label}
                     style={[styles.subBubble, subBubblePositionStyle]}
                     onPress={subBubble.onPress}
-                />
+                >
+                    {LABEL_TO_SUB_BUBBLE_IMAGE[subBubble.image]}
+                </TouchableOpacity>
             );
         });
 
         const primaryBubble = (
             <Interactable.View
-                key={label}
+                key={id}
                 initialPosition={{ x: initialX, y: initialY }}
                 boundaries={{
                     left: 0,
@@ -229,12 +239,14 @@ export default class Bubble extends Component {
                     onLongPress={this.handleLongPress}
                 >
                     <View style={[styles.container, sizeStyle]}>
-                        <Text style={styles.text}>{label}</Text>
+                        {LABEL_TO_IMAGE[image]}
                         { interactable &&
                             <TouchableOpacity
                                 onPress={this.handleDeletePress}
                                 style={[styles.deleteButton, deleteButtonStyle]}
-                            />
+                            >
+                                <Text style={[styles.deleteSymbol, { transform: [{ rotate: '225deg' }] }]}>+</Text>
+                            </TouchableOpacity>
                         }
                     </View>
                 </TouchableOpacity>

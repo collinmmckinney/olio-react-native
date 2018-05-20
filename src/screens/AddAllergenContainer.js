@@ -28,7 +28,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         dispatchProps.selectAllegenType(key);
                         ownProps.navigation.navigate('Map');
                     },
-                    label: 'Shellfish'
+                    label: 'Shellfish',
+                    image: 'shellfish'
                 };
             } else if (key === 'Pollen') {
                 return {
@@ -36,7 +37,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         dispatchProps.selectAllegenType(key);
                         ownProps.navigation.navigate('PollenMap');
                     },
-                    label: 'Pollen'
+                    label: 'Pollen',
+                    image: 'pollen'
                 };
             } else if (key === 'TreePollen') {
                 return {
@@ -44,7 +46,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         dispatchProps.selectAllegenType(key);
                         ownProps.navigation.navigate('Map');
                     },
-                    label: 'TreePollen'
+                    label: 'TreePollen',
+                    image: 'treePollen'
                 };
             }
             return {};

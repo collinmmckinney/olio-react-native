@@ -24,33 +24,33 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                 return {
                     label: 'Allergen-Induced',
                     subBubbles: [
-                        { label: '+', onPress: () => ownProps.navigation.navigate('AddAllergen'), image: null }
+                        { label: '+', onPress: () => ownProps.navigation.navigate('AddAllergen'), image: 'add' }
                     ],
-                    image: null
+                    image: 'map'
                 };
             } else if (key === 'weather') {
                 return {
                     label: 'Weather-Induced',
                     onPress: () => ownProps.navigation.navigate('Weather'),
-                    image: null
+                    image: 'weather'
                 };
             } else if (key === 'airQuality') {
                 return {
                     label: 'Air Quality',
                     onPress: () => ownProps.navigation.navigate('AirQuality'),
-                    image: null
+                    image: 'airQuality'
                 };
             } else if (key === 'flow') {
                 return {
                     label: 'Spirometry',
                     onPress: () => ownProps.navigation.navigate('Spirometry'),
-                    image: null
+                    image: 'spirometry'
                 };
             } else if (key === 'home') {
                 return {
                     label: 'Household',
                     onPress: () => ownProps.navigation.navigate('Home'),
-                    image: null
+                    image: 'household'
                 };
             }
             return {};

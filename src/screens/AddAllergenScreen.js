@@ -30,30 +30,6 @@ const OPTIONS = [
         label: 'Shellfish',
         color: colors.primary,
         image: null
-    },
-    {
-        key: 'other1',
-        label: 'Other1',
-        color: colors.primary,
-        image: null
-    },
-    {
-        key: 'other2',
-        label: 'Other2',
-        color: colors.primary,
-        image: null
-    },
-    {
-        key: 'other3',
-        label: 'Other3',
-        color: colors.primary,
-        image: null
-    },
-    {
-        key: 'other4',
-        label: 'Other4',
-        color: colors.primary,
-        image: null
     }
 ];
 
