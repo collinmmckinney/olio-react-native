@@ -8,8 +8,9 @@ const mapStateToProps = ({ Weather, Map }, ownProps) => {
     return {
         latitude: Map.userLocation.coords.latitude,
         longitude: Map.userLocation.coords.longitude,
+        town: Weather.town,
         forecasts: Weather.hourlyForecasts.map(forecast => ({
-            date: forecast.date,
+            time: `${new Date(forecast.date).getHours()}:00`,
             temperature: forecast.temperature,
             humidity: forecast.humidity
         }))

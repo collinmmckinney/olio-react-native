@@ -1,8 +1,7 @@
 import { RECEIVE_DAILY_WEATHER, RECEIVE_HOURLY_WEATHER } from '../actions/weather';
 
 const initialState = {
-    locationCity: null,
-    locationState: null,
+    town: null,
     hourlyForecasts: [],
     hourlyLastUpdated: null,
     dailyForecasts: [],
@@ -34,6 +33,7 @@ export default function Weather(state = initialState, action) {
                     };
                 });
                 updatedState.dailyLastUpdated = Date.now();
+                updatedState.town = action.payload.town;
             }
             break;
         }
@@ -46,6 +46,7 @@ export default function Weather(state = initialState, action) {
                     humidity: forecast.RelativeHumidity
                 }));
                 updatedState.hourlyLastUpdated = Date.now();
+                updatedState.town = action.payload.town;
             }
             break;
         }

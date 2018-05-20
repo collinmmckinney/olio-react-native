@@ -1,6 +1,7 @@
 export { default as AddButton } from './AddButton';
 export { default as Bubble } from './Bubble';
 export { default as Button } from './Button';
+export { default as Forecast } from './Forecast';
 export { default as Form } from './Form';
 export { default as MapButton } from './MapButton';
 export { default as ScrollSelect } from './ScrollSelect';

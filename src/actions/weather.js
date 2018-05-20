@@ -11,10 +11,10 @@ function requestDailyWeather() {
     };
 }
 
-function receiveDailyWeather(data) {
+function receiveDailyWeather(data, town) {
     return {
         type: RECEIVE_DAILY_WEATHER,
-        payload: { data }
+        payload: { data, town }
     };
 }
 
@@ -26,8 +26,11 @@ export function fetchDailyWeather(latitude, longitude) {
         return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${apiKey}`)
             .then(response => response.json())
             .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${json.Key}?details=true&apikey=${apiKey}`)
-                .then(response => response.json()))
-            .then(json => dispatch(receiveDailyWeather(json)));
+                .then((response) => {
+                    return response.json()
+                        .then(result => ({ json: result, town: json.LocalizedName }));
+                }))
+            .then(({ json, town }) => dispatch(receiveDailyWeather(json, town)));
     };
 }
 
@@ -37,10 +40,10 @@ function requestHourlyWeather() {
     };
 }
 
-function receiveHourlyWeather(data) {
+function receiveHourlyWeather(data, town) {
     return {
         type: RECEIVE_HOURLY_WEATHER,
-        payload: { data }
+        payload: { data, town }
     };
 }
 
@@ -51,10 +54,11 @@ export function fetchHourlyWeather(latitude, longitude) {
         const apiKey = 'CPS86TRZg7dOzVC7YqPqpaBahB5A2BtU';
         return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${apiKey}`)
             .then(response => response.json())
-            .then((json) => {
-                return fetch(`https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${json.Key}?details=true&apikey=${apiKey}`)
-                    .then(response => response.json())
-            })
-            .then(json => dispatch(receiveHourlyWeather(json)));
+            .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${json.Key}?details=true&apikey=${apiKey}`)
+                .then((response) => {
+                    return response.json()
+                        .then(result => ({ json: result, town: json.LocalizedName }));
+                }))
+            .then(({ json, town }) => dispatch(receiveHourlyWeather(json, town)));
     };
 }
