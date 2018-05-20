@@ -35,18 +35,22 @@ const mapCreateDoctorMutationToProps = ({ mutate }) => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     onPressDone: (form) => {
-        ownProps.createDoctor(
-            ownProps.patientId,
-            form.doctorEmail,
-            form.doctorFirstName,
-            form.doctorLastName
-        );
-        ownProps.refetchCaregiverQuery({ emails: [form.caregiver1Email, form.caregiver2Email] })
-            .then(({ data }) => {
-                const caregiversIds = data.allUsers.map(user => user.caregiver.id);
-                ownProps.addCaregivers(ownProps.patientId, caregiversIds);
-                ownProps.navigation.navigate('Avatar');
-            });
+        if (form.doctorEmail !== '') {
+            ownProps.createDoctor(
+                ownProps.patientId,
+                form.doctorEmail,
+                form.doctorFirstName,
+                form.doctorLastName
+            );
+        }
+        if (form.caregiver1Email !== '' && form.caregiver2Email !== '') {
+            ownProps.refetchCaregiverQuery({ emails: [form.caregiver1Email, form.caregiver2Email] })
+                .then(({ data }) => {
+                    const caregiversIds = data.allUsers.map(user => user.caregiver.id);
+                    ownProps.addCaregivers(ownProps.patientId, caregiversIds);
+                    ownProps.navigation.navigate('Avatar');
+                });
+        }
     },
     onPressBack: ownProps.navigation.goBack
 });

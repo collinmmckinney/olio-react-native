@@ -122,6 +122,12 @@ export default class OnboardingUserInfoScreen extends Component {
 
     render() {
         const fields = FIELDS.map(field => ({ ...field, value: this.state[field.key] }));
+        let missingFields = false;
+        FIELDS.forEach((field) => {
+            if (this.state[field.key] === '') {
+                missingFields = true;
+            }
+        });
 
         return (
             <View style={styles.container}>
@@ -189,6 +195,7 @@ export default class OnboardingUserInfoScreen extends Component {
                     </View>
                     <View style={styles.nextWrapper}>
                         <Button
+                            disabled={missingFields}
                             onPress={this.handlePressNext}
                             label="NEXT"
                             style={styles.nextButton}

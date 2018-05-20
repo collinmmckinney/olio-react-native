@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
 export default class Button extends Component {
     static propTypes = {
         label: PropTypes.string,
+        disabled: PropTypes.bool,
         style: ViewPropTypes.style,
         onPress: PropTypes.func
     }
 
     static defaultProps = {
         label: '',
+        disabled: false,
         style: null,
         onPress: () => {}
     }
@@ -49,9 +51,9 @@ export default class Button extends Component {
     }
 
     render() {
-        const { label, style } = this.props;
+        const { label, disabled, style } = this.props;
         return (
-            <TouchableOpacity onPress={this.handlePress}>
+            <TouchableOpacity onPress={this.handlePress} disabled={disabled}>
                 <View style={[styles.container, style]}>
                     <Text style={styles.text}>{label}</Text>
                 </View>

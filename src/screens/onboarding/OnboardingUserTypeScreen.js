@@ -123,13 +123,6 @@ export default class OnboardingUserTypeScreen extends Component {
                             style={styles.backButton}
                         />
                     </View>
-                    <View style={styles.nextWrapper}>
-                        <Button
-                            onPress={this.handlePressNext}
-                            label="NEXT"
-                            style={styles.nextButton}
-                        />
-                    </View>
                 </View>
             </View>
         );
