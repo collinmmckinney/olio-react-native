@@ -5,6 +5,7 @@ import {
     Text,
     Image
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { colors } from '../style';
 import { Button } from '../components';
 
@@ -60,6 +61,22 @@ const styles = StyleSheet.create({
 });
 
 export default class AboutMeScreen extends Component {
+    static propTypes = {
+        onAppleADayPress: PropTypes.func,
+    };
+
+    static defaultProps = {
+        onAppleADayPress: () => {},
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.AppleADayPress = this.AppleADayPress.bind(this);
+    }
+    AppleADayPress() {
+        this.props.onAppleADayPress();
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -78,7 +95,7 @@ export default class AboutMeScreen extends Component {
                 <View style={styles.bottom}>
                     <Button label="#me" onPress={this.handleSave} style={styles.button1} />
                     <Button label="#DreamBig" onPress={this.handleSave} style={styles.button2} />
-                    <Button label="#AppleADay" onPress={this.handleSave} style={styles.button3} />
+                    <Button label="#AppleADay" onPress={this.AppleADayPress} style={styles.button3} />
                 </View>
             </View>
         );
