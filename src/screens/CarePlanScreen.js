@@ -38,11 +38,13 @@ export default class CarePlanScreen extends Component {
   static propTypes = {
       onPurpLungPress: PropTypes.func,
       onBlueLungPress: PropTypes.func,
+      onMedicationPress: PropTypes.func,
   };
 
   static defaultProps = {
       onPurpLungPress: () => {},
       onBlueLungPress: () => {},
+      onMedicationPress: () => {},
   };
 
   constructor(props) {
@@ -50,6 +52,7 @@ export default class CarePlanScreen extends Component {
 
       this.handlePurpLungPress = this.handlePurpLungPress.bind(this);
       this.handleBlueLungPress = this.handleBlueLungPress.bind(this);
+      this.handleMedicationPress = this.handleMedicationPress.bind(this);
   }
 
   handlePurpLungPress() {
@@ -60,13 +63,17 @@ export default class CarePlanScreen extends Component {
       this.props.onBlueLungPress();
   }
 
+  handleMedicationPress() {
+      this.props.onMedicationPress();
+  }
+
   render() {
       return (
           <View style={styles.container}>
               <View style={styles.inner}>
                   <Text style={styles.title}>My CarePlan</Text>
                   <View style={styles.lungs}>
-                      <TouchableOpacity onPress={this.handlePurpLungPress}>
+                      <TouchableOpacity onPress={this.handlePurpLungPress} onLongPress={this.handleMedicationPress}>
                           <Image
                               style={{
                                   width: 100,

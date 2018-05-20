@@ -48,7 +48,8 @@ import {
     WeatherContainer,
     DataContainer,
     SettingsContainer,
-    HealthPlanContainer
+    HealthPlanContainer,
+    MedicationLogContainer
 } from './src/screens';
 
 const GRAPHQL_URL = 'https://api.graph.cool/simple/v1/cjg6t4f9f0j5l0137824h9apr';
@@ -117,6 +118,9 @@ const AvatarStack = StackNavigator({
     },
     CarePlan: {
         screen: CarePlanContainer
+    },
+    MedicationLog: {
+        screen: MedicationLogContainer
     },
     Medications: {
         screen: MedicationsContainer

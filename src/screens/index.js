@@ -1,6 +1,7 @@
 export { default as AvatarContainer } from './AvatarContainer';
 export { default as WellbeingContainer } from './WellbeingContainer';
 export { default as CarePlanContainer } from './CarePlanContainer';
+export { default as MedicationLogContainer } from './MedicationLogContainer';
 export { default as AsthmaCareContainer } from './AsthmaCareContainer';
 export { default as MedicationsContainer } from './MedicationsContainer';
 export { default as AboutMeContainer } from './AboutMeContainer';

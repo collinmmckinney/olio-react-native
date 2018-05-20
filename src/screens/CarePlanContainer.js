@@ -11,6 +11,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     ...stateProps,
     onPurpLungPress: () => ownProps.navigation.navigate('Medications'),
     onBlueLungPress: () => ownProps.navigation.navigate('AsthmaCare'),
+    onMedicationPress: () => ownProps.navigation.navigate('MedicationLog')
 });
 
 export default compose(
