@@ -4,6 +4,7 @@ export { default as Button } from './Button';
 export { default as Forecast } from './Forecast';
 export { default as Form } from './Form';
 export { default as MapButton } from './MapButton';
+export { default as MapLongButton } from './MapLongButton';
 export { default as ScrollSelect } from './ScrollSelect';
 export { default as ScrollView } from './ScrollView';
 export { default as StaticBubble } from './StaticBubble';

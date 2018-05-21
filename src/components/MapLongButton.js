@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     View,
     ViewPropTypes,
+    Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableWithoutFeedback
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { colors } from '../style';
@@ -12,20 +13,27 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 52,
-        height: 52,
-        backgroundColor: colors.primary,
-        borderRadius: 12
+        width: 105,
+        height: 30,
+        backgroundColor: 'white',
+        borderRadius: 17,
+        opacity: 0.7
+    },
+    label: {
+        fontSize: 14,
+        color: colors.grayText
     }
 });
 
-export default class MapButton extends Component {
+export default class MapLongButton extends Component {
     static propTypes = {
+        label: PropTypes.string,
         style: ViewPropTypes.style,
         onPress: PropTypes.func
     }
 
     static defaultProps = {
+        label: null,
         style: null,
         onPress: () => {}
     }
@@ -42,11 +50,13 @@ export default class MapButton extends Component {
     }
 
     render() {
-        const { style } = this.props;
+        const { label, style } = this.props;
         return (
-            <TouchableOpacity onPress={this.handlePress}>
-                <View style={[styles.container, style]} />
-            </TouchableOpacity>
+            <TouchableWithoutFeedback onPress={this.handlePress}>
+                <View style={[styles.container, style]}>
+                    <Text style={styles.label}>{label}</Text>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }

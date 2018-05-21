@@ -3,6 +3,7 @@ import { View, StyleSheet, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { colors, sizes } from '../../style';
+import { MapLongButton } from '../../components';
 
 const SEVERITY_TO_BUBBLES = {
     Low: 5,
@@ -60,6 +61,11 @@ const styles = StyleSheet.create({
         height: BUBBLE_DIAMETER,
         borderRadius: BUBBLE_DIAMETER,
         backgroundColor: colors.primary
+    },
+    button: {
+        position: 'absolute',
+        left: (sizes.DEVICE_WIDTH / 2) - 53,
+        bottom: 20
     }
 });
 
@@ -216,6 +222,19 @@ export default class PollenMapScreen extends Component {
                     />
                 }
                 {bubbleElements}
+                <MapLongButton
+                    label="POLLEN CAM"
+                    style={styles.button}
+                    onPress={() => {
+                        const newBubbles =
+                            initializeBubbles(this.props.windDirection, this.props.severity);
+                        this.setState({ bubbles: newBubbles }, () => {
+                            if (newBubbles.length > 0) {
+                                this.initiatePollenAnimation();
+                            }
+                        });
+                    }}
+                />
             </View>
         );
     }
