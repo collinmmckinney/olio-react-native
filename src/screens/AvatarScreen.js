@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Foundation';
-import { AddButton, Bubble } from '../components';
+import { colors, sizes } from '../style';
+import { AddButton, Bubble, CloudMan } from '../components';
 
 const girlImage = require('../assets/girl.png');
 const lungImage = require('../assets/whiteLungs.png');
@@ -32,7 +33,47 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 13,
         right: 13
-    }
+    },
+    cloudy: {
+        position: 'absolute',
+        top: -30,
+        left: (2 / 4) * sizes.DEVICE_WIDTH
+    },
+    cloudyModal: {
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        top: 90,
+        right: 50,
+        width: 170,
+        height: 260,
+        borderRadius: 25,
+        padding: 18,
+        paddingTop: 20,
+        backgroundColor: colors.primary
+    },
+    modalText: {
+        color: 'white',
+        fontSize: 16,
+        marginBottom: 20
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 60,
+        height: 30,
+        backgroundColor: colors.grayText,
+        borderRadius: 10
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16
+    },
 });
 
 export default class AvatarScreen extends Component {
@@ -72,6 +113,10 @@ export default class AvatarScreen extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            showCloudy: true
+        };
 
         this.handleHeartPress = this.handleHeartPress.bind(this);
         this.handleLungsPress = this.handleLungsPress.bind(this);
@@ -140,6 +185,7 @@ export default class AvatarScreen extends Component {
 
     render() {
         const { bubbles, arrangeMode } = this.props;
+        const { showCloudy } = this.state;
         const bubbleElements = bubbles.map(bubble => (
             <Bubble
                 key={bubble.id}
@@ -176,6 +222,31 @@ export default class AvatarScreen extends Component {
                     </ImageBackground>
                 </View>
                 {bubbleElements}
+                { showCloudy && (
+                    <View style={styles.cloudy}>
+                        <View style={styles.cloudyModal}>
+                            <View>
+                                <Text style={styles.modalText}>Welcome to Olio!</Text>
+                                <Text style={styles.modalText}>Want me to show you around?</Text>
+                            </View>
+                            <View style={styles.buttonRow}>
+                                <TouchableOpacity
+                                    onPress={() => this.setState({ showCloudy: false })}
+                                    style={styles.button}
+                                >
+                                    <Text style={styles.buttonText}>YES</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => this.setState({ showCloudy: false })}
+                                    style={styles.button}
+                                >
+                                    <Text style={styles.buttonText}>NO</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <CloudMan winds={0} />
+                    </View>
+                )}
                 <View style={styles.addButton}>
                     <AddButton
                         close={arrangeMode}

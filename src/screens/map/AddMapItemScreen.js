@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
-        paddingHorizontal: 18
+        paddingHorizontal: 18,
+        backgroundColor: 'white'
     },
     commentInput: {
         height: 175

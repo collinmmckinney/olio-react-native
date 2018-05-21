@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
     },
     heart: {
         flex: 2,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: 200
     }
 });
 
@@ -66,6 +68,7 @@ export default class WellbeingScreen extends Component {
   GreenHeartPress() {
       this.props.onGreenHeartPress();
   }
+
   render() {
       return (
           <View style={styles.container}>
