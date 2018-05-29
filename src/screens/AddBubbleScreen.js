@@ -16,31 +16,31 @@ const OPTIONS = [
     {
         key: 'weather',
         label: 'Weather-Induced',
-        color: colors.primary,
+        color: colors.weather,
         image: 'weather'
     },
     {
         key: 'allergen',
         label: 'Allergen-Induced',
-        color: colors.primary,
+        color: colors.map,
         image: 'map'
     },
     {
         key: 'flow',
         label: 'Spirometry',
-        color: colors.primary,
+        color: colors.spirometry,
         image: 'spirometry'
     },
     {
         key: 'airQuality',
         label: 'Air Quality',
-        color: colors.primary,
+        color: colors.airQuality,
         image: 'airQuality'
     },
     {
         key: 'home',
         label: 'Household',
-        color: colors.primary,
+        color: colors.household,
         image: 'household'
     }
 ];
