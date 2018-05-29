@@ -20,18 +20,53 @@ const styles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingVertical: 24,
         justifyContent: 'space-between',
+    },
+    titleContainer: {
+        flex: 1,
+        justifyContent: 'center',
         alignItems: 'center'
     },
     title: {
         color: colors.primary,
         fontSize: 24,
-        flex: 1
     },
     lungs: {
         flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
     },
+    upperText: {
+        flex: 0.5,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    lowerText: {
+        flex: 0.5,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    blueContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 25,
+        backgroundColor: '#7cd5c3',
+        borderRadius: 5,
+    },
+    purpleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 25,
+        backgroundColor: '#9a65cd',
+        borderRadius: 5,
+    },
+    text: {
+        color: 'white',
+        fontSize: 18,
+    }
 });
 
 export default class CarePlanScreen extends Component {
@@ -71,7 +106,16 @@ export default class CarePlanScreen extends Component {
       return (
           <View style={styles.container}>
               <View style={styles.inner}>
-                  <Text style={styles.title}>My CarePlan</Text>
+                  <View style={styles.titleContainer}>
+                      <Text style={styles.title}>My CarePlan</Text>
+                  </View>
+                  <View style={styles.upperText}>
+                      <TouchableOpacity onPress={this.handleBlueLungPress}>
+                          <View style={styles.blueContainer}>
+                              <Text style={styles.text}>  asthma care  </Text>
+                          </View>
+                      </TouchableOpacity>
+                  </View>
                   <View style={styles.lungs}>
                       <TouchableOpacity onPress={this.handlePurpLungPress} onLongPress={this.handleMedicationPress}>
                           <Image
@@ -90,6 +134,13 @@ export default class CarePlanScreen extends Component {
                               }}
                               source={blueLung}
                           />
+                      </TouchableOpacity>
+                  </View>
+                  <View style={styles.lowerText}>
+                      <TouchableOpacity onPress={this.handlePurpLungPress}>
+                          <View style={styles.purpleContainer}>
+                              <Text style={styles.text}>  medications  </Text>
+                          </View>
                       </TouchableOpacity>
                   </View>
               </View>

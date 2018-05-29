@@ -32,7 +32,48 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
         width: 200
+    },
+    upperText: {
+        flex: 0.5,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    lowerText: {
+        flex: 0.5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    redContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 25,
+        backgroundColor: colors.heartRed,
+        borderRadius: 5,
+        marginRight: 30
+    },
+    greenContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 25,
+        backgroundColor: colors.green,
+        borderRadius: 5,
+        marginLeft: 30
+    },
+    yellowContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 25,
+        backgroundColor: colors.yellow,
+        borderRadius: 5,
+    },
+    text: {
+        color: 'white',
+        fontSize: 18,
     }
 });
 
@@ -74,38 +115,51 @@ export default class WellbeingScreen extends Component {
           <View style={styles.container}>
               <View style={styles.inner}>
                   <Text style={styles.title}>My Wellbeing</Text>
+                  <View style={styles.upperText}>
+                      <TouchableOpacity onPress={this.RedHeartPress}>
+                          <View style={styles.redContainer}>
+                              <Text style={styles.text}>  @now  </Text>
+                          </View>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={this.GreenHeartPress}>
+                          <View style={styles.greenContainer}>
+                              <Text style={styles.text}>  about me  </Text>
+                          </View>
+                      </TouchableOpacity>
+                  </View>
                   <View style={styles.heart}>
-                      <TouchableOpacity onPress={this.YellowHeartPress}>
-                          <ImageBackground
+                      <ImageBackground
+                          style={{
+                              width: 98,
+                              height: 135,
+                          }}
+                          source={yellowHeart}
+                      >
+                          <Image
                               style={{
-                                  width: 98,
-                                  height: 135,
+                                  width: 90,
+                                  height: 120,
+                                  marginLeft: -43,
+                                  marginTop: -20,
                               }}
-                              source={yellowHeart}
-                          >
-                              <TouchableOpacity onPress={this.RedHeartPress}>
-                                  <Image
-                                      style={{
-                                          width: 90,
-                                          height: 120,
-                                          marginLeft: -43,
-                                          marginTop: -20,
-                                      }}
-                                      source={redHeart}
-                                  />
-                              </TouchableOpacity>
-                              <TouchableOpacity onPress={this.GreenHeartPress}>
-                                  <Image
-                                      style={{
-                                          width: 90,
-                                          height: 120,
-                                          marginLeft: 47,
-                                          marginTop: -121,
-                                      }}
-                                      source={greenHeart}
-                                  />
-                              </TouchableOpacity>
-                          </ImageBackground>
+                              source={redHeart}
+                          />
+                          <Image
+                              style={{
+                                  width: 90,
+                                  height: 120,
+                                  marginLeft: 47,
+                                  marginTop: -121,
+                              }}
+                              source={greenHeart}
+                          />
+                      </ImageBackground>
+                  </View>
+                  <View style={styles.lowerText}>
+                      <TouchableOpacity onPress={this.YellowHeartPress}>
+                          <View style={styles.yellowContainer}>
+                              <Text style={styles.text}>  evals  </Text>
+                          </View>
                       </TouchableOpacity>
                   </View>
               </View>

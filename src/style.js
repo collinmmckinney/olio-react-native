@@ -9,7 +9,8 @@ export const colors = {
     windBlue: '#D7F4FF',
     yellow: '#f3cd31',
     green: '#82a936',
-    red: '#f68687'
+    red: '#f68687',
+    heartRed: '#e07545'
 };
 
 const { height, width } = Dimensions.get('window');
