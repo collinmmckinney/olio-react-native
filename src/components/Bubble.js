@@ -66,6 +66,7 @@ export default class Bubble extends Component {
         radius: PropTypes.number,
         image: PropTypes.oneOf(['flower', 'tree', 'shellfish', 'map', 'weather', 'household', 'spirometry', 'airQuality']),
         label: PropTypes.string,
+        color: PropTypes.string,
         interactable: PropTypes.bool,
         onPress: PropTypes.func,
         onLongPress: PropTypes.func,
@@ -82,6 +83,7 @@ export default class Bubble extends Component {
         radius: 40,
         image: null,
         label: '',
+        color: colors.primary,
         interactable: true,
         onPress: () => {},
         onLongPress: () => {},
@@ -177,6 +179,7 @@ export default class Bubble extends Component {
             initialX,
             initialY,
             radius,
+            color,
             interactable
         } = this.props;
 
@@ -186,7 +189,7 @@ export default class Bubble extends Component {
             borderRadius: radius
         };
         const colorStyle = {
-            backgroundColor: interactable ? colors.primaryDarker : colors.primary
+            backgroundColor: interactable ? colors.primaryDarker : color
         };
         const style = [sizeStyle, colorStyle];
 
@@ -204,10 +207,11 @@ export default class Bubble extends Component {
             const subBubbleX = cx - (subBubbleContainerRadius * Math.sin(angle));
             const subBubbleY = cy + (subBubbleContainerRadius * Math.cos(angle));
             const subBubblePositionStyle = { top: subBubbleY, left: subBubbleX };
+            const subBubbleColorStyle = { backgroundColor: subBubble.color };
             return (
                 <TouchableOpacity
                     key={id + subBubble.label}
-                    style={[styles.subBubble, subBubblePositionStyle]}
+                    style={[styles.subBubble, subBubblePositionStyle, subBubbleColorStyle]}
                     onPress={subBubble.onPress}
                 >
                     {React.cloneElement(LABEL_TO_IMAGE[subBubble.image], { size: 30 })}

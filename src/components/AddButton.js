@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: 63,
         height: 63,
         borderRadius: 63,
-        backgroundColor: colors.primary
+        backgroundColor: colors.addButton
     },
     text: {
         color: 'white',

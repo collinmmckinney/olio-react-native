@@ -1,6 +1,7 @@
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { loggedInUserQuery } from '../graphql/queries';
+import { colors } from '../style';
 import { addSubBubbles } from '../actions/bubbles';
 import { selectAllegenType } from '../actions/map';
 import AddAllergenScreen from './AddAllergenScreen';
@@ -29,7 +30,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         ownProps.navigation.navigate('Map');
                     },
                     label: 'Shellfish',
-                    image: 'shellfish'
+                    image: 'shellfish',
+                    color: colors.shellfish
                 };
             } else if (key === 'Pollen') {
                 return {
@@ -38,7 +40,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         ownProps.navigation.navigate('PollenMap');
                     },
                     label: 'Pollen',
-                    image: 'pollen'
+                    image: 'pollen',
+                    color: colors.pollen
                 };
             } else if (key === 'TreePollen') {
                 return {
@@ -47,7 +50,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
                         ownProps.navigation.navigate('Map');
                     },
                     label: 'TreePollen',
-                    image: 'treePollen'
+                    image: 'treePollen',
+                    color: colors.treePollen
                 };
             }
             return {};

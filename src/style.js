@@ -10,6 +10,16 @@ export const colors = {
     yellow: '#f3cd31',
     green: '#82a936',
     red: '#f68687',
+    weather: '#7cd5c3',
+    airQuality: '#a94fce',
+    map: '#ff9304',
+    household: '#82a936',
+    spirometry: '#f4d6a6',
+    addButton: '#f2cb27',
+    pollen: '#e07545',
+    treePollen: '#d8903e',
+    shellfish: '#ffb204',
+    heartRed: '#e07545'
 };
 
 const { height, width } = Dimensions.get('window');
