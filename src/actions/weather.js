@@ -5,6 +5,8 @@ export const FETCH_HOURLY_WEATHER = 'FETCH_HOURLY_WEATHER';
 export const REQUEST_HOURLY_WEATHER = 'REQUEST_HOURLY_WEATHER';
 export const RECEIVE_HOURLY_WEATHER = 'RECEIVE_HOURLY_WEATHER';
 
+const API_KEY = 'CPS86TRZg7dOzVC7YqPqpaBahB5A2BtU';
+
 function requestDailyWeather() {
     return {
         type: REQUEST_DAILY_WEATHER
@@ -22,15 +24,15 @@ export function fetchDailyWeather(latitude, longitude) {
     return (dispatch) => {
         dispatch(requestDailyWeather());
         // TODO Load API keys securely
-        const apiKey = 'CPS86TRZg7dOzVC7YqPqpaBahB5A2BtU';
-        return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${apiKey}`)
+        return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${API_KEY}`)
             .then(response => response.json())
-            .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${json.Key}?details=true&apikey=${apiKey}`)
+            .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${json.Key}?details=true&apikey=${API_KEY}`)
                 .then((response) => {
                     return response.json()
                         .then(result => ({ json: result, town: json.LocalizedName }));
                 }))
-            .then(({ json, town }) => dispatch(receiveDailyWeather(json, town)));
+            .then(({ json, town }) => dispatch(receiveDailyWeather(json, town)))
+            .catch(() => dispatch(receiveDailyWeather(null, null)));
     };
 }
 
@@ -51,14 +53,14 @@ export function fetchHourlyWeather(latitude, longitude) {
     return (dispatch) => {
         dispatch(requestHourlyWeather());
         // TODO Load API keys securely
-        const apiKey = 'CPS86TRZg7dOzVC7YqPqpaBahB5A2BtU';
-        return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${apiKey}`)
+        return fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude},${longitude}&apikey=${API_KEY}`)
             .then(response => response.json())
-            .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${json.Key}?details=true&apikey=${apiKey}`)
+            .then(json => fetch(`https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${json.Key}?details=true&apikey=${API_KEY}`)
                 .then((response) => {
                     return response.json()
                         .then(result => ({ json: result, town: json.LocalizedName }));
                 }))
-            .then(({ json, town }) => dispatch(receiveHourlyWeather(json, town)));
+            .then(({ json, town }) => dispatch(receiveHourlyWeather(json, town)))
+            .catch(() => dispatch(receiveHourlyWeather(null, null)));
     };
 }
