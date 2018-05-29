@@ -1,35 +1,26 @@
 import React, { Component } from 'react';
 import {
-    View,
+    Image,
     StyleSheet,
-    Text
 } from 'react-native';
-import PropTypes from 'prop-types';
+
+const screenshot = require('../assets/Data.png');
 
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
         flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white'
+        width: null,
+        height: null,
     }
 });
 
 export default class DataScreen extends Component {
-    static propTypes = {
-        userId: PropTypes.string
-    };
-
-    static defaultProps = {
-        userId: ''
-    };
-
     render() {
-        const { userId } = this.props;
         return (
-            <View style={styles.container}>
-                <Text>{userId}</Text>
-            </View>
+            <Image
+                style={styles.backgroundImage}
+                source={screenshot}
+            />
         );
     }
 }

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { colors } from '../style';
+import { StyleSheet, Image } from 'react-native';
+
+const screenshot = require('../assets/Home.png');
 
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        borderColor: colors.primary,
-        borderWidth: 4,
-        borderRadius: 8
+        width: null,
+        height: null,
     }
 });
 
 export default class HomeScreen extends Component {
     render() {
         return (
-            <View style={styles.container}>
-            </View>
+            <Image
+                style={styles.backgroundImage}
+                source={screenshot}
+            />
         );
     }
 }

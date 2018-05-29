@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../components';
 
+const screenshot = require('../assets/Network.png');
+
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
         flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white'
+        width: null,
+        height: null,
+        justifyContent: 'flex-end'
     }
 });
 
@@ -30,9 +32,12 @@ export default class SettingsScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground
+                style={styles.backgroundImage}
+                source={screenshot}
+            >
                 <Button label="Log Out" onPress={this.handlePressLogout} />
-            </View>
+            </ImageBackground>
         );
     }
 }
